@@ -128,10 +128,10 @@ role.user = 'ROLE_USER'
 
 // Définition de l'utilisateur 'administrateur'
 admin {
-    username = "Pixnista Administrator"
     // To define in pixnista-passwords.properties
+    // username = ""
     // password = ""
-    email = "admin.pixnista@captainware.com"
+    // email = ""
 }
 
 // Configuration pour le serveur de mail
@@ -139,8 +139,8 @@ grails {
     mail {
         host = "auth.smtp.1and1.fr"
         port = 465
-        username = "noreply.pixnista@captainware.com"
         // To define in pixnista-passwords.properties
+        // username = ""
         // password = ""
         props = ["mail.smtp.auth"                  : "true",
                  "mail.smtp.socketFactory.port"    : "465",
