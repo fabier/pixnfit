@@ -3,7 +3,7 @@
     &copy;&nbsp;
     Grails
     &nbsp;-&nbsp;
-    2015
+    2016
     &nbsp;-&nbsp;
     v.<g:meta name="app.version"/>
         <br/>
