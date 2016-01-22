@@ -11,6 +11,8 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+grails.config.locations = ["pixnista-passwords.properties"]
+
 grails.project.groupId = 'grails-starter' // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -127,7 +129,8 @@ role.user = 'ROLE_USER'
 // Définition de l'utilisateur 'administrateur'
 admin {
     username = "Pixnista Administrator"
-    password = ""
+    // To define in pixnista-passwords.properties
+    // password = ""
     email = "admin.pixnista@captainware.com"
 }
 
@@ -137,7 +140,8 @@ grails {
         host = "auth.smtp.1and1.fr"
         port = 465
         username = "noreply.pixnista@captainware.com"
-        password = ""
+        // To define in pixnista-passwords.properties
+        // password = ""
         props = ["mail.smtp.auth"                  : "true",
                  "mail.smtp.socketFactory.port"    : "465",
                  "mail.smtp.socketFactory.class"   : "javax.net.ssl.SSLSocketFactory",
