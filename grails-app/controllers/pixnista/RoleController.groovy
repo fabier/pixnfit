@@ -1,4 +1,4 @@
-package starter
+package pixnista
 
 import org.springframework.security.access.annotation.Secured
 

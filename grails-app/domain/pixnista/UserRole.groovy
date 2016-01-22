@@ -1,4 +1,4 @@
-package starter
+package pixnista
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 

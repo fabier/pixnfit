@@ -1,4 +1,4 @@
-package starter
+package pixnista
 
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource

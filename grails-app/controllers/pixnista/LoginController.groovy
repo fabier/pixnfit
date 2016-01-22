@@ -1,4 +1,4 @@
-package starter
+package pixnista
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityUtils

@@ -1,6 +1,6 @@
-import starter.Role
-import starter.User
-import starter.UserRole
+import pixnista.Role
+import pixnista.User
+import pixnista.UserRole
 
 class BootStrap {
 

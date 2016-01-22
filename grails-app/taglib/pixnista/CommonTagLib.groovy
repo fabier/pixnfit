@@ -1,4 +1,4 @@
-package starter
+package pixnista
 
 class CommonTagLib {
     static defaultEncodeAs = [taglib: 'html']
