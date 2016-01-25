@@ -1,6 +1,6 @@
 package pixnista
 
-class BodyType {
+class BodyType extends BaseEntity {
 
     static constraints = {
     }

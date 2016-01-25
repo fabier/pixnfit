@@ -1,6 +1,6 @@
 package pixnista
 
-class ImageData {
+class ImageData extends BaseEntity {
 
     static constraints = {
     }

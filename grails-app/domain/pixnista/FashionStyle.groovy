@@ -1,6 +1,6 @@
 package pixnista
 
-class FashionStyle {
+class FashionStyle extends BaseEntity {
 
     static constraints = {
     }

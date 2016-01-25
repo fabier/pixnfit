@@ -1,6 +1,6 @@
 package pixnista
 
-class Visibility {
+class Visibility extends BaseEntity {
 
     static constraints = {
     }

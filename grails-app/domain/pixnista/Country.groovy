@@ -1,6 +1,6 @@
 package pixnista
 
-class Country {
+class Country extends BaseEntity {
 
     static constraints = {
     }

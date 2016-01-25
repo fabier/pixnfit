@@ -1,6 +1,6 @@
 package pixnista
 
-class PostComment {
+class PostComment extends BaseEntity {
 
     static constraints = {
     }

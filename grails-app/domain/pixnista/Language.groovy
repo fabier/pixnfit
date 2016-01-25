@@ -1,6 +1,6 @@
 package pixnista
 
-class Language {
+class Language extends BaseEntity {
 
     static constraints = {
     }

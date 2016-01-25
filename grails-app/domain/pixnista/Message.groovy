@@ -1,6 +1,6 @@
 package pixnista
 
-class Message {
+class Message extends BaseEntity {
 
     static constraints = {
     }
