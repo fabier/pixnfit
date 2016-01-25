@@ -76,13 +76,12 @@ class User {
 
     static transients = ['springSecurityService']
 
-    static hasMany = [fashionStyles   : FashionStyle,
-                      followedUsers   : User,
-                      blacklistedUsers: User,
-                      favoritedPosts  : Post,
+    static hasMany = [
+            fashionStyles   : FashionStyle,
+            followedUsers   : User,
+            blacklistedUsers: User,
+            favoritedPosts  : Post
     ]
-
-    static mappedBy = [followedUsers: "user_follow", blacklistedUsers: "user_blacklist"]
 
     static constraints = {
         username blank: false
