@@ -24,7 +24,7 @@ class ImageData extends BaseEntity {
     Image image
 
     static constraints = {
-        md5 blank: false, size: 32
+        md5 blank: false, size: 32..32
     }
 
     def beforeInsert() {

@@ -21,7 +21,7 @@ class Language extends BaseEntity {
     static constraints = {
         name blank: false, unique: true
         nativeName blank: false
-        isoCode6391 blank: false, unique: true, size: 2
+        isoCode6391 blank: false, unique: true, size: 2..2
     }
 
     // Delete is forbidden
