@@ -12,10 +12,17 @@ class ImageType extends BaseEntity {
      */
     MimeType defaultMimeType
 
-    static hasMany = [fileExtensions: FileExtension, mimeTypes: MimeType, images: Image]
+    static hasMany = [fileExtensions: FileExtension, mimeTypes: MimeType]
 
     static constraints = {
         name blank: false, unique: true
+    }
+
+    /**
+     * Images with this ImageType
+     */
+    List<Image> getImages() {
+        Image.findAllByImageType(this)
     }
 
     // Delete is forbidden

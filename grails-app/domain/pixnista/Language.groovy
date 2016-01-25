@@ -13,15 +13,17 @@ class Language extends BaseEntity {
      */
     String isoCode6391
 
-    /**
-     * Users using this language
-     */
-    static hasMany = [users: User]
-
     static constraints = {
         name blank: false, unique: true
         nativeName blank: false
         isoCode6391 blank: false, unique: true, size: 2..2
+    }
+
+    /**
+     * Users using this language
+     */
+    List<User> getUsers() {
+        User.findAllByLanguage(this)
     }
 
     // Delete is forbidden
