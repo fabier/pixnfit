@@ -15,13 +15,10 @@ abstract class BaseEntity extends BaseDomain {
     User creator
 
     static constraints = {
-        name nullable: true
         description nullable: true
-        creator nullable: true
     }
 
     static mapping = {
-        name type: 'text'
         description type: 'text'
     }
 }

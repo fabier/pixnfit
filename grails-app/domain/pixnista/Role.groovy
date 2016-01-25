@@ -16,4 +16,9 @@ class Role {
         authority blank: false, unique: true
         creator nullable: true
     }
+
+    // Delete is forbidden
+    def beforeDelete() {
+        return false
+    }
 }
