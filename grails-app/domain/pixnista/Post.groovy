@@ -7,14 +7,20 @@ package pixnista
 class Post extends BaseEntity {
 
     /**
+     * Post type, either help or dressing
+     */
+    PostType postType
+
+    /**
      * Post visibility
      */
     Visibility visibility
 
     /**
-     * Post type, either help or dressing
+     * Post state
+     * Ex: Active, Inactive, Deleted
      */
-    PostType postType
+    State state
 
     /**
      * Images visible in Post
