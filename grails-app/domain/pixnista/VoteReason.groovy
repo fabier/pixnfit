@@ -6,8 +6,6 @@ class VoteReason extends BaseEntity {
         name blank: false, unique: true
     }
 
-
-
     // Delete is forbidden
     def beforeDelete() {
         return false

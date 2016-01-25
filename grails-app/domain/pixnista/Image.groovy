@@ -38,7 +38,7 @@ class Image extends BaseEntity {
     /**
      * Posts where this image appears (at least once)
      */
-    List<Post> getPosts(){
+    List<Post> getPosts() {
         Post.findAll("from Post where ? in elements(images)", [this])
     }
 }
