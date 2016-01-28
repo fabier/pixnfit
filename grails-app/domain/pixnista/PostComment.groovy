@@ -13,5 +13,6 @@ class PostComment extends BaseEntity {
     static belongsTo = [post: Post]
 
     static constraints = {
+        name nullable: true
     }
 }
