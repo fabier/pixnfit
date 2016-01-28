@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(MimeType)
-class MimeTypeSpec extends Specification {
+@TestFor(Mimetype)
+class MimetypeSpec extends Specification {
 
     def setup() {
     }

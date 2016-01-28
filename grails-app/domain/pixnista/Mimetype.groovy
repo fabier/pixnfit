@@ -1,9 +1,9 @@
 package pixnista
 
-class MimeType extends BaseEntity {
+class Mimetype extends BaseEntity {
 
     /**
-     * MimeType
+     * Mimetype
      * Ex : image/png, image/jpeg, image/gif
      */
     String mimetype
