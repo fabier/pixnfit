@@ -1,9 +1,14 @@
+import pixnista.TableNameSequencePostgreSQLDialect
+
 dataSource {
     pooled = true
-    dbCreate = "update" // "validate"
+    dbCreate = "update"
+//    dbCreate = "validate"
+//    dbCreate = "create-drop"
     driverClassName = "org.postgresql.Driver"
     url = "jdbc:postgresql://localhost:5432/pixnista"
-    dialect = org.hibernate.dialect.PostgreSQL9Dialect
+    dialect = TableNameSequencePostgreSQLDialect
+// dialect = org.hibernate.dialect.PostgreSQL9Dialect
 // Defined in pixnista-passwords.properties
 // username = ""
 // password = ""
@@ -28,6 +33,7 @@ environments {
     }
     production {
         dataSource {
+            dbCreate = "update"
         }
     }
 }
