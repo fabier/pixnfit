@@ -3,8 +3,8 @@ package pixnista
 class FileExtension extends BaseEntity {
 
     /**
-     * File extension
-     * Ex : ".jpg", ".jpeg", ".gif"
+     * File extension, without prefixing dot
+     * Ex : "jpg", "jpeg", "gif"
      */
     String extension
 
