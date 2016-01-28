@@ -1,12 +1,5 @@
 /* BASE LAYOUT */
 
-h1 {
-  color: #48802c;
-  font-weight: normal;
-  font-size: 1.25em;
-  margin: 0.8em 0 0.3em 0;
-}
-
 /* GENERAL */
 
 .content h1 {
@@ -38,3 +31,186 @@ h1 {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
+.post-nocomment {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.post-creator-avatar {
+  border-radius: 50%;
+  float: left;
+  width: 96px;
+  margin: 10px;
+}
+
+.comments-title {
+  color: #bbb;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.comment-creator-name {
+  display: inline;
+  font-size: 16px;
+  font-weight: 600;
+  height: auto;
+  line-height: 23px;
+}
+
+.comment-creator-avatar {
+  border-radius: 50%;
+  width: 32px;
+  float: left;
+  margin: 5px;
+  margin-bottom: 24px;
+}
+
+.comment-author-description {
+
+}
+
+.comment-content {
+  color: rgb(0, 0, 0);
+  display: block;
+  font-family: proxima-nova, 'Proxima Nova', sans-serif;
+  font-size: 14px;
+  //height: 23px;
+  line-height: 18px;
+  margin-bottom: 9px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+
+.comment-date {
+  color: #bbb;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.jumbotron h2 {
+  font-size: 1.5em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: gray;
+}
+
+// remove 1px offset glyphicons have
+form .glyphicon {
+  top: 0;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.form-signin {
+  position: relative;
+  /*padding: 19px 29px 29px;*/
+  margin: 0 auto 20px;
+  /*margin-top: 20px;*/
+}
+
+/*This is one way to get ng-cloak to work without having to put angular.js loaded at the top of the page.
+Without this angular would not be loaded yet, so it won't recognize ng-cloak.  This is the css that angular
+will ultimately load to make the ng-cloak display none until $compile thing runs. */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.signinError {
+  right: 67px;
+  top: 53px;
+  z-index: 100;
+}
+
+/* This moves the signin form over a bit. */
+.navbar-nav.navbar-right:last-child {
+  margin-right: 2px;
+}
+
+.gravatarSm {
+  line-height: 3.5;
+}
+
+/* This changes the cursor to a pointer */
+.pointer {
+  cursor: pointer;
+}
+
+.li-no-style {
+  list-style-type: none;
+}
+
+.image-thumb-wrapper {
+  position: relative;
+}
+
+.image-thumb-wrapper .glyphicon {
+  position: absolute;
+  right: 2px;
+  top: 76px;
+}
+
+.image-thumb-wrapper .glyphicon-ok-sign {
+  font-size: large;
+}
+
+.image-thumb-wrapper .glyphicon-ok-sign.ok {
+  color: green;
+}
+
+.image-thumb-wrapper .glyphicon-ok-sign.ko {
+  color: orange;
+}
+
+.image-thumb-wrapper .glyphicon-remove-sign {
+  color: red;
+  font-size: large;
+}
+
+.image-thumb {
+  width: 100%;
+  height: auto;
+}
+
+.image-thumb:hover {
+  -webkit-filter: brightness(150%);
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px;
+}
+
+.header-username {
+  color: #DDD;
+  padding: 0 10px;
+}
+
+.header-useravatar {
+  width: 32px;
+  height: auto;
+}
+
+.circle {
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  font-size: 36px;
+  font-weight: bolder;
+  color: #fff;
+  line-height: 176px;
+  text-align: center;
+  background: #5cb85c;
+}
+
+.vote-button {
+  width: 100%;
+}
