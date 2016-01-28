@@ -27,6 +27,7 @@ class PostVote extends BaseEntity {
     static belongsTo = [post: Post]
 
     static constraints = {
+        name nullable: true
         vote nullable: false
         voteReason nullable: true
 

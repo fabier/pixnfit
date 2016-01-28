@@ -15,6 +15,7 @@ class PostCommentVote extends BaseEntity {
     static belongsTo = [postComment: PostComment]
 
     static constraints = {
+        name nullable: true
         vote nullable: false
 
         // Only one vote per user per postComment
