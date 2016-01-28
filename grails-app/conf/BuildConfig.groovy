@@ -89,5 +89,8 @@ grails.project.dependency.resolution = {
 
         // Statistiques et monitoring
         compile ":grails-melody:1.55.0"
+
+        // Générer des données initiales
+        compile ":faker:0.7"
     }
 }
