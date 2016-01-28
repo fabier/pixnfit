@@ -19,4 +19,5 @@ stacktrace.log
 .project
 .classpath
 /*.iml
-/grails-app/conf/pixnista-passwords.properties
+/grails-app/conf/passwords.properties
+

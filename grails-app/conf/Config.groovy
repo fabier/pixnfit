@@ -11,7 +11,7 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
-grails.config.locations = ["pixnista-passwords.properties"]
+grails.config.locations = ["password.properties"]
 
 grails.project.groupId = 'grails-starter' // change this to alter the default package name and Maven publishing destination
 
