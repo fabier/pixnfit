@@ -64,7 +64,7 @@ class Post extends BaseEntity {
     }
 
     float getPostScoreAsPercentage() {
-
+        getPositiveVoteCount() / getVoteCount() * 100.0
     }
 
     /**
