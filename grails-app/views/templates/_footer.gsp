@@ -1,7 +1,7 @@
 <footer class="footer text-small">
     <p>
     &copy;&nbsp;
-    Grails
+    Pixnfit
     &nbsp;-&nbsp;
     2016
     &nbsp;-&nbsp;

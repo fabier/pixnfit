@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><g:layoutTitle default="CaptainFleet"/></title>
+    <title><g:layoutTitle default="Pixnfit"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="apple-touch-icon" sizes="57x57" href="${assetPath(src: 'favicons/apple-icon-57x57.png')}">

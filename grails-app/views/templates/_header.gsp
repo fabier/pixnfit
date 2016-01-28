@@ -12,7 +12,7 @@
             <g:link uri="/" class="navbar-brand danger">
                 <span>
                     <g:img dir="images" file="favicons/favicon-32x32.png" class="logo-top-frontpage"/>
-                    Grails
+                    Pixnfit
                 </span>
             </g:link>
         </div>
