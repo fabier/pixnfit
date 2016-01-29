@@ -6,13 +6,13 @@ Pixnista project made with Grails
 
 # Things to do BEFORE launching app
 ## Configuration
-You need to create a file in <code>/grails-app/conf</code> named <code>password.properties</code>
+You need to create a file in <code>/grails-app/conf</code> named <code>passwords.properties</code>
 
 **YOU MUST CHANGE THE VALUES BEFORE STARTING**
 <br/>
 This file must contain the following keys.
 
-> password.properties
+> passwords.properties
 
 ```
 # Admin user
