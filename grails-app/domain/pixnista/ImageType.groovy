@@ -8,11 +8,20 @@ class ImageType extends BaseEntity {
     FileExtension defaultFileExtension
 
     /**
-     * Default MimeType for this ImageType
+     * Default Mimetype for this ImageType
      */
-    MimeType defaultMimeType
+    Mimetype defaultMimeType
 
-    static hasMany = [fileExtensions: FileExtension, mimeTypes: MimeType]
+    static hasMany = [
+            /**
+             * Valid FileExtensions for this ImageType
+             */
+            fileExtensions: FileExtension,
+            /**
+             * Valid MimeTypes for this ImageType
+             */
+            mimetypes: Mimetype
+    ]
 
     static constraints = {
         name blank: false, unique: true

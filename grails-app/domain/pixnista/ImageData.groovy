@@ -19,12 +19,20 @@ class ImageData extends BaseEntity {
     String md5
 
     /**
-     * The image that uses this imageData
+     * The image using this data
      */
     Image image
 
+    static belongsTo = [image: Image]
+
     static constraints = {
         md5 blank: false, size: 32..32
+    }
+
+    def beforeValidate() {
+        if (md5 == null || isDirty("data")) {
+            updateMD5()
+        }
     }
 
     def beforeInsert() {
@@ -39,6 +47,6 @@ class ImageData extends BaseEntity {
 
     def updateMD5() {
         // Update MD5 Hash
-        md5 = DigestUtils.md5(data)
+        md5 = DigestUtils.md5Hex(data)
     }
 }
