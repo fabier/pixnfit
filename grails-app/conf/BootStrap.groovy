@@ -1,3 +1,4 @@
+import pixnista.BodyType
 import pixnista.Role
 import pixnista.User
 import pixnista.UserRole
@@ -6,7 +7,11 @@ class BootStrap {
 
     def grailsApplication
 
+    def bootstrapInitialDataService
+
     def init = { servletContext ->
+        addMetaMethods()
+
         // Création des rôles utilisateurs
         if (grailsApplication.config.role) {
             def adminRole = Role.findByAuthority(grailsApplication.config.role.admin) ?: new Role(authority: grailsApplication.config.role.admin).save(failOnError: true, flush: true)
@@ -36,12 +41,22 @@ class BootStrap {
                 }
             }
         }
+
+        bootstrapInitialDataService.initStaticData()
+//        bootstrapInitialDataService.initRandomData(true)
+    }
+
+    def addMetaMethods() {
+        grailsApplication.domainClasses.each { dc ->
+            dc.metaClass.'static'.random << {
+                delegate.withCriteria(uniqueResult: true) {
+                    maxResults 1
+                    sqlRestriction " 1=1 order by random()"
+                }
+            }
+        }
     }
 
     def destroy = {
-    }
-
-    static def generatePassword() {
-
     }
 }
