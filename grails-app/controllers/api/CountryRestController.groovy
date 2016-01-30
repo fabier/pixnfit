@@ -2,7 +2,7 @@ package api
 
 import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
-import pixnista.Country
+import pixnfit.Country
 
 @Secured("hasRole('ROLE_USER')")
 class CountryRestController extends RestfulController {

@@ -1,7 +1,7 @@
-import pixnista.BodyType
-import pixnista.Role
-import pixnista.User
-import pixnista.UserRole
+import pixnfit.BodyType
+import pixnfit.Role
+import pixnfit.User
+import pixnfit.UserRole
 
 class BootStrap {
 

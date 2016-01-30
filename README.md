@@ -1,5 +1,5 @@
-# pixnista-grails
-Pixnista project made with Grails
+# pixnfit-grails
+PixnFit project made with Grails
 
 **PLEASE READ CAREFULLY, THERE ARE THINGS TO DO BEFORE LAUNCHING APPLICATION**
 

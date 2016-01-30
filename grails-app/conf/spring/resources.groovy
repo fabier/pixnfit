@@ -1,5 +1,5 @@
 import grails.rest.render.xml.XmlRenderer
-import pixnista.Post
+import pixnfit.Post
 
 // Place your Spring DSL code here
 beans = {

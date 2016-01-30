@@ -1,4 +1,4 @@
-package pixnista
+package pixnfit
 
 class LoggingFilters {
 

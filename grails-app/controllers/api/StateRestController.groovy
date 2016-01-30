@@ -2,7 +2,7 @@ package api
 
 import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
-import pixnista.State
+import pixnfit.State
 
 @Secured("hasRole('ROLE_USER')")
 class StateRestController extends RestfulController {

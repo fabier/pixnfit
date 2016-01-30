@@ -121,7 +121,6 @@ log4j.main = {
     info "grails.app"
 }
 
-
 // Définition des rôles
 role.admin = 'ROLE_ADMIN'
 role.user = 'ROLE_USER'
@@ -156,24 +155,24 @@ grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
 grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'pixnista.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'pixnista.UserRole'
-grails.plugin.springsecurity.authority.className = 'pixnista.Role'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'pixnfit.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'pixnfit.UserRole'
+grails.plugin.springsecurity.authority.className = 'pixnfit.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-        '/'              : ['permitAll'],
-        '/index'         : ['permitAll'],
-        '/index.gsp'     : ['permitAll'],
-        '/assets/**'     : ['permitAll'],
-        '/**/js/**'      : ['permitAll'],
-        '/**/css/**'     : ['permitAll'],
-        '/**/images/**'  : ['permitAll'],
-        '/monitoring'    : ['permitAll'],
-        '/monitoring/**' : ['permitAll']
+        '/'             : ['permitAll'],
+        '/index'        : ['permitAll'],
+        '/index.gsp'    : ['permitAll'],
+        '/assets/**'    : ['permitAll'],
+        '/**/js/**'     : ['permitAll'],
+        '/**/css/**'    : ['permitAll'],
+        '/**/images/**' : ['permitAll'],
+        '/monitoring'   : ['permitAll'],
+        '/monitoring/**': ['permitAll']
 ]
 
 grails.plugin.springsecurity.ui.register.postRegisterUrl = '/'
 grails.plugin.springsecurity.ui.register.emailFrom = "noreply.pixnista@captainware.com"
-grails.plugin.springsecurity.ui.register.emailSubject = 'Pixnista - Valider votre email'
+grails.plugin.springsecurity.ui.register.emailSubject = 'Pixnfit - Valider votre email'
 grails.plugin.springsecurity.ui.register.defaultRoleNames = ['ROLE_USER']
 grails.plugin.springsecurity.ui.password.validationRegex = '^.*(?=.*[a-zA-Z\\d]).*$' // Au moins quelques caractères
 grails.plugin.springsecurity.ui.password.minLength = 4
@@ -194,31 +193,31 @@ grails {
                     emailBody = '''\
 Bonjour $user.username,<br/>
 <br/>
-Vous venez de créer un compte sur <a href="http://www.pixnista.com">Pixnista</a> et nous vous en remercions !<br/>
+Vous venez de créer un compte sur <a href="http://www.pixnfit.com">Pixnfit</a> et nous vous en remercions !<br/>
 <br/>
 Merci de <strong><a href="$url">cliquer ici</a></strong> pour terminer la procédure d'enregistrement, ou copier coller l'adresse suivante dans votre navigateur :<br/>
 $url<br/>
 <br/>
 Merci de ne pas répondre à ce message automatique.<br/>
 <br/>
-L'équipe Pixnista
+L'équipe Pixnfit
 '''
-                    emailFrom = 'Pixnista <noreply.pixnista@captainware.com>'
-                    emailSubject = 'Pixnista - Création de compte'
+                    emailFrom = 'Pixnfit <noreply.pixnista@captainware.com>'
+                    emailSubject = 'Pixnfit - Création de compte'
                     defaultRoleNames = ['ROLE_USER']
                     postRegisterUrl = null // use defaultTargetUrl if not set
                     emailTo = 'contact@captainware.com'
                     emailBodyToInternalEmailAccount = '''\
 Bonjour,<br/>
 <br/>
-Un nouvel utilisateur vient d'être créé sur <a href="http://www.pixnista.com">Pixnista</a>.<br/>
+Un nouvel utilisateur vient d'être créé sur <a href="http://www.pixnfit.com">Pixnfit</a>.<br/>
 <br/>
   Nom : <b>$user.username</b><br/>
 Email : <b>$user.email</b><br/>
 <br/>
 Merci de ne pas répondre à ce message automatique.<br/>
 <br/>
-L'équipe Pixnista
+L'équipe Pixnfit
 '''
                 }
 
@@ -234,10 +233,10 @@ Si vous êtes bien celui qui a fait la demande, alors <a href="$url">cliquez ici
 <br/>
 Merci de ne pas répondre à ce message automatique.<br/>
 <br/>
-L'équipe Pixnista
+L'équipe Pixnfit
 '''
-                    emailFrom = 'Pixnista <noreply.pixnista@captainware.com>'
-                    emailSubject = 'Pixnista - Réinitialisation du mot de passe'
+                    emailFrom = 'Pixnfit <noreply.pixnista@captainware.com>'
+                    emailSubject = 'Pixnfit - Réinitialisation du mot de passe'
                     postResetUrl = null // use defaultTargetUrl if not set
                 }
             }

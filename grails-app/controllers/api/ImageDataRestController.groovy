@@ -2,7 +2,7 @@ package api
 
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
-import pixnista.ImageData
+import pixnfit.ImageData
 
 @Secured("hasRole('ROLE_USER')")
 class ImageDataRestController extends RestfulController {

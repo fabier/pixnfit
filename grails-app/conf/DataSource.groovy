@@ -1,4 +1,4 @@
-import pixnista.TableNameSequencePostgreSQLDialect
+import pixnfit.TableNameSequencePostgreSQLDialect
 
 dataSource {
     pooled = true
@@ -6,10 +6,10 @@ dataSource {
 //    dbCreate = "validate"
 //    dbCreate = "create-drop"
     driverClassName = "org.postgresql.Driver"
-    url = "jdbc:postgresql://localhost:5432/pixnista"
+    url = "jdbc:postgresql://localhost:5432/pixnfit"
     dialect = TableNameSequencePostgreSQLDialect
 // dialect = org.hibernate.dialect.PostgreSQL9Dialect
-// Defined in pixnista-passwords.properties
+// Defined in passwords.properties
 // username = ""
 // password = ""
 // logSql = true

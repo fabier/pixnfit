@@ -2,7 +2,7 @@ package api
 
 import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
-import pixnista.PostCommentVote
+import pixnfit.PostCommentVote
 
 @Secured("hasRole('ROLE_USER')")
 class PostCommentVoteRestController extends RestfulController {

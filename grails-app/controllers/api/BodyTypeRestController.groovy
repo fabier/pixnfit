@@ -2,7 +2,7 @@ package api
 
 import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
-import pixnista.BodyType
+import pixnfit.BodyType
 
 @Secured("hasRole('ROLE_USER')")
 class BodyTypeRestController extends RestfulController {
