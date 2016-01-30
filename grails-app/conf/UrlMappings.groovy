@@ -5,21 +5,22 @@ class UrlMappings {
         /**
          * REST API MAPPINGS
          */
-//        "/api/bodyTypes"(resources: 'bodyType')
-//        "/api/countrys"(resources: 'country')
-//        "/api/fashionStyles"(resources: 'fashionStyle')
-//        "/api/images"(resources: 'image')
-//        "/api/imageTypes"(resources: 'imageType')
-//        "/api/languages"(resources: 'language')
-//        "/api/messages"(resources: 'message')
-//        "/api/posts"(resources: 'post')
-//        "/api/postComments"(resources: 'postComment')
-//        "/api/postCommentVotes"(resources: 'postCommentVote')
-//        "/api/postVotes"(resources: 'postVote')
-//        "/api/states"(resources: 'state')
-//        "/api/users"(resources: 'user')
-//        "/api/visibilitys"(resources: 'visibility')
-//        "/api/voteReasons"(resources: 'voteReason')
+        "/api/bodyType"(resources: 'bodyTypeRest')
+        "/api/country"(resources: 'countryRest')
+        "/api/fashionStyle"(resources: 'fashionStyleRest')
+        "/api/image"(resources: 'imageRest')
+        "/api/imageData"(resources: 'imageDataRest')
+        "/api/imageType"(resources: 'imageTypeRest')
+        "/api/language"(resources: 'languageRest')
+        "/api/message"(resources: 'messageRest')
+        "/api/post"(resources: 'postRest')
+        "/api/postComment"(resources: 'postCommentRest')
+        "/api/postCommentVote"(resources: 'postCommentVoteRest')
+        "/api/postVote"(resources: 'postVoteRest')
+        "/api/state"(resources: 'stateRest')
+        "/api/user"(resources: 'userRest')
+        "/api/visibility"(resources: 'visibilityRest')
+        "/api/voteReason"(resources: 'voteReasonRest')
 
         /**
          * OTHER CONTROLLERS
