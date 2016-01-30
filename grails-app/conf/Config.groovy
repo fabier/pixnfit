@@ -244,3 +244,12 @@ L'équipe Pixnista
         }
     }
 }
+
+grails.plugin.springsecurity.useBasicAuth = true
+grails.plugin.springsecurity.basic.realmName = "Tennis-API"
+grails.plugin.springsecurity.filterChain.chainMap = [
+        // Stateless chain
+        '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',
+        // Traditional chain
+        '/**'    : 'JOINED_FILTERS,-basicAuthenticationFilter,-basicExceptionTranslationFilter,-restTokenValidationFilter,-restExceptionTranslationFilter'
+]
