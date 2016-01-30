@@ -1,4 +1,4 @@
-# pixnfit-grails
+# pixnfit
 PixnFit project made with Grails
 
 **PLEASE READ CAREFULLY, THERE ARE THINGS TO DO BEFORE LAUNCHING APPLICATION**
