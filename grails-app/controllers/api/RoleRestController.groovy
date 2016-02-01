@@ -7,7 +7,8 @@ import pixnfit.Role
 import pixnfit.User
 
 /**
- * Il n'est pas autorisé de lister les roles, mais on peut voir pour un identifiant de role donné les informations de ce role
+ * Il n'est pas autorisé de modifier, éditer ou supprimer un role,
+ * mais on peut voir les informations de role
  */
 @Secured("hasRole('ROLE_USER')")
 class RoleRestController extends RestfulController {
@@ -15,15 +16,6 @@ class RoleRestController extends RestfulController {
 
     RoleRestController() {
         super(User)
-    }
-
-    def index(Integer max) {
-        // Interdit de lister les roles depuis le webservice
-        render status: HttpStatus.FORBIDDEN
-    }
-
-    def show(Role role) {
-        respond role
     }
 
     def save() {
