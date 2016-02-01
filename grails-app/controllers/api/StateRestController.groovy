@@ -1,14 +1,14 @@
 package api
 
-import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
 import pixnfit.State
+import pixnfit.StaticDataRestfulController
 
 @Secured("hasRole('ROLE_USER')")
-class StateRestController extends RestfulController {
+class StateRestController extends StaticDataRestfulController {
     static responseFormats = ['json', 'xml']
 
-    StateRestController(){
+    StateRestController() {
         super(State)
     }
 }

@@ -1,14 +1,14 @@
 package api
 
-import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
 import pixnfit.FashionStyle
+import pixnfit.StaticDataRestfulController
 
 @Secured("hasRole('ROLE_USER')")
-class FashionStyleRestController extends RestfulController {
+class FashionStyleRestController extends StaticDataRestfulController {
     static responseFormats = ['json', 'xml']
 
-    FashionStyleRestController(){
+    FashionStyleRestController() {
         super(FashionStyle)
     }
 }
