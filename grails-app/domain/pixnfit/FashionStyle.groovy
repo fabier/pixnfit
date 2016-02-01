@@ -2,15 +2,16 @@ package pixnfit
 
 class FashionStyle extends BaseEntity {
 
+    /**
+     * Users with (at least) this fashion style
+     */
+    Set<User> users
+
+    static belongsTo = [User]
+    static hasMany = [users: User]
+
     static constraints = {
         name blank: false, unique: true
-    }
-
-    /**
-     * Gets users with (at least) this fashion style
-     */
-    List<User> getUsers() {
-        User.findAll("from User where ? in elements(fashionStyles)", [this])
     }
 
     // Delete is forbidden
