@@ -30,14 +30,25 @@ class Post extends BaseEntity {
     /**
      * Comments on this post
      */
-    List<PostComment> postComments
+    Set<PostComment> postComments
 
     /**
      * Votes on this post
      */
-    List<PostVote> postVotes
+    Set<PostVote> postVotes
 
-    static hasMany = [images: Image, postComments: PostComment, postVotes: PostVote]
+    static belongsTo = [
+            creator   : User,
+            postType  : PostType,
+            state     : State,
+            visibility: Visibility
+    ]
+
+    static hasMany = [
+            images          : Image,
+            postComments    : PostComment,
+            postVotes       : PostVote
+    ]
 
     static constraints = {
     }
@@ -70,7 +81,7 @@ class Post extends BaseEntity {
     /**
      * Gets users that favorited this post
      */
-    List<User> getFavoritedByUsers() {
+    List<User> getFollowers() {
         User.findAll("from User where ? in elements(favoritedPosts)", [this])
     }
 }
