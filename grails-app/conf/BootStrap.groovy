@@ -1,4 +1,3 @@
-import pixnfit.BodyType
 import pixnfit.Role
 import pixnfit.User
 import pixnfit.UserRole
@@ -39,6 +38,13 @@ class BootStrap {
                 if (!UserRole.findByUserAndRole(adminUser, userRole)) {
                     UserRole.create adminUser, userRole, true
                 }
+
+                // On dit que le créateur des rôles ROLE_ADMIN et ROLE_USER est "ADMIN"
+                adminRole.setCreator(adminUser)
+                adminRole.save()
+
+                userRole.setCreator(adminUser)
+                userRole.save()
             }
         }
 
