@@ -8,7 +8,7 @@ import pixnfit.Message
 class MessageRestController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    MessageRestController(){
+    MessageRestController() {
         super(Message)
     }
 }

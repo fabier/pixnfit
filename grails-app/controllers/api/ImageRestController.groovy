@@ -8,7 +8,7 @@ import pixnfit.Image
 class ImageRestController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    ImageRestController(){
+    ImageRestController() {
         super(Image)
     }
 }

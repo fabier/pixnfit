@@ -8,7 +8,7 @@ import pixnfit.PostVote
 class PostVoteRestController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    PostVoteRestController(){
+    PostVoteRestController() {
         super(PostVote)
     }
 }
