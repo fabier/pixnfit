@@ -8,6 +8,13 @@ class FileExtension extends BaseEntity {
      */
     String extension
 
+    /**
+     * The associated ImageType
+     */
+    ImageType imageType
+
+    static belongsTo = [imageType: ImageType]
+
     static constraints = {
         name blank: false, unique: true
         extension blank: false, unique: true
