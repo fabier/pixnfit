@@ -8,6 +8,15 @@ class Mimetype extends BaseEntity {
      */
     String mimetype
 
+    /**
+     * The associated ImageType
+     */
+    ImageType imageType
+
+    static belongsTo = [imageType: ImageType]
+
+    static hasOne = [imageType: ImageType]
+
     static constraints = {
         name blank: false, unique: true
         mimetype blank: false, unique: true
