@@ -11,6 +11,8 @@ class Message extends BaseEntity {
      */
     User recipient
 
+    static belongsTo = [recipient: User, creator: User]
+
     static constraints = {
     }
 }
