@@ -83,6 +83,11 @@ class User {
             favoritedPosts  : Post
     ]
 
+    static mappedBy = [
+            followedUsers   : 'followedUsers',
+            blacklistedUsers: 'blacklistedUsers'
+    ]
+
     static constraints = {
         username blank: false
         password blank: false
