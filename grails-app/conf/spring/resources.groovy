@@ -10,6 +10,10 @@ def excludeClass = ['class']
 def staticDataExcludes = ['class', 'creator', 'dateCreated', 'lastUpdated']
 def staticDataIncludes = ['id', 'name', 'description']
 
+def fashionStyleExcludes = ['class', 'creator', 'dateCreated', 'lastUpdated', 'users']
+def fileExtensionExcludes = ['class', 'creator', 'dateCreated', 'lastUpdated', 'imageType']
+def mimetypeExcludes = ['class', 'creator', 'dateCreated', 'lastUpdated', 'imageType']
+
 def imageExcludes = excludeClass
 def imageDataExcludes = excludeClass
 def messageExcludes = excludeClass
@@ -201,32 +205,32 @@ beans = {
     // -- FashionStyle
     // --------------------------------
     fashionStyleXmlRenderer(XmlRenderer, FashionStyle) {
-        excludes = staticDataExcludes
+        excludes = fashionStyleExcludes
     }
     fashionStyleJsonRenderer(JsonRenderer, FashionStyle) {
-        excludes = staticDataExcludes
+        excludes = fashionStyleExcludes
     }
     fashionStyleXmlCollectionRenderer(XmlCollectionRenderer, FashionStyle) {
-        excludes = staticDataExcludes
+        excludes = fashionStyleExcludes
     }
     fashionStyleJsonCollectionRenderer(JsonCollectionRenderer, FashionStyle) {
-        excludes = staticDataExcludes
+        excludes = fashionStyleExcludes
     }
 
     // --------------------------------
     // -- FileExtension
     // --------------------------------
     fileExtensionXmlRenderer(XmlRenderer, FileExtension) {
-        excludes = staticDataExcludes
+        excludes = fileExtensionExcludes
     }
     fileExtensionJsonRenderer(JsonRenderer, FileExtension) {
-        excludes = staticDataExcludes
+        excludes = fileExtensionExcludes
     }
     fileExtensionXmlCollectionRenderer(XmlCollectionRenderer, FileExtension) {
-        excludes = staticDataExcludes
+        excludes = fileExtensionExcludes
     }
     fileExtensionJsonCollectionRenderer(JsonCollectionRenderer, FileExtension) {
-        excludes = staticDataExcludes
+        excludes = fileExtensionExcludes
     }
 
     // --------------------------------
@@ -281,16 +285,16 @@ beans = {
     // -- Mimetype
     // --------------------------------
     mimetypeXmlRenderer(XmlRenderer, Mimetype) {
-        excludes = staticDataExcludes
+        excludes = mimetypeExcludes
     }
     mimetypeJsonRenderer(JsonRenderer, Mimetype) {
-        excludes = staticDataExcludes
+        excludes = mimetypeExcludes
     }
     mimetypeXmlCollectionRenderer(XmlCollectionRenderer, Mimetype) {
-        excludes = staticDataExcludes
+        excludes = mimetypeExcludes
     }
     mimetypeJsonCollectionRenderer(JsonCollectionRenderer, Mimetype) {
-        excludes = staticDataExcludes
+        excludes = mimetypeExcludes
     }
 
     // --------------------------------
