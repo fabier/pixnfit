@@ -3,28 +3,34 @@ package pixnfit
 class ImageType extends BaseEntity {
 
     /**
+     * Default mime type for this ImageType
+     */
+    Mimetype defaultMimeType
+
+    /**
      * Default file extension for this ImageType
      */
     FileExtension defaultFileExtension
 
     /**
-     * Default Mimetype for this ImageType
+     * Valid file extensions for this ImageType
      */
-    Mimetype defaultMimeType
+    Set<FileExtension> fileExtensions
+
+    /**
+     * Valid mimetypes for this ImageType
+     */
+    Set<Mimetype> mimetypes
 
     static hasMany = [
-            /**
-             * Valid FileExtensions for this ImageType
-             */
-            fileExtensions: FileExtension,
-            /**
-             * Valid MimeTypes for this ImageType
-             */
-            mimetypes: Mimetype
+            mimetypes     : Mimetype,
+            fileExtensions: FileExtension
     ]
 
     static constraints = {
         name blank: false, unique: true
+        defaultMimeType nullable: true
+        defaultFileExtension nullable: true
     }
 
     /**
@@ -33,7 +39,6 @@ class ImageType extends BaseEntity {
     List<Image> getImages() {
         Image.findAllByImageType(this)
     }
-
     // Delete is forbidden
     def beforeDelete() {
         return false
