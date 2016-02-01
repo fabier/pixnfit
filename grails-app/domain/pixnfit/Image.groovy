@@ -23,9 +23,18 @@ class Image extends BaseEntity {
     ImageType imageType
 
     /**
+     * Posts where this image appears (at least once)
+     */
+    Set<Post> posts
+
+    /**
      * Data, externalized to avoid a "big" table, and easy way to do "lazy loading".
      */
     static hasOne = [imageData: ImageData]
+
+    static belongsTo = [Post]
+
+    static hasMany = [posts: Post]
 
     static constraints = {
         filename blank: false
@@ -34,12 +43,6 @@ class Image extends BaseEntity {
         imageData unique: true
     }
 
-    /**
-     * Posts where this image appears (at least once)
-     */
-    List<Post> getPosts() {
-        Post.findAll("from Post where ? in elements(images)", [this])
-    }
     def beforeValidate() {
         if (imageData?.md5 == null || isDirty("imageData")) {
             imageData.updateMD5()
