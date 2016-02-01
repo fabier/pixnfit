@@ -6,6 +6,11 @@ package pixnfit
 class PostVote extends BaseEntity {
 
     /**
+     * The post on which this vote is
+     */
+    Post post
+
+    /**
      * Vote value
      * True means positive vote
      * False means negative vote
@@ -21,10 +26,10 @@ class PostVote extends BaseEntity {
      */
     VoteReason voteReason
 
-    /**
-     * The post on which this vote is
-     */
-    static belongsTo = [post: Post]
+    static belongsTo = [
+            post      : Post,
+            voteReason: VoteReason
+    ]
 
     static constraints = {
         name nullable: true
