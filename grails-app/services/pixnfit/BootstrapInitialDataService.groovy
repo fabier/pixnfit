@@ -12,6 +12,7 @@ class BootstrapInitialDataService {
     FakerService fakerService
     UserService userService
     ImageService imageService
+    ImageTypeService imageTypeService
     PostTypeService postTypeService
     StateService stateService
     VisibilityService visibilityService
@@ -115,48 +116,55 @@ class BootstrapInitialDataService {
         }
         log.info "Genders OK"
 
+        // ImageType
+        log.info "Initializing ImageTypes..."
+        ImageType jpegImageType, pngImageType, gifImageType
+        if (ImageType.count() == 0) {
+            jpegImageType = new ImageType(name: "JPEG", creator: admin).save(flush: true)
+            pngImageType = new ImageType(name: "PNG", creator: admin).save(flush: true)
+            gifImageType = new ImageType(name: "GIF", creator: admin).save(flush: true)
+        } else {
+            jpegImageType = imageTypeService.jpeg()
+            pngImageType = imageTypeService.png()
+            gifImageType = imageTypeService.gif()
+        }
+        log.info "ImageTypes OK"
+
         // Mimetype
         log.info "Initializing MimeTypes..."
         if (Mimetype.count() == 0) {
-            new Mimetype(name: "JPEG", mimetype: "image/jpeg", creator: admin).save(failOnError: true)
-            new Mimetype(name: "PNG", mimetype: "image/png", creator: admin).save(failOnError: true)
-            new Mimetype(name: "GIF", mimetype: "image/gif", creator: admin).save(failOnError: true)
+            def jpgMimeType = new Mimetype(name: "JPEG", mimetype: "image/jpeg", imageType: jpegImageType, creator: admin).save(failOnError: true)
+            jpegImageType.setDefaultMimeType(jpgMimeType)
+            jpegImageType.save()
+
+            def pngMimeType = new Mimetype(name: "PNG", mimetype: "image/png", imageType: pngImageType, creator: admin).save(failOnError: true)
+            pngImageType.setDefaultMimeType(pngMimeType)
+            pngImageType.save()
+
+            def gifMimeType = new Mimetype(name: "GIF", mimetype: "image/gif", imageType: gifImageType, creator: admin).save(failOnError: true)
+            gifImageType.setDefaultMimeType(gifMimeType)
+            gifImageType.save()
         }
         log.info "MimeTypes OK"
 
         // FileExtension
         log.info "Initializing FileExtensions..."
         if (FileExtension.count() == 0) {
-            new FileExtension(name: "JPG", extension: "jpg", creator: admin).save(failOnError: true)
-            new FileExtension(name: "JPEG", extension: "jpeg", creator: admin).save(failOnError: true)
-            new FileExtension(name: "PNG", extension: "png", creator: admin).save(failOnError: true)
-            new FileExtension(name: "GIF", extension: "gif", creator: admin).save(failOnError: true)
+            def jpgFileExtension = new FileExtension(name: "JPG", extension: "jpg", imageType: jpegImageType, creator: admin).save(failOnError: true)
+            jpegImageType.setDefaultFileExtension(jpgFileExtension)
+            jpegImageType.save()
+
+            new FileExtension(name: "JPEG", extension: "jpeg", imageType: jpegImageType, creator: admin).save(failOnError: true)
+
+            def gifFileExtension = new FileExtension(name: "PNG", extension: "png", imageType: pngImageType, creator: admin).save(failOnError: true)
+            pngImageType.setDefaultFileExtension(gifFileExtension)
+            pngImageType.save()
+
+            def pngFileExtension = new FileExtension(name: "GIF", extension: "gif", imageType: gifImageType, creator: admin).save(failOnError: true)
+            gifImageType.setDefaultFileExtension(pngFileExtension)
+            gifImageType.save()
         }
         log.info "FileExtensions OK"
-
-        // ImageType
-        log.info "Initializing ImageTypes..."
-        if (ImageType.count() == 0) {
-            FileExtension jpegFileExtension = fileExtensionService.jpeg()
-            FileExtension pngFileExtension = fileExtensionService.png()
-            FileExtension gifFileExtension = fileExtensionService.gif()
-            Mimetype jpegMimeType = mimeTypeService.jpeg()
-            Mimetype pngMimeType = mimeTypeService.png()
-            Mimetype gifMimeType = mimeTypeService.gif()
-            def jpegImageType = new ImageType(name: "JPEG",
-                    defaultMimeType: jpegMimeType,
-                    defaultFileExtension: jpegFileExtension,
-                    creator: admin).addToFileExtensions(jpegFileExtension).addToFileExtensions(jpegFileExtension).addToMimetypes(jpegMimeType).save(failOnError: true)
-            def pngImageType = new ImageType(name: "PNG",
-                    defaultMimeType: pngMimeType,
-                    defaultFileExtension: pngFileExtension,
-                    creator: admin).addToFileExtensions(pngFileExtension).addToMimetypes(pngMimeType).save(failOnError: true)
-            def gifImageType = new ImageType(name: "GIF",
-                    defaultMimeType: gifMimeType,
-                    defaultFileExtension: gifFileExtension,
-                    creator: admin).addToFileExtensions(gifFileExtension).addToMimetypes(gifMimeType).save(failOnError: true)
-        }
-        log.info "ImageTypes OK"
     }
 
     /**
