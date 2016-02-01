@@ -6,6 +6,11 @@ package pixnfit
 class PostCommentVote extends BaseEntity {
 
     /**
+     * The postComment on which this vote is
+     */
+    PostComment postComment
+
+    /**
      * Vote value
      * True means positive vote
      * False means negative vote
