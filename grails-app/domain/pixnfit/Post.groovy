@@ -30,7 +30,7 @@ class Post extends BaseEntity {
     /**
      * Comments on this post
      */
-    Set<PostComment> postComments
+    List<PostComment> postComments
 
     /**
      * Votes on this post
