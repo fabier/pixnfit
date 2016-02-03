@@ -55,28 +55,19 @@ class UrlMappings {
         // On peut récupérer des informations sur les commentaires
         // et voter pour un commentaire
         "/api/v1/postComment"(resources: "postCommentRest", includes: ["index", "show", "save", "update", "delete"]) {
-            "/votes"(controller: "postCommentRest") {
-                action = [GET: "votes", POST: "addVote"]
-            }
+            "/votes"(controller: "postCommentRest", action: "votes", method: "GET")
+            "/votes"(controller: "postCommentRest", action: "addVote", method: "POST")
         }
 
         // On peut récupérer des informations sur un profil utilisateur
         "/api/v1/user"(resources: "userRest", includes: ["show", "save", "update", "delete"]) {
-            "/incomingMessages"(controller: "userRest") {
-                action = [GET: "incomingMe copyessages"]
-            }
-            "/outgoingMessages"(controller: "userRest") {
-                action = [GET: "outgoingMessages"]
-            }
-            "/posts"(controller: "userRest") {
-                action = [GET: "posts", POST: "addPost"]
-            }
-            "/followers"(controller: "userRest") {
-                action = [GET: "followers", POST: "addFollower"]
-            }
-            "/following"(controller: "userRest") {
-                action = [GET: "following"]
-            }
+            "/incomingMessages"(controller: "userRest", action: "incomingMessages", method: "GET")
+            "/outgoingMessages"(controller: "userRest", action: "outgoingMessages", method: "GET")
+            "/posts"(controller: "userRest", action: "posts", method: "GET")
+            "/followers"(controller: "userRest", action: "followers", method: "GET")
+            "/followers"(controller: "userRest", action: "addFollower", method: "POST")
+            "/followers"(controller: "userRest", action: "removeFollower", method: "DELETE")
+            "/following"(controller: "userRest", action: "following", method: "GET")
         }
 
         /**
