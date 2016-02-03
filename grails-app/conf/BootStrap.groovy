@@ -132,6 +132,15 @@ class BootStrap {
                     dateCreated: image.dateCreated
             ]
         }
+        JSON.registerObjectMarshaller(ImageData) {
+            ImageData imageData = it
+            return [
+                    id         : imageData.id,
+                    data       : imageData.data.encodeBase64().toString(),
+                    md5        : imageData.md5,
+                    dateCreated: imageData.dateCreated
+            ]
+        }
         JSON.registerObjectMarshaller(Message) {
             Message message = it
             User creator = message.creator
