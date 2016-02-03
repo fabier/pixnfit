@@ -16,5 +16,6 @@ class PostComment extends BaseEntity {
 
     static constraints = {
         name nullable: true
+        description nullable: false, blank: false
     }
 }
