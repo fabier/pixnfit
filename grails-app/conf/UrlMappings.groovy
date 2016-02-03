@@ -5,27 +5,83 @@ class UrlMappings {
         /**
          * REST API MAPPINGS
          */
-        "/api/v1/bodyType"(resources: 'bodyTypeRest')
-        "/api/v1/country"(resources: 'countryRest')
-        "/api/v1/fashionStyle"(resources: 'fashionStyleRest')
-        "/api/v1/fileExtension"(resources: 'fileExtensionRest')
-        "/api/v1/gender"(resources: 'genderRest')
-        "/api/v1/image"(resources: 'imageRest')
-        "/api/v1/imageData"(resources: 'imageDataRest')
-        "/api/v1/imageType"(resources: 'imageTypeRest')
-        "/api/v1/language"(resources: 'languageRest')
-        "/api/v1/message"(resources: 'messageRest')
-        "/api/v1/mimetype"(resources: 'mimetypeRest')
-        "/api/v1/post"(resources: 'postRest')
-        "/api/v1/postComment"(resources: 'postCommentRest')
-        "/api/v1/postCommentVote"(resources: 'postCommentVoteRest')
-        "/api/v1/postType"(resources: 'postTypeRest')
-        "/api/v1/postVote"(resources: 'postVoteRest')
-        "/api/v1/role"(resources: 'roleRest')
-        "/api/v1/state"(resources: 'stateRest')
-        "/api/v1/user"(resources: 'userRest')
-        "/api/v1/visibility"(resources: 'visibilityRest')
-        "/api/v1/voteReason"(resources: 'voteReasonRest')
+
+        // ------------------------
+        // -- Authentication
+        // ------------------------
+        "/api/v1/auth"(controller: "authRest", action: "checkCredentials", method: "POST")
+
+        // ------------------------
+        // -- Static Data (READ ONLY)
+        // ------------------------
+        "/api/v1/bodyType"(resources: "bodyTypeRest", includes: ["index", "show"])
+        "/api/v1/country"(resources: "countryRest", includes: ["index", "show"])
+        "/api/v1/fashionStyle"(resources: "fashionStyleRest", includes: ["index", "show"])
+        "/api/v1/gender"(resources: "genderRest", includes: ["index", "show"])
+        "/api/v1/imageType"(resources: "imageTypeRest", includes: ["index", "show"])
+        "/api/v1/language"(resources: "languageRest", includes: ["index", "show"])
+        "/api/v1/postType"(resources: "postTypeRest", includes: ["index", "show"])
+        "/api/v1/state"(resources: "stateRest", includes: ["index", "show"])
+        "/api/v1/visibility"(resources: "visibilityRest", includes: ["index", "show"])
+        "/api/v1/voteReason"(resources: "voteReasonRest", includes: ["index", "show"])
+
+        // ------------------------
+        // -- Dynamic Data (READABLE, INSERTABLE, UPDATABLE, DELETABLE)
+        // ------------------------
+        // On peut visualiser des images, en créer, et récupérer les données associées
+        "/api/v1/image"(resources: "imageRest", includes: ["show", "save", "update", "delete"]) {
+            "/data"(controller: "imageRest") {
+                action = [GET: "data"]
+            }
+        }
+
+        // On peut créer des messages
+        "/api/v1/message"(resources: "messageRest", includes: ["index", "show", "save", "update", "delete"])
+
+        // On peut voir les posts,
+        // les commentaires sur ce post, poster un nouveau commentaire
+        // les votes sur ce post
+        "/api/v1/post"(resources: "postRest", includes: ["show", "save", "update", "delete"]) {
+            "/comments"(controller: "postRest") {
+                action = [GET: "comments", POST: "addComment"]
+            }
+            "/votes"(controller: "postRest") {
+                action = [GET: "votes", POST: "addVote"]
+            }
+        }
+
+        // Liste de posts qui ont besoin d'aide et de votes
+        "/api/v1/post/help"(controller: "postRest", action: "help", method: "GET")
+
+        // Sélection de posts qui ont recu de l'aide
+        "/api/v1/post/featured"(controller: "postRest", action: "featured", method: "GET")
+
+        // On peut récupérer des informations sur les commentaires
+        // et voter pour un commentaire
+        "/api/v1/postComment"(resources: "postCommentRest", includes: ["index", "show", "save", "update", "delete"]) {
+            "/votes"(controller: "postCommentRest") {
+                action = [GET: "votes", POST: "addVote"]
+            }
+        }
+
+        // On peut récupérer des informations sur un profil utilisateur
+        "/api/v1/user"(resources: "userRest", includes: ["show", "save", "update", "delete"]) {
+            "/incomingMessages"(controller: "userRest") {
+                action = [GET: "incomingMe copyessages"]
+            }
+            "/outgoingMessages"(controller: "userRest") {
+                action = [GET: "outgoingMessages"]
+            }
+            "/posts"(controller: "userRest") {
+                action = [GET: "posts", POST: "addPost"]
+            }
+            "/followers"(controller: "userRest") {
+                action = [GET: "followers", POST: "addFollower"]
+            }
+            "/following"(controller: "userRest") {
+                action = [GET: "following"]
+            }
+        }
 
         /**
          * OTHER CONTROLLERS
@@ -38,6 +94,6 @@ class UrlMappings {
         }
 
         "/"(controller: "public")
-        "500"(view: '/error')
+        "500"(view: "/error")
     }
 }
