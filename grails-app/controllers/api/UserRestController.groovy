@@ -1,8 +1,8 @@
 package api
 
-import grails.rest.RestfulController
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
+import pixnfit.DynamicDataRestfulController
 import pixnfit.User
 
 /**
@@ -11,19 +11,13 @@ import pixnfit.User
  * à condition d'être loggué en tant que cet utilisateur
  */
 @Secured("hasRole('ROLE_USER')")
-class UserRestController extends RestfulController {
-    static responseFormats = ['json', 'xml']
+class UserRestController extends DynamicDataRestfulController {
 
     UserRestController() {
         super(User)
     }
 
     def index(Integer max) {
-        // Interdit de lister les utilisateurs depuis le webservice
-        render status: HttpStatus.FORBIDDEN
-    }
-
-    def show() {
         // Interdit de lister les utilisateurs depuis le webservice
         render status: HttpStatus.FORBIDDEN
     }
@@ -41,5 +35,9 @@ class UserRestController extends RestfulController {
     def delete() {
         // Interdit de supprimer les utilisateurs depuis le webservice
         render status: HttpStatus.FORBIDDEN
+    }
+
+    def incomingMessages() {
+        User user = queryForResource()
     }
 }
