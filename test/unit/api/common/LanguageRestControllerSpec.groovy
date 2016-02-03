@@ -1,13 +1,14 @@
-package api
+package api.common
 
+import api.common.LanguageRestController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(StateRestController)
-class StateRestControllerSpec extends Specification {
+@TestFor(LanguageRestController)
+class LanguageRestControllerSpec extends Specification {
 
     def setup() {
     }

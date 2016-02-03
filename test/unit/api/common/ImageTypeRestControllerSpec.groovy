@@ -1,13 +1,14 @@
-package api
+package api.common
 
+import api.common.ImageTypeRestController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(VisibilityRestController)
-class VisibilityRestControllerSpec extends Specification {
+@TestFor(ImageTypeRestController)
+class ImageTypeRestControllerSpec extends Specification {
 
     def setup() {
     }

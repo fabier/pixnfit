@@ -1,13 +1,14 @@
-package api
+package api.common
 
+import api.common.FashionStyleRestController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(CountryRestController)
-class CountryRestControllerSpec extends Specification {
+@TestFor(FashionStyleRestController)
+class FashionStyleRestControllerSpec extends Specification {
 
     def setup() {
     }
