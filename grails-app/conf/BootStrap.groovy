@@ -255,11 +255,16 @@ class BootStrap {
         JSON.registerObjectMarshaller(PostVote) {
             PostVote postVote = it
             Post post = postVote.post
+            VoteReason voteReason = postVote.voteReason
             User creator = postVote.creator
             Image creatorImage = creator?.image
             return [
                     id         : postVote.id,
                     vote       : postVote.vote,
+                    voteReason : voteReason ? [
+                            id  : voteReason.id,
+                            name: voteReason.name
+                    ] : null,
                     post       : [
                             id  : post.id,
                             name: post.name
