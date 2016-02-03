@@ -15,9 +15,6 @@ class PostController {
     def show(long id) {
         Post post = Post.get(id)
         List<PostComment> comments = post.postComments
-        comments.sort { a, b ->
-            -a.dateCreated.compareTo(b.dateCreated)
-        }
         int positiveVoteCount = post.getPositiveVoteCount()
         int negativeVoteCount = post.getNegativeVoteCount()
         int totalVoteCount = post.getVoteCount()
