@@ -1,14 +1,15 @@
 package api
 
+import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.security.access.annotation.Secured
-import pixnfit.DynamicDataRestfulController
-import pixnfit.Post
-import pixnfit.PostTypeService
+import pixnfit.*
 
 @Secured("hasRole('ROLE_USER')")
 class PostRestController extends DynamicDataRestfulController {
 
     PostTypeService postTypeService
+
+    SpringSecurityService springSecurityService
 
     // On ne peut qu'ajouter des posts, pas de mise à jour ou de suppression
     static allowedMethods = [help: "GET", featured: "GET", save: "POST", addComment: "POST", addVote: "POST"]
@@ -23,9 +24,20 @@ class PostRestController extends DynamicDataRestfulController {
     }
 
     def addComment() {
-        log.info "params : $params"
-        log.info "request : $request"
-        respond null
+        def json = request.JSON
+        Post post = Post.get(params.postRestId)
+        PostComment postComment = new PostComment(
+                post: post,
+                description: json.description,
+                creator: springSecurityService.currentUser
+        )
+        if (postComment.validate()) {
+            postComment.save()
+            respond postComment
+        } else {
+            respond postComment
+        }
+        respond postComment
     }
 
     def votes() {
@@ -34,9 +46,31 @@ class PostRestController extends DynamicDataRestfulController {
     }
 
     def addVote() {
-        log.info "params : $params"
-        log.info "request : $request"
-        respond null
+        def json = request.JSON
+        Post post = Post.get(params.postRestId)
+
+        // Si on a passé un identifiant de voteReason, on doit avoir une valeur conhérente
+        VoteReason voteReason
+        if (json.voteReasonId != null) {
+            voteReason = VoteReason.get(json.voteReasonId)
+            if (voteReason == null) {
+                respond([error: "voteReasonId : ${json.voteReasonId} is not a valid value"])
+            }
+        }
+
+        // Création du vote
+        PostVote postVote = new PostVote(
+                post: post,
+                vote: json.vote,
+                voteReason: voteReason,
+                creator: springSecurityService.currentUser
+        )
+        if (postVote.validate()) {
+            postVote.save()
+            respond postVote
+        } else {
+            respond postVote
+        }
     }
 
     def help() {
