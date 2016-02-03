@@ -30,24 +30,20 @@ class UrlMappings {
         // ------------------------
         // On peut visualiser des images, en créer, et récupérer les données associées
         "/api/v1/image"(resources: "imageRest", includes: ["show", "save", "update", "delete"]) {
-            "/data"(controller: "imageRest") {
-                action = [GET: "data"]
-            }
+            "/data"(controller: "imageRest", action: "data", method: "GET")
         }
 
         // On peut créer des messages
-        "/api/v1/message"(resources: "messageRest", includes: ["index", "show", "save", "update", "delete"])
+        "/api/v1/message"(resources: "messageRest", includes: ["show", "save", "update", "delete"])
 
         // On peut voir les posts,
         // les commentaires sur ce post, poster un nouveau commentaire
         // les votes sur ce post
         "/api/v1/post"(resources: "postRest", includes: ["show", "save", "update", "delete"]) {
-            "/comments"(controller: "postRest") {
-                action = [GET: "comments", POST: "addComment"]
-            }
-            "/votes"(controller: "postRest") {
-                action = [GET: "votes", POST: "addVote"]
-            }
+            "/comments"(controller: "postRest", action: "comments", method: "GET")
+            "/comments"(controller: "postRest", action: "addComment", method: "POST")
+            "/votes"(controller: "postRest", action: "votes", method: "GET")
+            "/votes"(controller: "postRest", action: "addVote", method: "POST")
         }
 
         // Liste de posts qui ont besoin d'aide et de votes
