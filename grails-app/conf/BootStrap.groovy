@@ -1,6 +1,6 @@
-import pixnfit.Role
-import pixnfit.User
-import pixnfit.UserRole
+import grails.converters.JSON
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import pixnfit.*
 
 class BootStrap {
 
@@ -8,8 +8,14 @@ class BootStrap {
 
     def bootstrapInitialDataService
 
+    LinkGenerator grailsLinkGenerator
+
     def init = { servletContext ->
+        // Adds random() method to all domain classes
         addMetaMethods()
+
+        // Register JSON Marshallers
+        registerMarshallers()
 
         // Création des rôles utilisateurs
         if (grailsApplication.config.role) {
@@ -52,6 +58,9 @@ class BootStrap {
 //        bootstrapInitialDataService.initRandomData(true)
     }
 
+    /**
+     * Adds random() method to all domain classes
+     */
     def addMetaMethods() {
         grailsApplication.domainClasses.each { dc ->
             dc.metaClass.'static'.random << {
@@ -60,6 +69,239 @@ class BootStrap {
                     sqlRestriction " 1=1 order by random()"
                 }
             }
+        }
+    }
+
+    def registerMarshallers() {
+        [BodyType, FashionStyle, FileExtension, Gender, ImageType, Mimetype, PostType, State, Visibility, VoteReason].each {
+            JSON.registerObjectMarshaller(it) {
+                return [
+                        id         : it.id,
+                        name       : it.name,
+                        description: it.description,
+                        dateCreated: it.dateCreated
+                ]
+            }
+        }
+        JSON.registerObjectMarshaller(Country) {
+            Country country = it
+            return [
+                    id          : country.id,
+                    name        : country.name,
+                    description : country.description,
+                    nativeName  : country.nativeName,
+                    isoCode31661: country.isoCode31661,
+                    dateCreated : country.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(Language) {
+            Language language = it
+            return [
+                    id         : language.id,
+                    name       : language.name,
+                    description: language.description,
+                    nativeName : language.nativeName,
+                    dateCreated: language.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(Image) {
+            Image image = it
+            User creator = image.creator
+            Image creatorImage = creator?.image
+            ImageType imageType = image.imageType
+            return [
+                    id         : image.id,
+                    name       : image.name,
+                    description: image.description,
+                    url        : grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true),
+                    creator    : [
+                            id      : creator.id,
+                            username: creator.username,
+                            image   : creatorImage ? [
+                                    id : creatorImage.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                            ] : null
+                    ],
+                    filename   : image.filename,
+                    width      : image.width,
+                    height     : image.height,
+                    imageType  : [
+                            id  : imageType.id,
+                            name: imageType.name,
+                    ],
+                    dateCreated: image.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(Message) {
+            Message message = it
+            User creator = message.creator
+            Image creatorImage = creator?.image
+            User recipient = message.recipient
+            Image recipientImage = recipient?.image
+            return [
+                    id         : message.id,
+                    name       : message.name,
+                    description: message.description,
+                    creator    : [
+                            id      : creator.id,
+                            username: creator.username,
+                            image   : creatorImage ? [
+                                    id : creatorImage.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                            ] : null
+                    ],
+                    recipient  : [
+                            id      : recipient.id,
+                            username: recipient.username,
+                            image   : recipientImage ? [
+                                    id : recipientImage.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: recipientImage.id, absolute: true)
+                            ] : null
+                    ],
+                    dateCreated: message.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(Post) {
+            Post post = it
+            User creator = post.creator
+            Image image = creator?.image
+            List<Image> images = post.images
+            def imagesAsMapArray = images.inject([]) { array, entry ->
+                array.add([
+                        id : entry.id,
+                        url: grailsLinkGenerator.link(controller: "image", action: "show", id: entry.id, absolute: true)
+                ])
+                return array
+            }
+            PostType postType = post.postType
+            Visibility visibility = post.visibility
+            State state = post.state
+            return [
+                    id         : post.id,
+                    name       : post.name,
+                    description: post.description,
+                    creator    : [
+                            id      : creator.id,
+                            username: creator.username,
+                            image   : image ? [
+                                    id : image.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true)
+                            ] : null
+                    ],
+                    images     : imagesAsMapArray,
+                    postType   : postType ? [
+                            id  : postType.id,
+                            name: postType.name,
+                    ] : null,
+                    visibility : visibility ? [
+                            id  : visibility.id,
+                            name: visibility.name,
+                    ] : null,
+                    state      : state ? [
+                            id  : state.id,
+                            name: state.name,
+                    ] : null,
+                    dateCreated: post.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(PostComment) {
+            PostComment postComment = it
+            User creator = postComment.creator
+            Image creatorImage = creator?.image
+            return [
+                    id         : postComment.id,
+                    name       : postComment.name,
+                    description: postComment.description,
+                    postId     : postComment.postId,
+                    creator    : [
+                            id      : creator.id,
+                            username: creator.username,
+                            image   : creatorImage ? [
+                                    id : creatorImage.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                            ] : null
+                    ],
+                    dateCreated: postComment.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(PostCommentVote) {
+            PostCommentVote postCommentVote = it
+            User creator = postCommentVote.creator
+            Image creatorImage = creator?.image
+            return [
+                    id           : postCommentVote.id,
+                    vote         : postCommentVote.vote,
+                    postCommentId: postCommentVote.postCommentId,
+                    creator      : [
+                            id      : creator.id,
+                            username: creator.username,
+                            image   : creatorImage ? [
+                                    id : creatorImage.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                            ] : null
+                    ],
+                    dateCreated  : postCommentVote.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(PostVote) {
+            PostVote postVote = it
+            Post post = postVote.post
+            User creator = postVote.creator
+            Image creatorImage = creator?.image
+            return [
+                    id         : postVote.id,
+                    vote       : postVote.vote,
+                    post       : [
+                            id  : post.id,
+                            name: post.name
+                    ],
+                    creator    : [
+                            id      : creator.id,
+                            username: creator.username,
+                            image   : creatorImage ? [
+                                    id : creatorImage.id,
+                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                            ] : null
+                    ],
+                    dateCreated: postVote.dateCreated
+            ]
+        }
+        JSON.registerObjectMarshaller(User) {
+            User user = it
+            BodyType bodyType = user.bodyType
+            Image image = user.image
+            Gender gender = user.gender
+            Country country = user.country
+            Language language = user.language
+            return [
+                    id         : user.id,
+                    username   : user.username,
+                    description: user.description,
+                    bodyType   : bodyType ? [
+                            id  : bodyType.id,
+                            name: bodyType.name,
+                    ] : null,
+                    gender     : gender ? [
+                            id  : gender.id,
+                            name: gender.name,
+                    ] : null,
+                    birthdate  : user.birthdate,
+                    height     : user.height,
+                    weight     : user.weight,
+                    image      : image ? [
+                            id : image.id,
+                            url: grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true),
+                    ] : null,
+                    country    : country ? [
+                            id  : country.id,
+                            name: country.name
+                    ] : null,
+                    language   : language ? [
+                            id  : language.id,
+                            name: language.name
+                    ] : null,
+                    dateCreated: it.dateCreated
+            ]
         }
     }
 
