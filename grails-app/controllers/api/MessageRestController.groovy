@@ -27,10 +27,10 @@ class MessageRestController extends DynamicDataRestfulController {
 
         // Création du message
         Message message = new Message(
-                description: json.description,
-                recipient: User.get(json.recipientId),
                 creator: springSecurityService.currentUser
         )
+        bindData(message, json, [include: ['description']])
+        foreignKeyBindDataIfNotNull(message, json, [recipient: User])
 
         if (message.validate()) {
             message.save()
