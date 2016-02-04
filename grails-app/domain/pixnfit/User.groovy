@@ -154,31 +154,38 @@ class User {
      * Adds this user to the 'follow list' of user in params
      */
     def addToFollowers(User user) {
-        new UserFollow(followedUser: this, followingUser: user).save(flush: true)
-        addToFollowedUsers(user)
+        this.addToFollowingUsers(
+                new UserFollow(followedUser: this, followingUser: user)
+        )
     }
 
     /**
      * Adds user in params to this user's 'follow list'
      */
     def addToFollowedUsers(User user) {
-        new UserFollow(followedUser: user, followingUser: this).save(flush: true)
+        this.addToFollowedUsers(
+                new UserFollow(followedUser: user, followingUser: this)
+        )
     }
 
     def removeFromFollowers(User user) {
         def follower = UserFollow.findByFollowedUserAndFollowingUser(this, user)
         if (follower != null) {
+            this.removeFromFollowingUsers(follower)
             follower.delete()
         }
     }
 
     def addToBlacklistedUsers(User user) {
-        new UserBlacklist(blacklistingUser: this, blacklistedUser: user).save()
+        this.addToBlacklistedUsers(
+                new UserBlacklist(blacklistingUser: this, blacklistedUser: user)
+        )
     }
 
     def removeFromBlacklistedUsers(User user) {
         def blacklistedUser = UserBlacklist.findByBlacklistingUserAndBlacklistedUser(this, user)
         if (blacklistedUser != null) {
+            this.removeFromBlacklistedUsers(blacklistedUser)
             blacklistedUser.delete()
         }
     }
@@ -186,14 +193,14 @@ class User {
     /**
      * Gets users following this user
      */
-    Set<User> getFollowers() {
+    Set<User> getFollowersAsUserSet() {
         this.followingUsers*.followingUser
     }
 
     /**
      * Gets users this user follows
      */
-    Set<User> getFollowedUsers() {
+    Set<User> getFollowedUsersAsUserSet() {
         this.followedUsers*.followedUser
     }
 
@@ -201,7 +208,7 @@ class User {
      * Users that blacklisted this user
      * Synonym for blacklistingUsers
      */
-    Set<User> getBlacklisters() {
+    Set<User> getBlacklistersAsUserSet() {
         this.blacklistingUsers*.blacklistingUser
     }
 
@@ -209,8 +216,16 @@ class User {
      * Users blacklisted by this user
      * @return
      */
-    Set<User> getBlacklistedUsers() {
+    Set<User> getBlacklistedUsersAsUserSet() {
         this.blacklistedUsers*.blacklistedUser
+    }
+
+    /**
+     * Users blacklisting this user
+     * @return
+     */
+    Set<User> getBlacklistingUsersAsUserSet() {
+        this.blacklistingUsers*.blacklistingUser
     }
 
     def beforeInsert() {
