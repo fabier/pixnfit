@@ -77,15 +77,23 @@ class User {
     static transients = ['springSecurityService']
 
     static hasMany = [
-            fashionStyles   : FashionStyle,
-            followedUsers   : User,
-            blacklistedUsers: User,
-            favoritedPosts  : Post
+            fashionStyles    : FashionStyle,
+            incomingMessages : Message,
+            outgoingMessages : Message,
+            followingUsers   : UserFollow,
+            followedUsers    : UserFollow,
+            blacklistingUsers: UserBlacklist,
+            blacklistedUsers : UserBlacklist,
+            favoritedPosts   : Post
     ]
 
     static mappedBy = [
-            followedUsers   : 'followedUsers',
-            blacklistedUsers: 'blacklistedUsers'
+            incomingMessages : 'recipient', // Messages WHERE this user is the recipient
+            outgoingMessages : 'creator', // Messages WHERE this user is the creator
+            followingUsers   : 'followedUser', // UserFollows WHERE this user is the followed User
+            followedUsers    : 'followingUser', // UserFollow WHERE this user is the following User
+            blacklistingUsers: 'blacklistedUser', // UserBlacklist WHERE this user is the blacklistedUser User
+            blacklistedUsers : 'blacklistingUser' // UserBlacklist WHERE this user is the blacklistingUser User
     ]
 
     static constraints = {
@@ -143,45 +151,66 @@ class User {
     }
 
     /**
-     * Gets messages sent
+     * Adds this user to the 'follow list' of user in params
      */
-    List<Message> getOutgoingMessages() {
-        Message.findAllByCreator(this)
+    def addToFollowers(User user) {
+        new UserFollow(followedUser: this, followingUser: user).save(flush: true)
+        addToFollowedUsers(user)
     }
 
     /**
-     * Gets messages received
+     * Adds user in params to this user's 'follow list'
      */
-    List<Message> getIncomingMessages() {
-        Message.findAllByRecipient(this)
+    def addToFollowedUsers(User user) {
+        new UserFollow(followedUser: user, followingUser: this).save(flush: true)
+    }
+
+    def removeFromFollowers(User user) {
+        def follower = UserFollow.findByFollowedUserAndFollowingUser(this, user)
+        if (follower != null) {
+            follower.delete()
+        }
+    }
+
+    def addToBlacklistedUsers(User user) {
+        new UserBlacklist(blacklistingUser: this, blacklistedUser: user).save()
+    }
+
+    def removeFromBlacklistedUsers(User user) {
+        def blacklistedUser = UserBlacklist.findByBlacklistingUserAndBlacklistedUser(this, user)
+        if (blacklistedUser != null) {
+            blacklistedUser.delete()
+        }
     }
 
     /**
-     * Synonym for getFollowers
+     * Gets users following this user
      */
-    List<User> getFollowingUsers() {
-        getFollowers()
+    Set<User> getFollowers() {
+        this.followingUsers*.followingUser
     }
 
     /**
-     * Gets followers
+     * Gets users this user follows
      */
-    List<User> getFollowers() {
-        User.findAll("from User where ? in elements(followedUsers)", [this])
+    Set<User> getFollowedUsers() {
+        this.followedUsers*.followedUser
     }
 
     /**
-     * Synonym for getBlacklisters
+     * Users that blacklisted this user
+     * Synonym for blacklistingUsers
      */
-    List<User> getBlacklistingUsers() {
-        getBlacklisters()
+    Set<User> getBlacklisters() {
+        this.blacklistingUsers*.blacklistingUser
     }
 
     /**
-     * Gets users who blacklisted this user
+     * Users blacklisted by this user
+     * @return
      */
-    List<User> getBlacklisters() {
-        User.findAll("from User where ? in elements(blacklistedUsers)", [this])
+    Set<User> getBlacklistedUsers() {
+        this.blacklistedUsers*.blacklistedUser
     }
 
     def beforeInsert() {
