@@ -1,6 +1,7 @@
 package api
 
 import grails.plugin.springsecurity.SpringSecurityService
+import grails.transaction.Transactional
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import pixnfit.*
@@ -9,6 +10,8 @@ import pixnfit.*
 class PostRestController extends DynamicDataRestfulController {
 
     PostTypeService postTypeService
+    StateService stateService
+    VisibilityService visibilityService
 
     SpringSecurityService springSecurityService
 
@@ -17,6 +20,39 @@ class PostRestController extends DynamicDataRestfulController {
 
     PostRestController() {
         super(Post)
+    }
+
+    @Override
+    @Transactional
+    Object save() {
+        def json = request.JSON
+        User user = springSecurityService.currentUser
+        Post post = new Post(
+                creator: user,
+                postType: postTypeService.help(),
+                state: stateService.active(),
+                visibility: visibilityService.public()
+        )
+        bindData(post, json, [include: ['name', 'description']])
+        foreignKeyBindDataIfNotNull(post, json, [postType: PostType, state: State, visibility: Visibility])
+
+        if (post.validate()) {
+            post.save()
+            respond post, [status: HttpStatus.CREATED]
+        } else {
+            respond post, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+        }
+    }
+
+    @Override
+    @Transactional
+    def update() {
+        def json = request.JSON
+        Post post = Post.get(params.id)
+        bindData(post, json, [include: ['name', 'description']])
+        foreignKeyBindDataIfNotNull(post, json, [postType: PostType, state: State, visibility: Visibility])
+        post.save()
+        respond post
     }
 
     def comments() {
@@ -29,9 +65,10 @@ class PostRestController extends DynamicDataRestfulController {
         Post post = Post.get(params.postRestId)
         PostComment postComment = new PostComment(
                 post: post,
-                description: json.description,
                 creator: springSecurityService.currentUser
         )
+        bindData(postComment, json, [include: ['description']])
+
         if (postComment.validate()) {
             postComment.save()
             respond postComment, [status: HttpStatus.CREATED]
@@ -50,22 +87,14 @@ class PostRestController extends DynamicDataRestfulController {
         def json = request.JSON
         Post post = Post.get(params.postRestId)
 
-        // Si on a passé un identifiant de voteReason, on doit avoir une valeur conhérente
-        VoteReason voteReason
-        if (json.voteReasonId != null) {
-            voteReason = VoteReason.get(json.voteReasonId)
-            if (voteReason == null) {
-                respond([error: "voteReasonId : ${json.voteReasonId} is not a valid value"])
-            }
-        }
-
         // Création du vote
         PostVote postVote = new PostVote(
                 post: post,
-                vote: json.vote,
-                voteReason: voteReason,
                 creator: springSecurityService.currentUser
         )
+        bindData(post, json, [include: ['vote', 'description']])
+        foreignKeyBindDataIfNotNull(post, json, [voteReason: VoteReason])
+
         if (postVote.validate()) {
             postVote.save()
             respond postVote, [status: HttpStatus.CREATED]
