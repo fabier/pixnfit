@@ -1,6 +1,7 @@
 package api
 
 import grails.plugin.springsecurity.SpringSecurityService
+import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import pixnfit.*
 
@@ -33,9 +34,9 @@ class PostRestController extends DynamicDataRestfulController {
         )
         if (postComment.validate()) {
             postComment.save()
-            respond postComment
+            respond postComment, [status: HttpStatus.CREATED]
         } else {
-            respond postComment
+            respond postComment, [status: HttpStatus.UNPROCESSABLE_ENTITY]
         }
         respond postComment
     }
@@ -67,9 +68,9 @@ class PostRestController extends DynamicDataRestfulController {
         )
         if (postVote.validate()) {
             postVote.save()
-            respond postVote
+            respond postVote, [status: HttpStatus.CREATED]
         } else {
-            respond postVote
+            respond postVote, [status: HttpStatus.UNPROCESSABLE_ENTITY]
         }
     }
 
