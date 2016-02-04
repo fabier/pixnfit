@@ -1,5 +1,6 @@
 package api
 
+import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import pixnfit.DynamicDataRestfulController
@@ -12,6 +13,8 @@ import pixnfit.User
  */
 @Secured("hasRole('ROLE_USER')")
 class UserRestController extends DynamicDataRestfulController {
+
+    SpringSecurityService springSecurityService
 
     UserRestController() {
         super(User)
@@ -38,6 +41,77 @@ class UserRestController extends DynamicDataRestfulController {
     }
 
     def incomingMessages() {
-        User user = queryForResource()
+        User user = User.get(params.userRestId)
+        respond user.incomingMessages.toArray()
+    }
+
+    def outgoingMessages() {
+        User user = User.get(params.userRestId)
+        respond user.outgoingMessages.toArray()
+    }
+
+    def posts() {
+        User user = User.get(params.userRestId)
+        respond user.posts.toArray()
+    }
+
+    def postComments() {
+        User user = User.get(params.userRestId)
+        respond user.postComments.toArray()
+    }
+
+    def postVotes() {
+        User user = User.get(params.userRestId)
+        respond user.postVotes.toArray()
+    }
+
+    def followers() {
+        User user = User.get(params.userRestId)
+        respond user.getFollowersAsUserSet().toArray()
+    }
+
+    def follow() {
+        User user = User.get(params.userRestId)
+        user.addToFollowers(springSecurityService.currentUser as User)
+        user.save()
+        respond user.getFollowersAsUserSet().toArray()
+    }
+
+    def unfollow() {
+        User user = User.get(params.userRestId)
+        user.removeFromFollowers(springSecurityService.currentUser as User)
+        user.save()
+        respond user.getFollowersAsUserSet().toArray()
+    }
+
+    def followedUsers() {
+        User user = User.get(params.userRestId)
+        respond user.getFollowedUsersAsUserSet().toArray()
+    }
+
+    def blacklistedUsers() {
+        User user = User.get(params.userRestId)
+        respond user.getBlacklistedUsersAsUserSet().toArray()
+    }
+
+    def blacklistedBy() {
+        User user = User.get(params.userRestId)
+        respond user.getBlacklistingUsersAsUserSet().toArray()
+    }
+
+    def blacklist() {
+        User user = (User) springSecurityService.currentUser
+        User userToBlacklist = User.get(params.userRestId)
+        user.addToBlacklistedUsers(userToBlacklist)
+        user.save()
+        respond user.getBlacklistedUsersAsUserSet().toArray()
+    }
+
+    def unblacklist() {
+        User user = (User) springSecurityService.currentUser
+        User userToUnblacklist = User.get(params.userRestId)
+        user.removeFromBlacklistedUsers(userToUnblacklist)
+        user.save()
+        respond user.getBlacklistedUsersAsUserSet().toArray()
     }
 }
