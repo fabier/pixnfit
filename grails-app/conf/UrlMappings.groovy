@@ -64,10 +64,16 @@ class UrlMappings {
             "/incomingMessages"(controller: "userRest", action: "incomingMessages", method: "GET")
             "/outgoingMessages"(controller: "userRest", action: "outgoingMessages", method: "GET")
             "/posts"(controller: "userRest", action: "posts", method: "GET")
+            "/postComments"(controller: "userRest", action: "postComments", method: "GET")
+            "/postVotes"(controller: "userRest", action: "postVotes", method: "GET")
             "/followers"(controller: "userRest", action: "followers", method: "GET")
-            "/followers"(controller: "userRest", action: "addFollower", method: "POST")
-            "/followers"(controller: "userRest", action: "removeFollower", method: "DELETE")
-            "/following"(controller: "userRest", action: "following", method: "GET")
+            "/follow"(controller: "userRest", action: "follow", method: "POST")
+            "/follow"(controller: "userRest", action: "unfollow", method: "DELETE")
+            "/followedUsers"(controller: "userRest", action: "followedUsers", method: "GET")
+            "/blacklistedUsers"(controller: "userRest", action: "blacklistedUsers", method: "GET")
+            "/blacklistedBy"(controller: "userRest", action: "blacklistedBy", method: "GET")
+            "/blacklist"(controller: "userRest", action: "blacklist", method: "POST")
+            "/blacklist"(controller: "userRest", action: "unblacklist", method: "DELETE")
         }
 
         /**
