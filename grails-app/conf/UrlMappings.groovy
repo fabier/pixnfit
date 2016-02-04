@@ -54,7 +54,7 @@ class UrlMappings {
 
         // On peut récupérer des informations sur les commentaires
         // et voter pour un commentaire
-        "/api/v1/postComments"(resources: "postCommentRest", includes: ["index", "show", "save", "update", "delete"]) {
+        "/api/v1/postComments"(resources: "postCommentRest", includes: ["show"]) {
             "/votes"(controller: "postCommentRest", action: "votes", method: "GET")
             "/votes"(controller: "postCommentRest", action: "addVote", method: "POST")
         }
