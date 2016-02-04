@@ -34,7 +34,7 @@ class UrlMappings {
         }
 
         // On peut créer des messages
-        "/api/v1/messages"(resources: "messageRest", includes: ["show", "save", "update", "delete"])
+        "/api/v1/messages"(resources: "messageRest", includes: ["show", "save"])
 
         // On peut voir les posts,
         // les commentaires sur ce post, poster un nouveau commentaire
