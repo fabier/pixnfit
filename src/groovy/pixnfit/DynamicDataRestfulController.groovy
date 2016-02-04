@@ -34,4 +34,19 @@ class DynamicDataRestfulController<T> extends RestfulController<T> {
     def create() {
         render status: HttpStatus.FORBIDDEN
     }
+
+    def foreignKeyBindDataIfNotNull(def target, def source, Map properties) {
+        for (def property in properties) {
+            String propertyName = property.key
+            Class propertyClass = property.value
+            if (source."${propertyName}Id" != null) {
+                def entity = propertyClass.get(source."${propertyName}Id")
+                if (entity != null) {
+                    target."${propertyName}" = entity
+                } else {
+                    respond([error: "${propertyName}Id : ${source."${propertyName}Id"} is not a valid value"])
+                }
+            }
+        }
+    }
 }
