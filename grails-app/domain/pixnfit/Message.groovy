@@ -14,5 +14,6 @@ class Message extends BaseEntity {
     static belongsTo = [recipient: User, creator: User]
 
     static constraints = {
+        name nullable: true
     }
 }
