@@ -8,7 +8,6 @@
 //= require jquery
 //= require bootstrap
 //= require dropzone
-//= require_tree .
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
