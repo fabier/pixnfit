@@ -11,7 +11,7 @@ class PublicController {
     def index() {
         List<Post> helpPosts = postService.getRandomHelpPosts(12)
         List<Post> dressingPosts = postService.getRandomDressingPosts(24)
-        render view: "index", model: [
+        render view: "home", model: [
                 helpPosts    : helpPosts,
                 dressingPosts: dressingPosts
         ]
