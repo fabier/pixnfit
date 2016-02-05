@@ -1,9 +1,7 @@
 @import "common-mixins";
 
-@bgDefault      : #4d8618;
-// #218b9c;
-@bgHighlight    : #306303;
-// #3b789f;
+@bgDefault      : #00a6d0;
+@bgHighlight    : #005F75;
 @colDefault     : #ffffff;
 @colHighlight   : #ffffff;
 @dropDown       : true;
@@ -101,28 +99,28 @@
 }
 
 body {
-  padding-top: 60px;
-  padding-bottom: 70px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.wrapper {
-  margin-top: 20px;
-}
+//.wrapper {
+//  margin-top: 20px;
+//}
 
 footer {
   color: @colDefault;
   width: 100%;
   padding: 4px;
-  position: fixed;
+  //position: fixed;
   background-color: @bgDefault;
   display: block;
   bottom: 0px;
   .box-shadow(0 -1px 4px #ccc);
   //.box-shadow(0 -1px 5px rgba(32, 32, 32, 0.6));
   text-align: center;
-  margin-top: -50px;
-  height: 50px;
-  z-index: 9999;
+  padding: 50px 0;
+  //height: 50px;
+  //z-index: 9999;
 }
 
 .padding-top-20 {
@@ -355,4 +353,13 @@ ul.nav-stacked a {
   float: none;
   margin-left: auto;
   margin-right: auto;
+}
+
+.topnav {
+  padding: 0;
+}
+
+.logo-top-frontpage {
+  height: 50px;
+  width: auto;
 }
