@@ -11,8 +11,7 @@
             </button>
             <g:link uri="/" class="navbar-brand danger">
                 <span>
-                    <g:img dir="images" file="favicons/favicon-32x32.png" class="logo-top-frontpage"/>
-                    Pixnfit
+                    <g:img dir="images" file="logo.png" class="logo-top-frontpage"/>
                 </span>
             </g:link>
         </div>
