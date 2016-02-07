@@ -136,13 +136,10 @@ admin {
 // Configuration pour le serveur de mail
 grails {
     mail {
-        host = "auth.smtp.1and1.fr"
-        port = 465
-        // To define in passwords.properties
-        // username = ""
-        // password = ""
+        host = "smtp.1und1.de"
+        port = 587
         props = ["mail.smtp.auth"                  : "true",
-                 "mail.smtp.socketFactory.port"    : "465",
+                 "mail.smtp.socketFactory.port"    : "587",
                  "mail.smtp.socketFactory.class"   : "javax.net.ssl.SSLSocketFactory",
                  "mail.smtp.socketFactory.fallback": "true"]
     }
@@ -171,7 +168,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 grails.plugin.springsecurity.ui.register.postRegisterUrl = '/'
-grails.plugin.springsecurity.ui.register.emailFrom = "noreply.pixnista@captainware.com"
+grails.plugin.springsecurity.ui.register.emailFrom = "noreply@pixnfit.com"
 grails.plugin.springsecurity.ui.register.emailSubject = 'Pixnfit - Valider votre email'
 grails.plugin.springsecurity.ui.register.defaultRoleNames = ['ROLE_USER']
 grails.plugin.springsecurity.ui.password.validationRegex = '^.*(?=.*[a-zA-Z\\d]).*$' // Au moins quelques caractères
@@ -202,11 +199,11 @@ Merci de ne pas répondre à ce message automatique.<br/>
 <br/>
 L'équipe Pixnfit
 '''
-                    emailFrom = 'Pixnfit <noreply.pixnista@captainware.com>'
+                    emailFrom = 'Pixnfit <noreply@pixnfit.com>'
                     emailSubject = 'Pixnfit - Création de compte'
                     defaultRoleNames = ['ROLE_USER']
                     postRegisterUrl = null // use defaultTargetUrl if not set
-                    emailTo = 'contact@captainware.com'
+                    emailTo = 'contact@pixnfit.com'
                     emailBodyToInternalEmailAccount = '''\
 Bonjour,<br/>
 <br/>
@@ -235,7 +232,7 @@ Merci de ne pas répondre à ce message automatique.<br/>
 <br/>
 L'équipe Pixnfit
 '''
-                    emailFrom = 'Pixnfit <noreply.pixnista@captainware.com>'
+                    emailFrom = 'Pixnfit <noreply@pixnfit.com>'
                     emailSubject = 'Pixnfit - Réinitialisation du mot de passe'
                     postResetUrl = null // use defaultTargetUrl if not set
                 }
