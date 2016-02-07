@@ -4,7 +4,7 @@
 <head>
 
     <meta name='layout' content='home'/>
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title>PixnFit - The social shopper</title>
 
     <!-- Custom Fonts -->
     %{--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--}%
