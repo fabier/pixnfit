@@ -1,4 +1,4 @@
-# ImageTypes API
+# States API
 
 <a name="index"></a>
 ## GET /api/v1/states

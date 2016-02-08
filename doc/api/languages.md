@@ -1,4 +1,4 @@
-# ImageTypes API
+# Languages API
 
 <a name="index"></a>
 ## GET /api/v1/languages

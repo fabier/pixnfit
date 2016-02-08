@@ -1,4 +1,4 @@
-# ImageTypes API
+# Genders API
 
 <a name="index"></a>
 ## GET /api/v1/genders

@@ -1,4 +1,4 @@
-# ImageTypes API
+# Visibilities API
 
 <a name="index"></a>
 ## GET /api/v1/visibilities

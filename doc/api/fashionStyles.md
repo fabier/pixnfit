@@ -1,4 +1,4 @@
-# ImageTypes API
+# FashionStyle API
 
 <a name="index"></a>
 ## GET /api/v1/fashionStyles
