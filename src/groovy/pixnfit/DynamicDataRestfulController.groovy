@@ -44,7 +44,7 @@ class DynamicDataRestfulController<T> extends RestfulController<T> {
                 if (entity != null) {
                     target."${propertyName}" = entity
                 } else {
-                    respond([error: "${propertyName}Id : ${source."${propertyName}Id"} is not a valid value"])
+                    respond((Object) [error: "${propertyName}Id : ${source."${propertyName}Id"} is not a valid value"], [status: HttpStatus.BAD_REQUEST])
                 }
             }
         }
