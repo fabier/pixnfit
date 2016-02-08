@@ -103,18 +103,36 @@ class PostRestController extends DynamicDataRestfulController {
         }
     }
 
+    def addImage() {
+        def json = request.JSON
+        Post post = Post.get(params.postRestId)
+
+        Image image = Image.get(json.imageId)
+        if (image != null) {
+            post.addToImages(image)
+            if (post.validate()) {
+                post.save()
+                respond post
+            } else {
+                respond post
+            }
+        } else {
+            respond((Object) [error: "imageId : ${json.imageId} is not a valid value"], [status: HttpStatus.BAD_REQUEST])
+        }
+    }
+
     def help() {
         // TODO : A améliorer en mettant en place la pagination, et en remontant en priorité ceux qui n'ont pas de votes...
-        int max = Math.min(params.max ?: 10, 100)
-        int offset = params.offset ?: 0
+        int max = Math.min((params.max ?: 10) as int, 100)
+        int offset = (params.offset ?: 0) as int
         respond Post.findAllByPostType(postTypeService.help(),
                 [max: max, offset: offset]).toArray()
     }
 
     def featured() {
         // TODO : A améliorer en mettant en place la pagination, en mettant un peu d'aléatoire dans l'ordre des posts, etc...
-        int max = Math.min(params.max ?: 10, 100)
-        int offset = params.offset ?: 0
+        int max = Math.min((params.max ?: 10) as int, 100)
+        int offset = (params.offset ?: 0) as int
         respond Post.findAllByPostType(postTypeService.dressing(),
                 [max: max, offset: offset]).toArray()
     }
