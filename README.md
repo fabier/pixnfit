@@ -40,8 +40,8 @@ PixnFit project made with Grails
 | GET | [/api/v1/posts/featured](doc/api/posts.md#featured) | Gets featured posts |
 | | **PostComment**  | |
 | GET | [/api/v1/postComments/:id](doc/api/postComments.md#show) | Gets a comment by its Id |
-| GET | [/api/v1/postComment/:id/votes](doc/api/postComments.md#votes) | Gets votes on a comment |
-| POST | [/api/v1/postComment/:id/votes](doc/api/postComments.md#save) | Creates a vote on a comment |
+| GET | [/api/v1/postComments/:id/votes](doc/api/postComments.md#votes) | Gets votes on a comment |
+| POST | [/api/v1/postComments/:id/votes](doc/api/postComments.md#save) | Creates a vote on a comment |
 | | **User**  | |
 | POST | [/api/v1/user](doc/api/users.md#save) | Creates a new user |
 | GET | [/api/v1/user/:id](doc/api/users.md#show) | Gets a user by its Id |
