@@ -10,20 +10,23 @@ PixnFit project made with Grails
 
  **All calls must be made using HTTP BASIC Authentication.**
 
+
+## Dynamic Datas
+
 | Method | URL | Description |
 |---|---|---|
-|| **Authentication**  ||
+| | **Authentication**  |  |
 | POST | [/api/v1/auth](doc/api/auth.md#login) | Test a login/password |
-||  **Image**  ||
+| | **Image**  | |
 | GET | [/api/v1/images/:id](doc/api/images.md#show) | Gets an image by its Id |
 | POST | [/api/v1/images](doc/api/images.md#save) | Creates a new image |
 | PUT | [/api/v1/images/:id](doc/api/images.md#update) | Updates an image |
 | DELETE | [/api/v1/images/:id](doc/api/images.md#delete) | Deletes an image |
 | GET | [/api/v1/images/:id/data](doc/api/images.md#data) | Gets an image data by its Id|
-||  **Message**  ||
+| | **Message**  | |
 | GET | [/api/v1/messages/:id](doc/api/messages#show) | Gets a message by its Id |
 | POST | [/api/v1/messages](doc/api/messages#save) | Creates a new message |
-||  **Post**  ||
+| | **Post**  | |
 | POST | [/api/v1/posts](doc/api/posts.md#save) | Creates a new post |
 | GET | [/api/v1/posts/:id](doc/api/posts.md#show) | Gets a post by its Id |
 | PUT | [/api/v1/posts/:id](doc/api/posts.md#update) | Updates a post |
@@ -35,11 +38,11 @@ PixnFit project made with Grails
 | POST | [/api/v1/posts/:id/votes](doc/api/posts.md#saveVote) | Creates a vote on a post |
 | GET | [/api/v1/posts/help](doc/api/posts.md#help) | Gets posts needing help and votes |
 | GET | [/api/v1/posts/featured](doc/api/posts.md#featured) | Gets featured posts |
-||  **PostComment**  ||
+| | **PostComment**  | |
 | GET | [/api/v1/postComments/:id](doc/api/postComments.md#show) | Gets a comment by its Id |
 | GET | [/api/v1/postComment/:id/votes](doc/api/postComments.md#votes) | Gets votes on a comment |
 | POST | [/api/v1/postComment/:id/votes](doc/api/postComments.md#save) | Creates a vote on a comment |
-||  **User**  ||
+| | **User**  | |
 | POST | [/api/v1/user](doc/api/users.md#save) | Creates a new user |
 | GET | [/api/v1/user/:id](doc/api/users.md#show) | Gets a user by its Id |
 | PUT | [/api/v1/user/:id](doc/api/users.md#update) | Updates a user |
@@ -59,37 +62,38 @@ PixnFit project made with Grails
 | DELETE | [/api/v1/user/:id/blacklist](doc/api/users.md#unblacklist) | Un-blacklist this user |
 
 
+## Static Datas
 
 | Method | URL | Description |
 |---|---|---|
-||  **BodyType**  ||
+| |  **BodyType**  | |
 | GET | [/api/v1/bodyTypes](doc/api/bodyTypes.md#index) | Gets all body types |
 | GET | [/api/v1/bodyTypes/:id](doc/api/bodyTypes.md#show) | Gets a body type by ts Id|
-||  **Country**  ||
+| |  **Country**  | |
 | GET | [/api/v1/countries](doc/api/countries.md#index) | Gets all countries |
 | GET | [/api/v1/countries/:id](doc/api/countries.md#show) | Gets a country by ts Id |
-||  **FashionStyle**  ||
+| |  **FashionStyle**  | |
 | GET | [/api/v1/fashionStyles](doc/api/fashionStyles.md#index) | Gets all fashion styles |
 | GET | [/api/v1/fashionStyles/:id](doc/api/fashionStyles.md#show) | Gets a fashion style by its Id|
-||  **Gender**  ||
+| |  **Gender**  | |
 | GET | [/api/v1/genders](doc/api/genders.md#index#index) | Gets all genders |
 | GET | [/api/v1/genders/:id](doc/api/genders.md#show) | Gets a gender by its Id |
-||  **ImageType**  ||
+| |  **ImageType**  | |
 | GET | [/api/v1/imageTypes](doc/api/imageTypes.md#index) | Gets all image types |
 | GET | [/api/v1/imageTypes/:id](doc/api/imageTypes.md#show) | Gets an image type by its Id |
-||  **Language**  ||
+| |  **Language**  | |
 | GET | [/api/v1/languages](doc/api/languages.md#index) | Gets all languages |
 | GET | [/api/v1/languages/:id](doc/api/languages.md#show) | Gets a language by its Id |
-||  **PostType**  ||
+| |  **PostType**  | |
 | GET | [/api/v1/postType](doc/api/postTypes.md#index) | Gets all post types |
 | GET | [/api/v1/postType/:id](doc/api/postTypes.md#show) | Gets a post type by its Id |
-||  **State**  ||
+| |  **State**  | |
 | GET | [/api/v1/state](doc/api/states.md#index) | Gets all states |
 | GET | [/api/v1/state/:id](doc/api/states.md#show) | Gets a state by its Id |
-||  **Visibility**  ||
+| |  **Visibility**  | |
 | GET | [/api/v1/visibilities](doc/api/visibilities.md#index) | Gets all visibilities |
 | GET | [/api/v1/visibilities/:id](doc/api/visibilities.md#show) | Gets a visibility by its Id |
-||  **VoteReason**  ||
+| |  **VoteReason**  | |
 | GET | [/api/v1/voteReasons](doc/api/voteReasons.md#index) | Gets all vote reasons |
 | GET | [/api/v1/voteReasons/:id](doc/api/voteReasons.md#show) | Gets a vote reason by its Id |
 
