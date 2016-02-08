@@ -32,6 +32,20 @@ None (Id is included in URL)
 Yes : **HTTP BASIC**
 ### Output
 ```json
+[
+  {
+    "id": 1047,
+    "vote": true,
+    "postCommentId": 1,
+    "creator": {
+      "id": 1,
+      "username": "Thomas Bull",
+      "imageUrl": null
+    },
+    "dateCreated": "2016-02-08T20:46:46Z"
+  },
+  ...
+]
 ```
 
 <a name="addVote"></a>
@@ -57,6 +71,6 @@ HTTP 201 Created
     "username": "Thomas Bull",
     "imageUrl": null
   },
-  "dateCreated": "2016-02-08T16:01:59Z"
+  "dateCreated": "2016-02-08T20:46:46Z"
 }
 ```
