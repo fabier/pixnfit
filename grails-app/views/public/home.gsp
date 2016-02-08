@@ -116,14 +116,14 @@
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2 col-sm-6">
 
-                <h2 class="section-heading">Check the vote out</h2>
+                <h2 class="section-heading">Check out the votes</h2>
 
                 <hr class="section-heading-spacer">
 
                 <div class="clearfix"></div>
 
                 <p class="lead">
-                    Vote is the best way to have
+                    Voting is the best way to receive
                     <br/>
                     feedback for your style
                 </p>
