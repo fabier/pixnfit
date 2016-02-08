@@ -262,7 +262,7 @@ Yes : **HTTP BASIC**
 
 <a name="votes"></a>
 ## POST /api/v1/posts/:id/votes
-Gets all votes on a post
+Creates a new vote on a post
 ### Params
 ```json
 {
