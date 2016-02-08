@@ -34,7 +34,7 @@ class PostRestController extends DynamicDataRestfulController {
                 visibility: visibilityService.public()
         )
         bindData(post, json, [include: ['name', 'description']])
-        foreignKeyBindDataIfNotNull(post, json, [postType: PostType, state: State, visibility: Visibility])
+        foreignKeyBindDataIfNotNull(post, json, [postType: PostType, visibility: Visibility])
 
         if (post.validate()) {
             post.save()
@@ -105,11 +105,17 @@ class PostRestController extends DynamicDataRestfulController {
 
     def help() {
         // TODO : A améliorer en mettant en place la pagination, et en remontant en priorité ceux qui n'ont pas de votes...
-        respond Post.findAllByPostType(postTypeService.help()).toArray()
+        int max = Math.min(params.max ?: 10, 100)
+        int offset = params.offset ?: 0
+        respond Post.findAllByPostType(postTypeService.help(),
+                [max: max, offset: offset]).toArray()
     }
 
     def featured() {
         // TODO : A améliorer en mettant en place la pagination, en mettant un peu d'aléatoire dans l'ordre des posts, etc...
-        respond Post.findAllByPostType(postTypeService.dressing()).toArray()
+        int max = Math.min(params.max ?: 10, 100)
+        int offset = params.offset ?: 0
+        respond Post.findAllByPostType(postTypeService.dressing(),
+                [max: max, offset: offset]).toArray()
     }
 }
