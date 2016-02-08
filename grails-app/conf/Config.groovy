@@ -242,7 +242,7 @@ L'équipe Pixnfit
 }
 
 grails.plugin.springsecurity.useBasicAuth = true
-grails.plugin.springsecurity.basic.realmName = "Tennis-API"
+grails.plugin.springsecurity.basic.realmName = "PixnFit"
 grails.plugin.springsecurity.filterChain.chainMap = [
         // Stateless chain
         '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',
