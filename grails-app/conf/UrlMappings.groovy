@@ -40,6 +40,7 @@ class UrlMappings {
         // les commentaires sur ce post, poster un nouveau commentaire
         // les votes sur ce post
         "/api/v1/posts"(resources: "postRest", includes: ["show", "save", "update", "delete"]) {
+            "/images"(controller: "postRest", action: "addImage", method: "POST")
             "/comments"(controller: "postRest", action: "comments", method: "GET")
             "/comments"(controller: "postRest", action: "addComment", method: "POST")
             "/votes"(controller: "postRest", action: "votes", method: "GET")
