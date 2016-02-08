@@ -44,3 +44,13 @@ Yes : **HTTP BASIC**
   "dateCreated": "2016-02-01T16:50:58Z"
 }
 ```
+
+<a name="delete"></a>
+## DELETE /api/v1/postComments/:id
+Deletes an existing comment
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+HTTP 204 No Content
