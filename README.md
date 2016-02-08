@@ -23,32 +23,39 @@ PixnFit project made with Grails
 ||  **Message**  ||
 | GET | [/api/v1/messages/${id}](doc/api/messages#show) | Gets a message by its Id |
 | POST | [/api/v1/messages](doc/api/messages#save) | Creates a new message |
-| PUT | [/api/v1/messages/${id}](doc/api/messages#update) | Updates a message |
-| DELETE | [/api/v1/messages/${id}](doc/api/messages#delete) | Deletes a message |
 ||  **Post**  ||
-| POST | [/api/v1/posts]() | Creates a new post |
-| GET | [/api/v1/posts/${id}]() | Gets a post by its Id |
-| PUT | [/api/v1/posts/${id}]() | Updates a post |
-| DELETE | [/api/v1/posts/${id}]() | Deletes a post |
-| GET | [/api/v1/posts/${id}/comments]() | Gets comments on a post |
-| POST | [/api/v1/posts/${id}/comments]() | Creates a new comment on a post |
-| GET | [/api/v1/posts/${id}/votes]() | Gets votes on a post |
-| GET | [/api/v1/posts/help]() | Gets posts needing help and votes |
-| GET | [/api/v1/posts/featured]() | Gets all featured posts |
+| POST | [/api/v1/posts](doc/api/post) | Creates a new post |
+| GET | [/api/v1/posts/${id}](doc/api/post) | Gets a post by its Id |
+| PUT | [/api/v1/posts/${id}](doc/api/post) | Updates a post |
+| DELETE | [/api/v1/posts/${id}](doc/api/post) | Deletes a post |
+| GET | [/api/v1/posts/${id}/comments](doc/api/post) | Gets comments on a post |
+| POST | [/api/v1/posts/${id}/comments](doc/api/post) | Creates a new comment on a post |
+| GET | [/api/v1/posts/${id}/votes](doc/api/post) | Gets votes on a post |
+| POST | [/api/v1/posts/${id}/votes](doc/api/post) | Creates a vote on a post |
+| GET | [/api/v1/posts/help](doc/api/post) | Gets posts needing help and votes |
+| GET | [/api/v1/posts/featured](doc/api/post) | Gets featured posts |
 ||  **PostComment**  ||
-| DELETE | [/api/v1/postComments/${id}]() | Deletes a comment |
-| GET | [/api/v1/postComment/${id}/votes]() | Gets votes on a comment |
+| GET | [/api/v1/postComments/${id}](doc/api/postComment) | Gets a comment by its Id |
+| GET | [/api/v1/postComment/${id}/votes](doc/api/postComment) | Gets votes on a comment |
+| POST | [/api/v1/postComment/${id}/votes](doc/api/postComment) | Creates a vote on a comment |
 ||  **User**  ||
-| POST | [/api/v1/user]() | Creates a new user |
-| GET | [/api/v1/user/${id}]() | Gets a user by its Id |
-| PUT | [/api/v1/user/${id}]() | Updates a user |
-| DELETE | [/api/v1/user/${id}]() | Deletes a user |
-| GET | [/api/v1/user/${id}/incomingMessages]() | Gets incoming messages for a user |
-| GET | [/api/v1/user/${id}/outgoingMessages]() | Gets outgoing messages for a user |
-| GET | [/api/v1/user/${id}/posts]() | Gets all posts created by this user |
-| GET | [/api/v1/user/${id}/followers]() | Gets all user's followers |
-| GET | [/api/v1/user/${id}/following]() | Gets all users this user is following |
-
+| POST | [/api/v1/user](doc/api/user) | Creates a new user |
+| GET | [/api/v1/user/${id}](doc/api/user) | Gets a user by its Id |
+| PUT | [/api/v1/user/${id}](doc/api/user) | Updates a user |
+| DELETE | [/api/v1/user/${id}](doc/api/user) | Deletes a user |
+| GET | [/api/v1/user/${id}/incomingMessages](doc/api/user) | Gets incoming messages for a user |
+| GET | [/api/v1/user/${id}/outgoingMessages](doc/api/user) | Gets outgoing messages for a user |
+| GET | [/api/v1/user/${id}/posts](doc/api/user) | Gets all posts created by this user |
+| GET | [/api/v1/user/${id}/postComments](doc/api/user) | Gets all comments created by this user |
+| GET | [/api/v1/user/${id}/postVotes](doc/api/user) | Gets all votes created by this user |
+| GET | [/api/v1/user/${id}/followers](doc/api/user) | Gets all user's followers |
+| POST | [/api/v1/user/${id}/follow](doc/api/user) | Follow this user |
+| DELETE | [/api/v1/user/${id}/follow](doc/api/user) | Unfollow this user |
+| GET | [/api/v1/user/${id}/followedUsers](doc/api/user) | Gets users followed by this user |
+| GET | [/api/v1/user/${id}/blacklistedUsers](doc/api/user) | Gets users blaclisted by this user |
+| GET | [/api/v1/user/${id}/blacklistedBy](doc/api/user) | Gets users that blacklisted this user |
+| POST | [/api/v1/user/${id}/blacklist](doc/api/user) | Blacklist this user |
+| DELETE | [/api/v1/user/${id}/blacklist](doc/api/user) | Un-blacklist this user |
 
 
 
@@ -67,23 +74,23 @@ PixnFit project made with Grails
 | GET | [/api/v1/genders](doc/api/genders#index) | Gets all genders |
 | GET | [/api/v1/genders/${id}](doc/api/genders#show) | Gets a gender by its Id |
 ||  **ImageType**  ||
-| GET | [/api/v1/imageTypes]() | Gets all image types |
-| GET | [/api/v1/imageTypes/${id}]() | Gets an image type by its Id |
+| GET | [/api/v1/imageTypes](doc/api/) | Gets all image types |
+| GET | [/api/v1/imageTypes/${id}](doc/api/) | Gets an image type by its Id |
 ||  **Language**  ||
-| GET | [/api/v1/languages]() | Gets all languages |
-| GET | [/api/v1/languages/${id}]() | Gets a language by its Id |
+| GET | [/api/v1/languages](doc/api/) | Gets all languages |
+| GET | [/api/v1/languages/${id}](doc/api/) | Gets a language by its Id |
 ||  **PostType**  ||
-| GET | [/api/v1/postType]() | Gets all post types |
-| GET | [/api/v1/postType/${id}]() | Gets a post type by its Id |
+| GET | [/api/v1/postType](doc/api/) | Gets all post types |
+| GET | [/api/v1/postType/${id}](doc/api/) | Gets a post type by its Id |
 ||  **State**  ||
-| GET | [/api/v1/state]() | Gets all states |
-| GET | [/api/v1/state/${id}]() | Gets a state by its Id |
+| GET | [/api/v1/state](doc/api/) | Gets all states |
+| GET | [/api/v1/state/${id}](doc/api/) | Gets a state by its Id |
 ||  **Visibility**  ||
-| GET | [/api/v1/visibilities]() | Gets all visibilities |
-| GET | [/api/v1/visibilities/${id}]() | Gets a visibility by its Id |
+| GET | [/api/v1/visibilities](doc/api/) | Gets all visibilities |
+| GET | [/api/v1/visibilities/${id}](doc/api/) | Gets a visibility by its Id |
 ||  **VoteReason**  ||
-| GET | [/api/v1/voteReasons]() | Gets all vote reasons |
-| GET | [/api/v1/voteReasons/${id}]() | Gets a vote reason by its Id |
+| GET | [/api/v1/voteReasons](doc/api/) | Gets all vote reasons |
+| GET | [/api/v1/voteReasons/${id}](doc/api/) | Gets a vote reason by its Id |
 
 
 
