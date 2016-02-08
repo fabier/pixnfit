@@ -92,8 +92,8 @@ class PostRestController extends DynamicDataRestfulController {
                 post: post,
                 creator: springSecurityService.currentUser
         )
-        bindData(post, json, [include: ['vote', 'description']])
-        foreignKeyBindDataIfNotNull(post, json, [voteReason: VoteReason])
+        bindData(postVote, json, [include: ['vote', 'description']])
+        foreignKeyBindDataIfNotNull(postVote, json, [voteReason: VoteReason])
 
         if (postVote.validate()) {
             postVote.save()
