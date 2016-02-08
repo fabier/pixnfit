@@ -362,3 +362,13 @@ Yes : **HTTP BASIC**
   "dateCreated": "2016-02-08T16:01:59Z"
 }
 ```
+
+<a name="delete"></a>
+## DELETE /api/v1/posts/:id
+Deletes an existing post
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+HTTP 204 No Content
