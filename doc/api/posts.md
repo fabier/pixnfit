@@ -1,142 +1,5 @@
 # Posts API
 
-<a name="show"></a>
-## GET /api/v1/posts/:id
-Gets a post by its Id
-### Params
-None (Id is included in URL)
-### Authentication
-Yes : **HTTP BASIC**
-### Output
-```json
-{
-  "id": 1,
-  "name": "Aut tempore repellat vero et sed alias.",
-  "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
-  "creator": {
-    "id": 2,
-    "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
-  },
-  "images": [
-    {
-      "id": 1,
-      "imageUrl": "http://www.pixnfit.com/image/show/1"
-    }
-  ],
-  "postType": {
-    "id": 1,
-    "name": "help"
-  },
-  "visibility": {
-    "id": 1,
-    "name": "public"
-  },
-  "state": {
-    "id": 1,
-    "name": "active"
-  },
-  "dateCreated": "2016-02-08T16:01:48Z"
-}
-```
-
-<a name="help"></a>
-## GET /api/v1/posts/help
-Gets help posts
-### Params
-Yes :
- * **max** (int) : Max results in output, defaults to 10
- * **offset** (int) : Offset for results, defaults to 0
-
-*Ex : /api/v1/posts/help?max=5&offset=2*
-### Authentication
-Yes : **HTTP BASIC**
-### Output
-```json
-[
-  {
-    "id": 1,
-    "name": "Aut tempore repellat vero et sed alias.",
-    "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
-    "creator": {
-      "id": 2,
-      "username": "Theodore Cummings",
-      "imageUrl": "http://www.pixnfit.com/image/show/29"
-    },
-    "images": [
-      {
-        "id": 1,
-        "imageUrl": "http://www.pixnfit.com/image/show/1"
-      }
-    ],
-    "postType": {
-      "id": 1,
-      "name": "help"
-    },
-    "visibility": {
-      "id": 1,
-      "name": "public"
-    },
-    "state": {
-      "id": 1,
-      "name": "active"
-    },
-    "dateCreated": "2016-02-08T16:01:48Z"
-  },
-  ...
-]
-```
-
-
-<a name="dressing"></a>
-## GET /api/v1/posts/dressing
-Gets dressing posts
-### Params
-Yes :
- * **max** (int) : Max results in output, defaults to 10
- * **offset** (int) : Offset for results, defaults to 0
-
-*Ex : /api/v1/posts/dressing?max=5&offset=2*
-### Authentication
-Yes : **HTTP BASIC**
-### Output
-```json
-[
-  {
-    "id": 1,
-    "name": "Aut tempore repellat vero et sed alias.",
-    "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
-    "creator": {
-      "id": 2,
-      "username": "Theodore Cummings",
-      "imageUrl": "http://www.pixnfit.com/image/show/29"
-    },
-    "images": [
-      {
-        "id": 1,
-        "imageUrl": "http://www.pixnfit.com/image/show/1"
-      }
-    ],
-    "postType": {
-      "id": 2,
-      "name": "dressing"
-    },
-    "visibility": {
-      "id": 1,
-      "name": "public"
-    },
-    "state": {
-      "id": 1,
-      "name": "active"
-    },
-    "dateCreated": "2016-02-08T16:01:48Z"
-  },
-  ...
-]
-```
-
-
-
 <a name="save"></a>
 ## POST /api/v1/posts
 Creates a new post
@@ -178,6 +41,98 @@ Yes : **HTTP BASIC**
   "dateCreated": "2016-02-08T16:01:48Z"
 }
 ```
+
+<a name="show"></a>
+## GET /api/v1/posts/:id
+Gets a post by its Id
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+{
+  "id": 1,
+  "name": "Aut tempore repellat vero et sed alias.",
+  "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+  "creator": {
+    "id": 2,
+    "username": "Theodore Cummings",
+    "imageUrl": "http://www.pixnfit.com/image/show/29"
+  },
+  "images": [
+    {
+      "id": 1,
+      "imageUrl": "http://www.pixnfit.com/image/show/1"
+    }
+  ],
+  "postType": {
+    "id": 1,
+    "name": "help"
+  },
+  "visibility": {
+    "id": 1,
+    "name": "public"
+  },
+  "state": {
+    "id": 1,
+    "name": "active"
+  },
+  "dateCreated": "2016-02-08T16:01:48Z"
+}
+```
+
+<a name="update"></a>
+## PUT /api/v1/posts
+Updates an existing post
+### Params
+```json
+{
+  "name": "Aut tempore repellat vero et sed alias.",
+  "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+  "postTypeId": 1,
+  "visibilityId": 1
+}
+```
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+{
+  "id": 1,
+  "name": "Aut tempore repellat vero et sed alias.",
+  "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+  "creator": {
+    "id": 2,
+    "username": "Theodore Cummings",
+    "imageUrl": "http://www.pixnfit.com/image/show/29"
+  },
+  "images": null,
+  "postType": {
+    "id": 1,
+    "name": "help"
+  },
+  "visibility": {
+    "id": 1,
+    "name": "public"
+  },
+  "state": {
+    "id": 1,
+    "name": "active"
+  },
+  "dateCreated": "2016-02-08T16:01:48Z"
+}
+```
+
+<a name="delete"></a>
+## DELETE /api/v1/posts/:id
+Deletes an existing post
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+HTTP 204 No Content
 
 
 <a name="addImage"></a>
@@ -363,12 +318,98 @@ Yes : **HTTP BASIC**
 }
 ```
 
-<a name="delete"></a>
-## DELETE /api/v1/posts/:id
-Deletes an existing post
+
+<a name="help"></a>
+## GET /api/v1/posts/help
+Gets help posts
 ### Params
-None (Id is included in URL)
+Yes :
+ * **max** (int) : Max results in output, defaults to 10
+ * **offset** (int) : Offset for results, defaults to 0
+
+*Ex : /api/v1/posts/help?max=5&offset=2*
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
-HTTP 204 No Content
+```json
+[
+  {
+    "id": 1,
+    "name": "Aut tempore repellat vero et sed alias.",
+    "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+    "creator": {
+      "id": 2,
+      "username": "Theodore Cummings",
+      "imageUrl": "http://www.pixnfit.com/image/show/29"
+    },
+    "images": [
+      {
+        "id": 1,
+        "imageUrl": "http://www.pixnfit.com/image/show/1"
+      }
+    ],
+    "postType": {
+      "id": 1,
+      "name": "help"
+    },
+    "visibility": {
+      "id": 1,
+      "name": "public"
+    },
+    "state": {
+      "id": 1,
+      "name": "active"
+    },
+    "dateCreated": "2016-02-08T16:01:48Z"
+  },
+  ...
+]
+```
+
+
+<a name="featured"></a>
+## GET /api/v1/posts/featured
+Gets featured posts
+### Params
+Yes :
+ * **max** (int) : Max results in output, defaults to 10
+ * **offset** (int) : Offset for results, defaults to 0
+
+*Ex : /api/v1/posts/dressing?max=5&offset=2*
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+[
+  {
+    "id": 1,
+    "name": "Aut tempore repellat vero et sed alias.",
+    "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+    "creator": {
+      "id": 2,
+      "username": "Theodore Cummings",
+      "imageUrl": "http://www.pixnfit.com/image/show/29"
+    },
+    "images": [
+      {
+        "id": 1,
+        "imageUrl": "http://www.pixnfit.com/image/show/1"
+      }
+    ],
+    "postType": {
+      "id": 2,
+      "name": "dressing"
+    },
+    "visibility": {
+      "id": 1,
+      "name": "public"
+    },
+    "state": {
+      "id": 1,
+      "name": "active"
+    },
+    "dateCreated": "2016-02-08T16:01:48Z"
+  },
+  ...
+]
+```
