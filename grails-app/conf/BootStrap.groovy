@@ -55,7 +55,7 @@ class BootStrap {
         }
 
         bootstrapInitialDataService.initStaticData()
-//        bootstrapInitialDataService.initRandomData(true)
+        bootstrapInitialDataService.initRandomData(true)
     }
 
     /**
@@ -108,35 +108,33 @@ class BootStrap {
             Image image = it
             User creator = image.creator
             Image creatorImage = creator?.image
-            ImageType imageType = image.imageType
             return [
                     id         : image.id,
                     name       : image.name,
                     description: image.description,
-                    url        : grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true),
+                    imageUrl   : grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true),
                     creator    : [
                             id      : creator.id,
                             username: creator.username,
-                            image   : creatorImage ? [
-                                    id : creatorImage.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
-                            ] : null
+                            imageUrl: creatorImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                                    : null
                     ],
                     filename   : image.filename,
-                    width      : image.width,
-                    height     : image.height,
-                    imageType  : [
-                            id  : imageType.id,
-                            name: imageType.name,
-                    ],
                     dateCreated: image.dateCreated
             ]
         }
         JSON.registerObjectMarshaller(ImageData) {
             ImageData imageData = it
+            ImageType imageType = imageData.imageType
             return [
                     id         : imageData.id,
-                    data       : imageData.data.encodeBase64().toString(),
+                    width      : imageData.width,
+                    height     : imageData.height,
+                    imageType  : imageType ? [
+                            id  : imageType.id,
+                            name: imageType.name,
+                    ] : null,
                     md5        : imageData.md5,
                     dateCreated: imageData.dateCreated
             ]
@@ -154,18 +152,16 @@ class BootStrap {
                     creator    : [
                             id      : creator.id,
                             username: creator.username,
-                            image   : creatorImage ? [
-                                    id : creatorImage.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
-                            ] : null
+                            imageUrl: creatorImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                                    : null
                     ],
                     recipient  : [
                             id      : recipient.id,
                             username: recipient.username,
-                            image   : recipientImage ? [
-                                    id : recipientImage.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: recipientImage.id, absolute: true)
-                            ] : null
+                            imageUrl: recipientImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: recipientImage.id, absolute: true)
+                                    : null
                     ],
                     dateCreated: message.dateCreated
             ]
@@ -173,7 +169,7 @@ class BootStrap {
         JSON.registerObjectMarshaller(Post) {
             Post post = it
             User creator = post.creator
-            Image image = creator?.image
+            Image creatorImage = creator?.image
             List<Image> images = post.images
             def imagesAsMapArray = images.inject([]) { array, entry ->
                 array.add([
@@ -192,10 +188,9 @@ class BootStrap {
                     creator    : [
                             id      : creator.id,
                             username: creator.username,
-                            image   : image ? [
-                                    id : image.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true)
-                            ] : null
+                            imageUrl: creatorImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                                    : null
                     ],
                     images     : imagesAsMapArray,
                     postType   : postType ? [
@@ -225,10 +220,9 @@ class BootStrap {
                     creator    : [
                             id      : creator.id,
                             username: creator.username,
-                            image   : creatorImage ? [
-                                    id : creatorImage.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
-                            ] : null
+                            imageUrl: creatorImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                                    : null
                     ],
                     dateCreated: postComment.dateCreated
             ]
@@ -244,10 +238,9 @@ class BootStrap {
                     creator      : [
                             id      : creator.id,
                             username: creator.username,
-                            image   : creatorImage ? [
-                                    id : creatorImage.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
-                            ] : null
+                            imageUrl: creatorImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                                    : null
                     ],
                     dateCreated  : postCommentVote.dateCreated
             ]
@@ -272,10 +265,9 @@ class BootStrap {
                     creator    : [
                             id      : creator.id,
                             username: creator.username,
-                            image   : creatorImage ? [
-                                    id : creatorImage.id,
-                                    url: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
-                            ] : null
+                            imageUrl: creatorImage ?
+                                    grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
+                                    : null
                     ],
                     dateCreated: postVote.dateCreated
             ]
@@ -302,10 +294,9 @@ class BootStrap {
                     birthdate  : user.birthdate,
                     height     : user.height,
                     weight     : user.weight,
-                    image      : image ? [
-                            id : image.id,
-                            url: grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true),
-                    ] : null,
+                    imageUrl   : image ?
+                            grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, absolute: true)
+                            : null,
                     country    : country ? [
                             id  : country.id,
                             name: country.name
