@@ -27,31 +27,9 @@ Yes : **HTTP BASIC**
 }
 ```
 
-<a name="data"></a>
-## GET /api/v1/images/:id/data
-Gets image data by its Id
-### Params
-None (Id is included in URL)
-### Authentication
-Yes : **HTTP BASIC**
-### Output
-```json
-{
-    "id": 1,
-    "md5": "1b36fb1060dd421eee1ea1f6310f1d52",
-    "width": 256,
-    "height": 256,
-    "imageType": {
-      "id": 1,
-      "name": "JPEG"
-    },
-    "dateCreated": "2016-02-01T16:52:41Z"
-}
-```
-
 <a name="save"></a>
 ## POST /api/v1/images
-Updates an existing Image
+Creates an Image
 ### Params
 Data file must be pushed, in HTML this can be a <code>form</code> like this :
 ```HTML
@@ -113,5 +91,37 @@ Yes : **HTTP BASIC**
   },
   "filename": "PIC210.jpg",
   "dateCreated": "2016-02-01T16:52:41Z"
+}
+```
+
+<a name="delete"></a>
+## DELETE /api/v1/images/:id
+Deletes an existing Image
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+HTTP 204 No Content
+
+<a name="data"></a>
+## GET /api/v1/images/:id/data
+Gets image data by its Id
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+{
+    "id": 1,
+    "md5": "1b36fb1060dd421eee1ea1f6310f1d52",
+    "width": 256,
+    "height": 256,
+    "imageType": {
+      "id": 1,
+      "name": "JPEG"
+    },
+    "dateCreated": "2016-02-01T16:52:41Z"
 }
 ```
