@@ -4,6 +4,7 @@ import grails.plugin.springsecurity.SpringSecurityService
 import grails.transaction.Transactional
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 import pixnfit.*
 
 @Secured("hasRole('ROLE_USER')")
@@ -19,14 +20,31 @@ class ImageRestController extends DynamicDataRestfulController {
     @Override
     @Transactional
     Object save() {
-        def json = request.JSON
         User user = springSecurityService.currentUser
+
+        byte[] data = null
+        String originalFilename = null
+        if (params.data != null) {
+            if (params.data instanceof CommonsMultipartFile) {
+                CommonsMultipartFile file = params.data
+                data = file.getBytes()
+                originalFilename = file.originalFilename
+            }
+        }
+
+        ImageData imageData = new ImageData(
+                creator: user,
+                name: originalFilename,
+                filename: originalFilename,
+                data: data
+        )
+        imageData.updateAutoCalculatedFields()
+
         Image image = new Image(
                 creator: user,
-                imageType: imageTypeService.jpeg()
+                imageData: imageData,
+                name: originalFilename
         )
-        bindData(image, json, [include: ['name', 'description', 'filename', 'height', 'width']])
-        foreignKeyBindDataIfNotNull(image, json, [imageType: ImageType])
 
         if (image.validate()) {
             image.save()
@@ -41,8 +59,7 @@ class ImageRestController extends DynamicDataRestfulController {
     def update() {
         def json = request.JSON
         Image image = Post.get(params.id)
-        bindData(image, json, [include: ['name', 'description', 'filename', 'height', 'width']])
-        foreignKeyBindDataIfNotNull(image, json, [imageType: ImageType])
+        bindData(image, json, [include: ['name', 'description', 'filename']])
         image.save()
         respond image
     }
