@@ -13,6 +13,11 @@ class ImageType extends BaseEntity {
     FileExtension defaultFileExtension
 
     /**
+     * Format name as known by ImageIO (Java)
+     */
+    String javaFormatName
+
+    /**
      * Valid file extensions for this ImageType
      */
     Set<FileExtension> fileExtensions
@@ -36,8 +41,8 @@ class ImageType extends BaseEntity {
     /**
      * Images with this ImageType
      */
-    List<Image> getImages() {
-        Image.findAllByImageType(this)
+    List<ImageData> getImageDatas() {
+        ImageData.findAllByImageType(this)
     }
     // Delete is forbidden
     def beforeDelete() {

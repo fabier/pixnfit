@@ -22,18 +22,17 @@ class ImageService {
         ImageData imageData = new ImageData(
                 creator: creator,
                 name: name,
+                filename: filename,
                 data: data
         )
+        imageData.updateAutoCalculatedFields()
 
         Image image = new Image(
                 creator: creator,
                 name: name,
-                filename: filename,
-                height: height,
-                width: width,
-                imageData: imageData,
-                imageType: imageTypeService.jpeg()
-        ).save(failOnError: true)
+                imageData: imageData
+        )
+        image.save(failOnError: true)
 
         return image
     }

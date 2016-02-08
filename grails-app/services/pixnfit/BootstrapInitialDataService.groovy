@@ -7,13 +7,10 @@ import org.apache.commons.lang3.RandomStringUtils
 @Transactional
 class BootstrapInitialDataService {
 
-    FileExtensionService fileExtensionService
-    MimeTypeService mimeTypeService
     FakerService fakerService
     UserService userService
     ImageService imageService
     ImageTypeService imageTypeService
-    PostTypeService postTypeService
     StateService stateService
     VisibilityService visibilityService
 
@@ -120,9 +117,9 @@ class BootstrapInitialDataService {
         log.info "Initializing ImageTypes..."
         ImageType jpegImageType, pngImageType, gifImageType
         if (ImageType.count() == 0) {
-            jpegImageType = new ImageType(name: "JPEG", creator: admin).save(flush: true)
-            pngImageType = new ImageType(name: "PNG", creator: admin).save(flush: true)
-            gifImageType = new ImageType(name: "GIF", creator: admin).save(flush: true)
+            jpegImageType = new ImageType(name: "JPEG", javaFormatName: "JPEG", creator: admin).save(flush: true)
+            pngImageType = new ImageType(name: "PNG", javaFormatName: "PNG", creator: admin).save(flush: true)
+            gifImageType = new ImageType(name: "GIF", javaFormatName: "GIF", creator: admin).save(flush: true)
         } else {
             jpegImageType = imageTypeService.jpeg()
             pngImageType = imageTypeService.png()
