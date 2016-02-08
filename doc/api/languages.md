@@ -4,27 +4,29 @@
 ## GET /api/v1/languages
 Gets all languages
 ### Params
-None
+Yes :
+ * **max** (int) : Max results in output, defaults to 10
+ * **offset** (int) : Offset for results, defaults to 0
+
+*Ex : /api/v1/languages?max=5&offset=2*
+### Authentication
+Yes : **HTTP BASIC**
 ### Output
 ```json
 [
   {
-    "id": 1,
-    "name": "JPEG",
-    "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
-  },
-  {
     "id": 2,
-    "name": "PNG",
+    "name": "English",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "nativeName": "English",
+    "dateCreated": "2016-02-01T16:50:57Z"
   },
   {
-    "id": 3,
-    "name": "GIF",
+    "id": 1,
+    "name": "French",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "nativeName": "Français",
+    "dateCreated": "2016-02-01T16:50:57Z"
   }
 ]
 ```
@@ -34,13 +36,14 @@ Gets a language by its Id
 ### Params
 None (Id is included in URL)
 ### Authentication
-YES : HTTP BASIC
+Yes : **HTTP BASIC**
 ### Output
 ```json
 {
   "id": 1,
-  "name": "JPEG",
+  "name": "French",
   "description": null,
-  "dateCreated": "2016-02-04T13:44:17Z"
+  "nativeName": "Français",
+  "dateCreated": "2016-02-01T16:50:57Z"
 }
 ```

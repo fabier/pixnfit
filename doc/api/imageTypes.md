@@ -4,7 +4,13 @@
 ## GET /api/v1/imageTypes
 Gets all imageTypes
 ### Params
-None
+Yes :
+ * **max** (int) : Max results in output, defaults to 10
+ * **offset** (int) : Offset for results, defaults to 0
+
+*Ex : /api/v1/imageTypes?max=5&offset=2*
+### Authentication
+Yes : **HTTP BASIC**
 ### Output
 ```json
 [
@@ -34,7 +40,7 @@ Gets an imageType by its Id
 ### Params
 None (Id is included in URL)
 ### Authentication
-YES : HTTP BASIC
+Yes : **HTTP BASIC**
 ### Output
 ```json
 {

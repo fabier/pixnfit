@@ -4,27 +4,39 @@
 ## GET /api/v1/countries
 Gets all countries
 ### Params
-None
+Yes :
+ * **max** (int) : Max results in output, defaults to 10
+ * **offset** (int) : Offset for results, defaults to 0
+
+*Ex : /api/v1/countries?max=5&offset=2*
+### Authentication
+Yes : **HTTP BASIC**
 ### Output
 ```json
 [
   {
-    "id": 1,
-    "name": "JPEG",
+    "id": 2,
+    "name": "England",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "nativeName": "England",
+    "isoCode31661": "EN",
+    "dateCreated": "2016-02-01T16:50:57Z"
   },
   {
-    "id": 2,
-    "name": "PNG",
+    "id": 1,
+    "name": "France",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "nativeName": "France",
+    "isoCode31661": "FR",
+    "dateCreated": "2016-02-01T16:50:57Z"
   },
   {
     "id": 3,
-    "name": "GIF",
+    "name": "USA",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "nativeName": "USA",
+    "isoCode31661": "US",
+    "dateCreated": "2016-02-01T16:50:57Z"
   }
 ]
 ```
@@ -34,13 +46,15 @@ Gets a country by its Id
 ### Params
 None (Id is included in URL)
 ### Authentication
-YES : HTTP BASIC
+Yes : **HTTP BASIC**
 ### Output
 ```json
 {
   "id": 1,
-  "name": "JPEG",
+  "name": "France",
   "description": null,
-  "dateCreated": "2016-02-04T13:44:17Z"
+  "nativeName": "France",
+  "isoCode31661": "FR",
+  "dateCreated": "2016-02-01T16:50:57Z"
 }
 ```

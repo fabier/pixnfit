@@ -4,27 +4,33 @@
 ## GET /api/v1/states
 Gets all states
 ### Params
-None
+Yes :
+ * **max** (int) : Max results in output, defaults to 10
+ * **offset** (int) : Offset for results, defaults to 0
+
+*Ex : /api/v1/states?max=5&offset=2*
+### Authentication
+Yes : **HTTP BASIC**
 ### Output
 ```json
 [
   {
     "id": 1,
-    "name": "JPEG",
+    "name": "active",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "dateCreated": "2016-02-01T16:50:57Z"
   },
   {
     "id": 2,
-    "name": "PNG",
+    "name": "inactive",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "dateCreated": "2016-02-01T16:50:57Z"
   },
   {
     "id": 3,
-    "name": "GIF",
+    "name": "deleted",
     "description": null,
-    "dateCreated": "2016-02-04T13:44:17Z"
+    "dateCreated": "2016-02-01T16:50:57Z"
   }
 ]
 ```
@@ -34,13 +40,13 @@ Gets a state by its Id
 ### Params
 None (Id is included in URL)
 ### Authentication
-YES : HTTP BASIC
+Yes : **HTTP BASIC**
 ### Output
 ```json
 {
   "id": 1,
-  "name": "JPEG",
+  "name": "active",
   "description": null,
-  "dateCreated": "2016-02-04T13:44:17Z"
+  "dateCreated": "2016-02-01T16:50:57Z"
 }
 ```
