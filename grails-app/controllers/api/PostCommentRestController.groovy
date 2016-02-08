@@ -3,7 +3,9 @@ package api
 import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
-import pixnfit.*
+import pixnfit.DynamicDataRestfulController
+import pixnfit.PostComment
+import pixnfit.PostCommentVote
 
 @Secured("hasRole('ROLE_USER')")
 class PostCommentRestController extends DynamicDataRestfulController {
@@ -28,7 +30,7 @@ class PostCommentRestController extends DynamicDataRestfulController {
                 postComment: postComment,
                 creator: springSecurityService.currentUser
         )
-        bindData(postComment, json, [include: ['vote', 'description']])
+        bindData(postCommentVote, json, [include: ['vote']])
 
         if (postCommentVote.validate()) {
             postCommentVote.save()
