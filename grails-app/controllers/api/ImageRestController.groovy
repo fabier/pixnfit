@@ -59,7 +59,7 @@ class ImageRestController extends DynamicDataRestfulController {
     def update() {
         def json = request.JSON
         Image image = Post.get(params.id)
-        bindData(image, json, [include: ['name', 'description', 'filename']])
+        bindData(image, json, [include: ['name', 'description']])
         image.save()
         respond image
     }
