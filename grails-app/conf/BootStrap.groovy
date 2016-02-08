@@ -120,7 +120,6 @@ class BootStrap {
                                     grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, absolute: true)
                                     : null
                     ],
-                    filename   : image.filename,
                     dateCreated: image.dateCreated
             ]
         }
@@ -129,6 +128,7 @@ class BootStrap {
             ImageType imageType = imageData.imageType
             return [
                     id         : imageData.id,
+                    filename   : imageData.filename,
                     width      : imageData.width,
                     height     : imageData.height,
                     imageType  : imageType ? [
@@ -173,8 +173,8 @@ class BootStrap {
             List<Image> images = post.images
             def imagesAsMapArray = images.inject([]) { array, entry ->
                 array.add([
-                        id : entry.id,
-                        url: grailsLinkGenerator.link(controller: "image", action: "show", id: entry.id, absolute: true)
+                        id      : entry.id,
+                        imageUrl: grailsLinkGenerator.link(controller: "image", action: "show", id: entry.id, absolute: true)
                 ])
                 return array
             }
