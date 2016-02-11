@@ -76,7 +76,11 @@ class ImageData extends BaseEntity {
 
     def updateAutoCalculatedFields() {
         // Update MD5 Hash
-        md5 = DigestUtils.md5Hex(data)
+        if (data != null) {
+            md5 = DigestUtils.md5Hex(data)
+        } else {
+            md5 = null
+        }
 
         // Update ImageType
         ImageInputStream imageInputStream = ImageIO.createImageInputStream(new ByteArrayInputStream(data))
