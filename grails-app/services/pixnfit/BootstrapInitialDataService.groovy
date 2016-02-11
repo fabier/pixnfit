@@ -180,9 +180,9 @@ class BootstrapInitialDataService {
         }
         log.info "... Users deleted."
 
-        log.info "Deleting all Posts..."
-        Post.executeUpdate("delete from Post")
-        log.info "... Posts deleted."
+        log.info "Deleting all PostCommentVotes..."
+        PostCommentVote.executeUpdate("delete from PostCommentVote")
+        log.info "... PostCommentVotes deleted."
 
         log.info "Deleting all PostComments..."
         PostComment.executeUpdate("delete from PostComment")
@@ -192,9 +192,9 @@ class BootstrapInitialDataService {
         PostVote.executeUpdate("delete from PostVote")
         log.info "... PostVotes deleted."
 
-        log.info "Deleting all PostCommentVotes..."
-        PostCommentVote.executeUpdate("delete from PostCommentVote")
-        log.info "... PostCommentVotes deleted."
+        log.info "Deleting all Posts..."
+        Post.executeUpdate("delete from Post")
+        log.info "... Posts deleted."
 
         log.info "Deleting all Images..."
         Image.executeUpdate("delete from Image")
