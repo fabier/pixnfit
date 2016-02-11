@@ -1,5 +1,5 @@
 <head>
-    <meta name='layout' content='main'/>
+    <meta name='layout' content='main_nolinks'/>
     <title>Access Denied</title>
 </head>
 

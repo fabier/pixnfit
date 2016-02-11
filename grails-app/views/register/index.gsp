@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <meta name='layout' content='main'/>
+    <meta name='layout' content='main_nolinks'/>
     <title>Register</title>
 </head>
 

@@ -2,7 +2,7 @@
 
 <head>
     <title><g:message code="default.forgotPassword.header"/></title>
-    <meta name='layout' content='main'/>
+    <meta name='layout' content='main_nolinks'/>
 </head>
 
 <body>
