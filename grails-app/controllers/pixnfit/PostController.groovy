@@ -1,12 +1,17 @@
 package pixnfit
 
 import grails.plugin.springsecurity.SpringSecurityService
+import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 @Secured("hasRole('ROLE_USER')")
 class PostController {
 
     SpringSecurityService springSecurityService
+    PostTypeService postTypeService
+    StateService stateService
+    VisibilityService visibilityService
 
     def create() {
         render view: "create"
@@ -32,5 +37,55 @@ class PostController {
                 userHasVoted     : userHasVoted,
                 currentUser      : springSecurityService.currentUser
         ]
+    }
+
+    def save() {
+        User user = springSecurityService.currentUser
+
+        // Initialisation des données du post
+        Post post = new Post(
+                creator: user,
+                postType: postTypeService.help(),
+                state: stateService.active(),
+                visibility: visibilityService.public()
+        )
+        bindData(post, params, [include: ['name', 'description']])
+
+        // Initialisation des données de l'image
+        byte[] data = null
+        String originalFilename = null
+        if (params.file != null) {
+            def file = request.getFile("file")
+            if (file instanceof CommonsMultipartFile) {
+                data = file.getBytes()
+                originalFilename = file.originalFilename
+            }
+        }
+
+        ImageData imageData = new ImageData(
+                creator: user,
+                name: originalFilename,
+                filename: originalFilename,
+                data: data
+        )
+        imageData.updateAutoCalculatedFields()
+
+        Image image = new Image(
+                creator: user,
+                imageData: imageData,
+                name: originalFilename
+        )
+
+        // Si les données du post sont correctes et que les données de l'image aussi,
+        // alors on peut créer le post, et associer le post et l'image
+        if (post.validate() && image.validate()) {
+            image.save()
+            post.addToImages(image)
+            post.save()
+            redirect controller: "post", action: "show", id: post.id
+        } else {
+            flash.error = "Impossible to create post. See logs for details."
+            redirect action: 'create', params: params
+        }
     }
 }
