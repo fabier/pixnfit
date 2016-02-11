@@ -12,7 +12,8 @@
             <g:set var="imageId" value="${post.images?.first()?.id}"/>
             <div class="row">
                 <div class="col-md-12">
-                    <img src="${createLink(controller: "image", action: "show", id: imageId)}" style="width:100%;"/>
+                    <img src="${createLink(controller: "image", action: "show", id: imageId, params: [width: 512, height: 512])}"
+                         style="width:100%;"/>
                 </div>
             </div>
 
@@ -28,7 +29,7 @@
                 <div class="col-md-12">
                     <g:if test="${creator.image}">
                         <img class="post-creator-avatar"
-                             src="${createLink(controller: "image", action: "show", id: creator.imageId)}"/>
+                             src="${createLink(controller: "image", action: "show", id: creator.imageId, params: [width: 128, height: 128])}"/>
                     </g:if>
                     <g:else>
                         <img class="post-creator-avatar" src="/images/user-avatar.png"/>
