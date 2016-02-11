@@ -24,23 +24,22 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <asset:stylesheet src="home"/>
-    <asset:javascript src="home"/>
-    <asset:deferredScripts src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"/>
-    <asset:deferredScripts src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"/>
+    <asset:stylesheet src="application"/>
+    <asset:javascript src="application"/>
     <g:layoutHead/>
 </head>
 
 <body>
 
-<g:render template="/templates/home/header"/>
+<g:render template="/header/mainHeader"/>
+<g:render template="/header/mainSubHeader"/>
 
 <div class="wrapper">
     <g:render template="/templates/flashMessage"/>
     <g:layoutBody/>
 </div>
 
-<g:render template="/templates/home/footer"/>
+<g:render template="/footer/mainFooter"/>
 
 <asset:deferredScripts/>
 </body>

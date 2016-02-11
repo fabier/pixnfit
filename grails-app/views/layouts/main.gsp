@@ -31,14 +31,12 @@
 
 <body>
 
-<g:render template="/templates/header"/>
+<g:render template="/header/mainHeader"/>
 
-<div class="wrapper">
+<div class="wrapper margin-top-20">
     <g:render template="/templates/flashMessage"/>
     <g:layoutBody/>
 </div>
-
-<g:render template="/templates/footer"/>
 
 <asset:deferredScripts/>
 </body>
