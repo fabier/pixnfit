@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse
 @Secured(['permitAll'])
 class LoginController {
 
+    static defaultAction = "index"
+
     /**
      * Dependency injection for the authenticationTrustResolver.
      */

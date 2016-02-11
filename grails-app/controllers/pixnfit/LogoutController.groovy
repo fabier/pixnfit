@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse
 @Secured(['permitAll'])
 class LogoutController extends grails.plugin.springsecurity.LogoutController {
 
+    static defaultAction = "index"
+
     /**
      * Index action. Redirects to the Spring security logout uri.
      */
