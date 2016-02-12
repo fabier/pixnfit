@@ -2,20 +2,8 @@
 <html>
 
 <head>
-
     <meta name='layout' content='landingpage'/>
     <title>PixnFit - The social shopper</title>
-
-    <!-- Custom Fonts -->
-    %{--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">--}%
-    %{--<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"--}%
-    %{--type="text/css">--}%
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -38,15 +26,16 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-offset-3">
-                            <form class="form-inline">
+                            <g:form controller="landingPage" action="submitEmail" class="form-inline">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Email"/>
+                                    <input name="email" class="form-control" type="text" placeholder="Email"
+                                           value="${params.email ?: ""}"/>
 
                                     <button type="submit" class="btn btn-primary">
                                         Submit
                                     </button>
                                 </div>
-                            </form>
+                            </g:form>
                         </div>
                     </div>
                 </div>
