@@ -46,7 +46,6 @@ PixnFit project made with Grails
 | POST | [/api/v1/user](doc/api/users.md#save) | Creates a new user |
 | GET | [/api/v1/user/:id](doc/api/users.md#show) | Gets a user by its Id |
 | PUT | [/api/v1/user/:id](doc/api/users.md#update) | Updates a user |
-| DELETE | [/api/v1/user/:id](doc/api/users.md#delete) | Deletes a user |
 | GET | [/api/v1/user/:id/incomingMessages](doc/api/users.md#incomingMessages) | Gets incoming messages for a user |
 | GET | [/api/v1/user/:id/outgoingMessages](doc/api/users.md#outgoingMessages) | Gets outgoing messages for a user |
 | GET | [/api/v1/user/:id/posts](doc/api/users.md#posts) | Gets all posts created by this user |

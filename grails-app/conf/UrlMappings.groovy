@@ -61,7 +61,7 @@ class UrlMappings {
         }
 
         // On peut récupérer des informations sur un profil utilisateur
-        "/api/v1/users"(resources: "userRest", includes: ["show", "save", "update", "delete"]) {
+        "/api/v1/users"(resources: "userRest", includes: ["show", "save", "update"]) {
             "/incomingMessages"(controller: "userRest", action: "incomingMessages", method: "GET")
             "/outgoingMessages"(controller: "userRest", action: "outgoingMessages", method: "GET")
             "/posts"(controller: "userRest", action: "posts", method: "GET")
