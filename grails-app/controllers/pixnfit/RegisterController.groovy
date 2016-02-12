@@ -150,9 +150,6 @@ class RegisterCommand {
     String email
     String password
     String password2
-    boolean acceptsConditions
-
-    def grailsApplication
 
     static constraints = {
         username blank: false
