@@ -38,4 +38,22 @@ class PostService {
             sqlRestriction " 1=1 ORDER BY random()"
         }
     }
+
+    Post getPreviousPost(Post post) {
+        return Post.withCriteria(uniqueResult: true) {
+            eq "postType", post.postType
+            gt "dateCreated", post.dateCreated
+            order("dateCreated", "asc")
+            maxResults(1)
+        }
+    }
+
+    Post getNextPost(Post post) {
+        return Post.withCriteria(uniqueResult: true) {
+            eq "postType", post.postType
+            lt "dateCreated", post.dateCreated
+            order("dateCreated", "desc")
+            maxResults(1)
+        }
+    }
 }
