@@ -58,6 +58,9 @@ grails.project.dependency.resolution = {
         // Librairies utilitaires
         compile "org.apache.commons:commons-lang3:3.4"
         compile 'commons-codec:commons-codec:1.10'
+
+        // Image Library
+        runtime 'org.imgscalr:imgscalr-lib:4.2'
     }
 
     plugins {

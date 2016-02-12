@@ -23,7 +23,7 @@ class ImageController {
                         // Rescale image
                         BufferedImage bufferedImage = ImageIO.read(ImageIO.createImageInputStream(new ByteArrayInputStream(data)))
                         BufferedImage rescaled = imageService.getScaledImageCropCentered(bufferedImage, width, height)
-                        render file: imageService.getDataAsJPEG(rescaled, 0.8f), contentType: "image/jpeg"
+                        render file: imageService.getDataAsJPEG(rescaled), contentType: "image/jpeg"
                     } else {
                         render file: data, contentType: imageData?.imageType?.defaultMimeType?.mimetype
                     }

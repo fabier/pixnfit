@@ -4,9 +4,8 @@ import com.sun.image.codec.jpeg.JPEGCodec
 import com.sun.image.codec.jpeg.JPEGEncodeParam
 import com.sun.image.codec.jpeg.JPEGImageEncoder
 import grails.transaction.Transactional
-import pixnfit.Image
+import org.imgscalr.Scalr
 
-import java.awt.*
 import java.awt.image.BufferedImage
 
 @Transactional
@@ -45,40 +44,33 @@ class ImageService {
     }
 
     BufferedImage getScaledImageCropCentered(BufferedImage source, int width, int height) {
-        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = resized.createGraphics();
-
-        g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
         int sourceWidth = source.getWidth()
         int sourceHeight = source.getHeight()
         float initialRatio = sourceWidth / sourceHeight
         float finalRatio = width / height
-        int dx = 0
-        int dy = 0
+        int dxSubimage = 0
+        int dySubimage = 0
+        int subimageWidth = sourceWidth
+        int subimageHeight = sourceHeight
 
         if (initialRatio >= finalRatio) {
             // Crop left and right
-            dx = Math.round((initialRatio - finalRatio) * sourceHeight)
+            subimageWidth = Math.round(finalRatio * sourceHeight) // sera inférieur ou égal à sourceWidth
+            dxSubimage = Math.floor((sourceWidth - subimageWidth) / 2)
         } else {
             // Crop top and bottom
-            dy = Math.round(sourceWidth / (finalRatio - initialRatio))
+            subimageHeight = Math.round(sourceWidth / finalRatio) // sera inférieur ou égal à sourceHeight
+            dySubimage = Math.floor((sourceHeight - subimageHeight) / 2)
         }
 
-        BufferedImage croppedImage = source.getSubimage((int) (dx / 2), (int) (dy / 2), source.getWidth() - dx, source.getHeight() - dy)
+        BufferedImage croppedImage = source.getSubimage(dxSubimage, dySubimage, subimageWidth, subimageHeight)
 
-//        g2d.drawImage(source, (int) (dx / 2), (int) (dy / 2), source.getWidth() - dx, source.getHeight() - dy, null);
-        g2d.drawImage(croppedImage, 0, 0, width, height, null)
-        g2d.dispose();
+        BufferedImage resized = Scalr.resize(croppedImage, Scalr.Method.ULTRA_QUALITY, width, height, Scalr.OP_ANTIALIAS);
 
         return resized
     }
 
-    byte[] getDataAsJPEG(BufferedImage bufferedImage, float quality = 0.95) {
+    byte[] getDataAsJPEG(BufferedImage bufferedImage, float quality = 0.9) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()
         JPEGImageEncoder jpegImageEncoder = JPEGCodec.createJPEGEncoder(byteArrayOutputStream)
         JPEGEncodeParam jpegEncodeParam = jpegImageEncoder.getDefaultJPEGEncodeParam(bufferedImage);
