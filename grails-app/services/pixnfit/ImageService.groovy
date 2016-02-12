@@ -30,18 +30,19 @@ class ImageService {
         byte[] data = downloadService.download(url)
 
         ImageData imageData = new ImageData(
-                creator: creator,
                 name: name,
                 filename: filename,
                 data: data
         )
+        imageData.setCreator(creator)
         imageData.updateAutoCalculatedFields()
 
         Image image = new Image(
-                creator: creator,
                 name: name,
                 imageData: imageData
         )
+        // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
+        image.setCreator(creator)
         image.save(failOnError: true)
 
         return image

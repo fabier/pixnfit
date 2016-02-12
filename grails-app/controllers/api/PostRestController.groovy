@@ -28,11 +28,11 @@ class PostRestController extends DynamicDataRestfulController {
         def json = request.JSON
         User user = springSecurityService.currentUser
         Post post = new Post(
-                creator: user,
                 postType: postTypeService.help(),
                 state: stateService.active(),
                 visibility: visibilityService.public()
         )
+        post.setCreator(user)
         bindData(post, json, [include: ['name', 'description']])
         foreignKeyBindDataIfNotNull(post, json, [postType: PostType, visibility: Visibility])
 
@@ -63,10 +63,12 @@ class PostRestController extends DynamicDataRestfulController {
     def addComment() {
         def json = request.JSON
         Post post = Post.get(params.postRestId)
+        User user = springSecurityService.currentUser
+
         PostComment postComment = new PostComment(
-                post: post,
-                creator: springSecurityService.currentUser
+                post: post
         )
+        postComment.setCreator(user)
         bindData(postComment, json, [include: ['description']])
 
         if (postComment.validate()) {
@@ -86,12 +88,13 @@ class PostRestController extends DynamicDataRestfulController {
     def addVote() {
         def json = request.JSON
         Post post = Post.get(params.postRestId)
+        User user = springSecurityService.currentUser
 
         // Création du vote
         PostVote postVote = new PostVote(
-                post: post,
-                creator: springSecurityService.currentUser
+                post: post
         )
+        postVote.setCreator(user)
         bindData(postVote, json, [include: ['vote', 'description']])
         foreignKeyBindDataIfNotNull(postVote, json, [voteReason: VoteReason])
 

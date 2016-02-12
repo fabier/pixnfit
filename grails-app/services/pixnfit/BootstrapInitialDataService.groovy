@@ -23,93 +23,120 @@ class BootstrapInitialDataService {
         // Language
         log.info "Initializing Languages..."
         if (Language.count() == 0) {
-            new Language(name: "French", nativeName: "Français", isoCode6391: "fr", creator: admin).save(failOnError: true)
-            new Language(name: "English", nativeName: "English", isoCode6391: "en", creator: admin).save(failOnError: true)
+            [new Language(name: "French", nativeName: "Français", isoCode6391: "fr"),
+             new Language(name: "English", nativeName: "English", isoCode6391: "en")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "Languages OK"
 
         // Country
         log.info "Initializing Countries..."
         if (Country.count() == 0) {
-            new Country(name: "France", nativeName: "France", isoCode31661: "FR", creator: admin).save(failOnError: true)
-            new Country(name: "England", nativeName: "England", isoCode31661: "EN", creator: admin).save(failOnError: true)
-            new Country(name: "USA", nativeName: "USA", isoCode31661: "US", creator: admin).save(failOnError: true)
+            [new Country(name: "France", nativeName: "France", isoCode31661: "FR"),
+             new Country(name: "England", nativeName: "England", isoCode31661: "EN"),
+             new Country(name: "USA", nativeName: "USA", isoCode31661: "US")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "Countries OK"
 
         // Visibility
         log.info "Initializing Visibilities..."
         if (Visibility.count() == 0) {
-            new Visibility(name: "public", creator: admin).save(failOnError: true)
-            new Visibility(name: "followers", creator: admin).save(failOnError: true)
-            new Visibility(name: "private", creator: admin).save(failOnError: true)
+            [new Visibility(name: "public"),
+             new Visibility(name: "followers"),
+             new Visibility(name: "private")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "Visibilities OK"
 
         // BodyType
         log.info "Initializing BodyTypes..."
         if (BodyType.count() == 0) {
-            new BodyType(name: "skinny", creator: admin).save(failOnError: true)
-            new BodyType(name: "average", creator: admin).save(failOnError: true)
-            new BodyType(name: "big", creator: admin).save(failOnError: true)
+            [new BodyType(name: "skinny"),
+             new BodyType(name: "average"),
+             new BodyType(name: "big")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "BodyTypes OK"
 
         // FashionStyle
         log.info "Initializing FashionStyles..."
         if (FashionStyle.count() == 0) {
-            new FashionStyle(name: "bohemian", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "arty", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "chic", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "classic", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "exotic", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "flamboyant", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "glamourous", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "romantic", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "sexy", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "sophisticated", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "western", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "traditional", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "preppy", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "punk", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "tomboy", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "rocker", creator: admin).save(failOnError: true)
-            new FashionStyle(name: "goth", creator: admin).save(failOnError: true)
+            [new FashionStyle(name: "bohemian"),
+             new FashionStyle(name: "arty"),
+             new FashionStyle(name: "chic"),
+             new FashionStyle(name: "classic"),
+             new FashionStyle(name: "exotic"),
+             new FashionStyle(name: "flamboyant"),
+             new FashionStyle(name: "glamourous"),
+             new FashionStyle(name: "romantic"),
+             new FashionStyle(name: "sexy"),
+             new FashionStyle(name: "sophisticated"),
+             new FashionStyle(name: "western"),
+             new FashionStyle(name: "traditional"),
+             new FashionStyle(name: "preppy"),
+             new FashionStyle(name: "punk"),
+             new FashionStyle(name: "tomboy"),
+             new FashionStyle(name: "rocker"),
+             new FashionStyle(name: "goth")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "FashionStyles OK"
 
         // State
         log.info "Initializing States..."
         if (State.count() == 0) {
-            new State(name: "active", creator: admin).save(failOnError: true)
-            new State(name: "inactive", creator: admin).save(failOnError: true)
-            new State(name: "deleted", creator: admin).save(failOnError: true)
+            [new State(name: "active"),
+             new State(name: "inactive"),
+             new State(name: "deleted")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "States OK"
 
         // VoteReason
         log.info "Initializing VoteReasons..."
         if (VoteReason.count() == 0) {
-            new VoteReason(name: "style", creator: admin).save(failOnError: true)
-            new VoteReason(name: "color", creator: admin).save(failOnError: true)
-            new VoteReason(name: "size", creator: admin).save(failOnError: true)
-            new VoteReason(name: "shape", creator: admin).save(failOnError: true)
+            [new VoteReason(name: "style"),
+             new VoteReason(name: "color"),
+             new VoteReason(name: "size"),
+             new VoteReason(name: "shape")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "VoteReasons OK"
 
         // PostType
         log.info "Initializing PostTypes..."
         if (PostType.count() == 0) {
-            new PostType(name: "help", creator: admin).save(failOnError: true)
-            new PostType(name: "dressing", creator: admin).save(failOnError: true)
+            [new PostType(name: "help"),
+             new PostType(name: "dressing")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "PostTypes OK"
 
         // Gender
         log.info "Initializing Genders..."
         if (Gender.count() == 0) {
-            new Gender(name: "male", creator: admin).save(failOnError: true)
-            new Gender(name: "female", creator: admin).save(failOnError: true)
+            [new Gender(name: "male"),
+             new Gender(name: "female")].each {
+                it.setCreator(admin)
+                it.save()
+            }
         }
         log.info "Genders OK"
 
@@ -117,9 +144,13 @@ class BootstrapInitialDataService {
         log.info "Initializing ImageTypes..."
         ImageType jpegImageType, pngImageType, gifImageType
         if (ImageType.count() == 0) {
-            jpegImageType = new ImageType(name: "JPEG", javaFormatName: "JPEG", creator: admin).save(flush: true)
-            pngImageType = new ImageType(name: "PNG", javaFormatName: "PNG", creator: admin).save(flush: true)
-            gifImageType = new ImageType(name: "GIF", javaFormatName: "GIF", creator: admin).save(flush: true)
+            jpegImageType = new ImageType(name: "JPEG", javaFormatName: "JPEG")
+            pngImageType = new ImageType(name: "PNG", javaFormatName: "PNG")
+            gifImageType = new ImageType(name: "GIF", javaFormatName: "GIF")
+            [jpegImageType, pngImageType, gifImageType].each {
+                it.setCreator(admin)
+                it.save(flush: true)
+            }
         } else {
             jpegImageType = imageTypeService.jpeg()
             pngImageType = imageTypeService.png()
@@ -130,15 +161,21 @@ class BootstrapInitialDataService {
         // Mimetype
         log.info "Initializing MimeTypes..."
         if (Mimetype.count() == 0) {
-            def jpgMimeType = new Mimetype(name: "JPEG", mimetype: "image/jpeg", imageType: jpegImageType, creator: admin).save(failOnError: true)
+            def jpgMimeType = new Mimetype(name: "JPEG", mimetype: "image/jpeg", imageType: jpegImageType)
+            jpgMimeType.setCreator(admin)
+            jpgMimeType.save()
             jpegImageType.setDefaultMimeType(jpgMimeType)
             jpegImageType.save()
 
-            def pngMimeType = new Mimetype(name: "PNG", mimetype: "image/png", imageType: pngImageType, creator: admin).save(failOnError: true)
+            def pngMimeType = new Mimetype(name: "PNG", mimetype: "image/png", imageType: pngImageType)
+            pngMimeType.setCreator(admin)
+            pngMimeType.save()
             pngImageType.setDefaultMimeType(pngMimeType)
             pngImageType.save()
 
-            def gifMimeType = new Mimetype(name: "GIF", mimetype: "image/gif", imageType: gifImageType, creator: admin).save(failOnError: true)
+            def gifMimeType = new Mimetype(name: "GIF", mimetype: "image/gif", imageType: gifImageType)
+            gifMimeType.setCreator(admin)
+            gifMimeType.save()
             gifImageType.setDefaultMimeType(gifMimeType)
             gifImageType.save()
         }
@@ -147,19 +184,27 @@ class BootstrapInitialDataService {
         // FileExtension
         log.info "Initializing FileExtensions..."
         if (FileExtension.count() == 0) {
-            def jpgFileExtension = new FileExtension(name: "JPG", extension: "jpg", imageType: jpegImageType, creator: admin).save(failOnError: true)
+            def jpgFileExtension = new FileExtension(name: "JPG", extension: "jpg", imageType: jpegImageType)
+            jpgFileExtension.setCreator(admin)
+            jpgFileExtension.save()
             jpegImageType.setDefaultFileExtension(jpgFileExtension)
             jpegImageType.save()
 
-            new FileExtension(name: "JPEG", extension: "jpeg", imageType: jpegImageType, creator: admin).save(failOnError: true)
+            def jpegFileExtension = new FileExtension(name: "JPEG", extension: "jpeg", imageType: jpegImageType)
+            jpegFileExtension.setCreator(admin)
+            jpegFileExtension.save()
 
-            def gifFileExtension = new FileExtension(name: "PNG", extension: "png", imageType: pngImageType, creator: admin).save(failOnError: true)
-            pngImageType.setDefaultFileExtension(gifFileExtension)
-            pngImageType.save()
-
-            def pngFileExtension = new FileExtension(name: "GIF", extension: "gif", imageType: gifImageType, creator: admin).save(failOnError: true)
-            gifImageType.setDefaultFileExtension(pngFileExtension)
+            def gifFileExtension = new FileExtension(name: "PNG", extension: "png", imageType: pngImageType)
+            gifFileExtension.setCreator(admin)
+            gifFileExtension.save()
+            gifImageType.setDefaultFileExtension(gifFileExtension)
             gifImageType.save()
+
+            def pngFileExtension = new FileExtension(name: "GIF", extension: "gif", imageType: gifImageType)
+            pngFileExtension.setCreator(admin)
+            pngFileExtension.save()
+            pngImageType.setDefaultFileExtension(pngFileExtension)
+            pngImageType.save()
         }
         log.info "FileExtensions OK"
     }
@@ -217,9 +262,8 @@ class BootstrapInitialDataService {
         if (User.count() < userCount) {
             char[] charset = (('A'..'Z') + ('0'..'9')).join().toCharArray()
             for (int i = 0; i < userCount; i++) {
-                String name = fakerService.name()
-                new User(
-                        username: name,
+                User newUser = new User(
+                        username: fakerService.name(),
                         gender: Gender.random(),
                         birthdate: fakerService.veryPastDate(),
                         bodyType: BodyType.random(),
@@ -230,8 +274,9 @@ class BootstrapInitialDataService {
                         weight: Math.round(70 + Math.max(Math.min(2.0, new Random().nextGaussian()), -2.0) * 10),
                         password: RandomStringUtils.random(20, charset),
                         email: fakerService.freeEmail("$i"), // Pour éviter les doublons
-                        enabled: false,
-                        creator: admin).save(failOnError: true)
+                        enabled: false)
+                newUser.setCreator(admin)
+                newUser.save()
             }
         }
         log.info("... ${userCount} Users created.");
@@ -247,14 +292,15 @@ class BootstrapInitialDataService {
                 int postCountForUser = Math.round(Math.max(0, random.nextGaussian() * 10 + 10))
                 for (int i in 0..postCountForUser) {
                     Image loremIpsumImage = imageService.createDefaultLoremIpsumImage(user)
-                    new Post(
-                            creator: user,
+                    Post newPost = new Post(
                             name: fakerService.sentence(5),
                             description: fakerService.paragraph(1),
                             postType: postType,
                             state: activeState,
                             visibility: publicVisibility
-                    ).addToImages(loremIpsumImage).save()
+                    )
+                    newPost.setCreator(user)
+                    newPost.addToImages(loremIpsumImage).save()
                 }
             }
         }
@@ -265,11 +311,12 @@ class BootstrapInitialDataService {
             int commentCountForPost = Math.round(Math.max(0, random.nextGaussian() * 10 + 30))
             for (int i in 0..commentCountForPost) {
                 User userCommenting = allUsers.get(random.nextInt(allUsers.size()))
-                new PostComment(
-                        creator: userCommenting,
+                PostComment postComment = new PostComment(
                         description: fakerService.paragraph(2),
                         post: post
-                ).save(failOnError: true)
+                )
+                postComment.setCreator(userCommenting)
+                postComment.save()
             }
 
             int voteCountForPost = Math.round(Math.max(0, random.nextGaussian() * 10 + 30))
@@ -278,12 +325,13 @@ class BootstrapInitialDataService {
             for (User voter : voters) {
                 boolean vote = random.nextGaussian() > -1
                 VoteReason voteReason = vote ? null : VoteReason.random()
-                new PostVote(
+                PostVote postVote = new PostVote(
                         post: post,
-                        creator: voter,
                         vote: vote,
                         voteReason: voteReason
-                ).save(failOnError: true)
+                )
+                postVote.setCreator(voter)
+                postVote.save()
             }
         }
         log.info("... ${PostComment.count()} PostComments and ${PostVote.count()} PostVotes created.");
@@ -295,11 +343,12 @@ class BootstrapInitialDataService {
             List<User> voters = allUsers.subList(0, Math.min(voteCountForPostComment, allUsers.size()))
             for (User voter : voters) {
                 boolean vote = random.nextGaussian() > -10
-                new PostCommentVote(
+                PostCommentVote postCommentVote = new PostCommentVote(
                         postComment: postComment,
-                        creator: voter,
                         vote: vote
-                ).save(failOnError: true)
+                )
+                postCommentVote.setCreator(voter)
+                postCommentVote.save()
             }
         }
         log.info("... ${PostCommentVote.count()} PostCommentVotes created.");

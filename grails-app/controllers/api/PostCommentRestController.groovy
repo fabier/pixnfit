@@ -6,6 +6,7 @@ import org.springframework.security.access.annotation.Secured
 import pixnfit.DynamicDataRestfulController
 import pixnfit.PostComment
 import pixnfit.PostCommentVote
+import pixnfit.User
 
 @Secured("hasRole('ROLE_USER')")
 class PostCommentRestController extends DynamicDataRestfulController {
@@ -24,12 +25,13 @@ class PostCommentRestController extends DynamicDataRestfulController {
     def addVote() {
         def json = request.JSON
         PostComment postComment = PostComment.get(params.postCommentRestId)
+        User user = springSecurityService.currentUser
 
         // Création du vote
         PostCommentVote postCommentVote = new PostCommentVote(
-                postComment: postComment,
-                creator: springSecurityService.currentUser
+                postComment: postComment
         )
+        postCommentVote.setCreator(user)
         bindData(postCommentVote, json, [include: ['vote']])
 
         if (postCommentVote.validate()) {

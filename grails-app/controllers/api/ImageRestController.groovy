@@ -33,18 +33,19 @@ class ImageRestController extends DynamicDataRestfulController {
         }
 
         ImageData imageData = new ImageData(
-                creator: user,
                 name: originalFilename,
                 filename: originalFilename,
                 data: data
         )
+        imageData.setCreator(user)
         imageData.updateAutoCalculatedFields()
 
         Image image = new Image(
-                creator: user,
                 imageData: imageData,
                 name: originalFilename
         )
+        // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
+        image.setCreator(user)
 
         if (image.validate()) {
             image.save()

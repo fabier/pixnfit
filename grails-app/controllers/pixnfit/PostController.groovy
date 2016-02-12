@@ -1,7 +1,6 @@
 package pixnfit
 
 import grails.plugin.springsecurity.SpringSecurityService
-import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -44,11 +43,11 @@ class PostController {
 
         // Initialisation des données du post
         Post post = new Post(
-                creator: user,
                 postType: postTypeService.help(),
                 state: stateService.active(),
                 visibility: visibilityService.public()
         )
+        post.setCreator(user)
         bindData(post, params, [include: ['name', 'description']])
 
         // Initialisation des données de l'image
@@ -63,18 +62,19 @@ class PostController {
         }
 
         ImageData imageData = new ImageData(
-                creator: user,
                 name: originalFilename,
                 filename: originalFilename,
                 data: data
         )
+        imageData.setCreator(user)
         imageData.updateAutoCalculatedFields()
 
         Image image = new Image(
-                creator: user,
                 imageData: imageData,
                 name: originalFilename
         )
+        // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
+        image.setCreator(user)
 
         // Si les données du post sont correctes et que les données de l'image aussi,
         // alors on peut créer le post, et associer le post et l'image
