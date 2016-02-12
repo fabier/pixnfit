@@ -11,6 +11,7 @@ class PostController {
     PostTypeService postTypeService
     StateService stateService
     VisibilityService visibilityService
+    PostService postService
 
     def create() {
         render view: "create"
@@ -26,8 +27,13 @@ class PostController {
         User user = springSecurityService.currentUser
         boolean userHasVoted = PostVote.findByPostAndCreator(post, user) != null
 
+        Post previousPost = postService.getPreviousPost(post)
+        Post nextPost = postService.getNextPost(post)
+
         render view: "show", model: [
                 post             : post,
+                previousPost     : previousPost,
+                nextPost         : nextPost,
                 positiveVoteCount: positiveVoteCount,
                 negativeVoteCount: negativeVoteCount,
                 totalVoteCount   : totalVoteCount,
