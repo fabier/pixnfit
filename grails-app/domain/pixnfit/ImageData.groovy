@@ -64,16 +64,6 @@ class ImageData extends BaseEntity {
         }
     }
 
-//    def beforeInsert() {
-//        updateAutoCalculatedFields()
-//    }
-
-//    def beforeUpdate() {
-//        if (isDirty("data")) {
-//            updateAutoCalculatedFields()
-//        }
-//    }
-
     def updateAutoCalculatedFields() {
         // Update MD5 Hash
         if (data != null) {
