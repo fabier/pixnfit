@@ -21,8 +21,7 @@ class ImageController {
                     Integer height = params.height ? Integer.parseInt(params.height) : null
                     if (width != null && height != null) {
                         // Rescale image
-                        BufferedImage bufferedImage = ImageIO.read(ImageIO.createImageInputStream(new ByteArrayInputStream(data)))
-                        BufferedImage rescaled = imageService.getScaledImageCropCentered(bufferedImage, width, height)
+                        BufferedImage rescaled = imageService.getScaledImageCropCenteredAndKeepOrientationUsingEXIFMetadata(data, width, height)
                         render file: imageService.getDataAsJPEG(rescaled), contentType: "image/jpeg"
                     } else {
                         render file: data, contentType: imageData?.imageType?.defaultMimeType?.mimetype

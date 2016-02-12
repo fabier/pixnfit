@@ -61,6 +61,9 @@ grails.project.dependency.resolution = {
 
         // Image Library
         runtime 'org.imgscalr:imgscalr-lib:4.2'
+
+        // To read EXIF data
+        runtime 'com.drewnoakes:metadata-extractor:2.8.1'
     }
 
     plugins {
