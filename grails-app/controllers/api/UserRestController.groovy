@@ -1,9 +1,14 @@
 package api
 
 import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.authentication.dao.NullSaltSource
+import grails.plugin.springsecurity.ui.RegistrationCode
+import groovy.text.SimpleTemplateEngine
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import pixnfit.DynamicDataRestfulController
+import pixnfit.RegisterController
 import pixnfit.User
 
 /**
@@ -15,6 +20,9 @@ import pixnfit.User
 class UserRestController extends DynamicDataRestfulController {
 
     SpringSecurityService springSecurityService
+    def springSecurityUiService
+    def saltSource
+    def mailService
 
     UserRestController() {
         super(User)
@@ -25,9 +33,91 @@ class UserRestController extends DynamicDataRestfulController {
         render status: HttpStatus.FORBIDDEN
     }
 
-    def save() {
-        // Interdit de créer les utilisateurs depuis le webservice
-        render status: HttpStatus.FORBIDDEN
+    @Secured("permitAll")
+    def save(CreateUserCommand command) {
+//        CreateUserCommand command = new CreateUserCommand()
+        bindData(command, request.JSON, [include: ['username', 'email', 'password']])
+//        command.validate()
+//        respond(command)
+//        return
+//    }
+//
+//    @Secured("permitAll")
+//    def save(CreateUserCommand command) {
+        if (!command.validate()) {
+            respond((Object) [errors: command.errors], [status: HttpStatus.BAD_REQUEST])
+        } else {
+
+            def userClass = lookupUserClass()
+            String usernameFieldName = SpringSecurityUtils.securityConfig.userLookup.usernamePropertyName
+            def user = userClass.findWhere((usernameFieldName): command."$usernameFieldName")
+            if (user) {
+                if (user.accountLocked) {
+                    // On va renvoyer le mail de validation automatiquement
+                } else {
+                    // Le compte existe déjà et il est actif
+                    respond user
+                    return
+                }
+            } else {
+                // Création du compte utilisateur
+                user = lookupUserClass().newInstance(email: command.email, username: command.username,
+                        accountLocked: true, enabled: true)
+            }
+
+            String salt = saltSource instanceof NullSaltSource ? null : command."$usernameFieldName"
+            RegistrationCode registrationCode = springSecurityUiService.register(user, command.password, salt)
+            if (registrationCode == null || registrationCode.hasErrors()) {
+                respond((Object) [error: message(code: 'spring.security.ui.register.miscError')])
+            } else {
+                // Préparation et envoi du mail
+                try {
+                    // Envoi du mail à destination de l'utilisateur
+                    String url = generateLink('verifyRegistration', [t: registrationCode.token])
+                    def conf = SpringSecurityUtils.securityConfig
+                    def emailFrom = conf.ui.register.emailFrom // noreply
+                    def emailTo = command.email
+                    def emailSubject = conf.ui.register.emailSubject // Création de compte
+
+                    def body = conf.ui.register.emailBody
+                    if (body.contains('$')) {
+                        body = evaluate(body, [user: user, url: url])
+                    }
+                    mailService.sendMail {
+                        to emailTo
+                        from emailFrom
+                        subject emailSubject
+                        html body.toString()
+                    }
+
+                    // Email à destination interne : on informe de la création d'un compte utilisateur
+                    emailTo = conf.ui.register.emailTo
+                    def emailBodyToInternalEmailAccount = conf.ui.register.emailBodyToInternalEmailAccount
+                    if (emailBodyToInternalEmailAccount.contains('$')) {
+                        emailBodyToInternalEmailAccount = evaluate(emailBodyToInternalEmailAccount, [user: user])
+                    }
+                    mailService.sendMail {
+                        to emailTo
+                        from emailFrom
+                        subject emailSubject
+                        html emailBodyToInternalEmailAccount.toString()
+                    }
+                } catch (Exception e) {
+                    // Le mail n'est pas parti, on affiche une erreur
+//                flash.error = message(code: 'registerCommand.email.errorDuringSend')
+//                flash.chainedParams = params
+//                redirect action: 'index'
+                    respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
+                }
+            }
+
+            if (user.validate()) {
+                user.save()
+                respond user, [status: HttpStatus.CREATED]
+            } else {
+                respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+            }
+        }
     }
 
     def update() {
@@ -113,5 +203,35 @@ class UserRestController extends DynamicDataRestfulController {
         user.removeFromBlacklistedUsers(userToUnblacklist)
         user.save()
         respond user.getBlacklistedUsersAsUserSet().toArray()
+    }
+
+    protected String lookupUserClassName() {
+        SpringSecurityUtils.securityConfig.userLookup.userDomainClassName
+    }
+
+    protected Class<?> lookupUserClass() {
+        grailsApplication.getDomainClass(lookupUserClassName()).clazz
+    }
+
+    protected String generateLink(String action, linkParams) {
+        createLink(base: "$request.scheme://$request.serverName:$request.serverPort$request.contextPath",
+                controller: 'register', action: action,
+                params: linkParams)
+    }
+
+    protected String evaluate(s, binding) {
+        new SimpleTemplateEngine().createTemplate(s).make(binding)
+    }
+}
+
+class CreateUserCommand {
+    String username
+    String email
+    String password
+
+    static constraints = {
+        username blank: false
+        email blank: false, email: true
+        password blank: false, validator: RegisterController.passwordValidator
     }
 }
