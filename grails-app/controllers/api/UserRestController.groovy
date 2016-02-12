@@ -7,9 +7,7 @@ import grails.plugin.springsecurity.ui.RegistrationCode
 import groovy.text.SimpleTemplateEngine
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
-import pixnfit.DynamicDataRestfulController
-import pixnfit.RegisterController
-import pixnfit.User
+import pixnfit.*
 
 /**
  * On n'a que le droit que de voir la fiche pour un utilisateur donné,
@@ -35,15 +33,8 @@ class UserRestController extends DynamicDataRestfulController {
 
     @Secured("permitAll")
     def save(CreateUserCommand command) {
-//        CreateUserCommand command = new CreateUserCommand()
         bindData(command, request.JSON, [include: ['username', 'email', 'password']])
-//        command.validate()
-//        respond(command)
-//        return
-//    }
-//
-//    @Secured("permitAll")
-//    def save(CreateUserCommand command) {
+
         if (!command.validate()) {
             respond((Object) [errors: command.errors], [status: HttpStatus.BAD_REQUEST])
         } else {
@@ -121,8 +112,16 @@ class UserRestController extends DynamicDataRestfulController {
     }
 
     def update() {
-        // Interdit de mettre à jour les utilisateurs depuis le webservice
-        render status: HttpStatus.FORBIDDEN
+        User user = springSecurityService.currentUser
+        def json = request.JSON
+        bindData(user, json, [include: ['username', 'description', "birthdate", "height", "weight"]])
+        foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language])
+        if (user.validate()) {
+            user.save()
+            respond user
+        } else {
+            respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+        }
     }
 
     def delete() {
