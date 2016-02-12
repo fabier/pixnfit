@@ -17,7 +17,7 @@
             <div class="col-md-4 col-xs-6 padding-5">
                 <g:link controller="post" action="show" id="${helpPost.id}">
                     <g:set var="imageId" value="${helpPost.images?.first()?.id}"/>
-                    <g:set var="imageURL" value="${createLink(controller: "image", action: "show", id: imageId, params: [width: 512, height: 512])}"/>
+                    <g:set var="imageURL" value="${createLink(controller: "image", action: "show", id: imageId, params: [width: 380, height: 380])}"/>
                     <img class="media-object image-thumb" src="${imageURL}" alt="...">
                 </g:link>
             </div>
