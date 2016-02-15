@@ -130,7 +130,7 @@
                                 </div>
                             </div>
 
-                            <p class="text-center">${voteCount} voters</p>
+                            <p class="text-center">${totalVoteCount} voters</p>
                         </g:if>
                         <g:else>
                             <div class="c100 p0> center">

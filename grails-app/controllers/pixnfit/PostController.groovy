@@ -35,20 +35,17 @@ class PostController {
         PostVote userPostVote = PostVote.findByCreatorAndPost(user, post)
         boolean userHasVoted = userPostVote != null
 
-        int voteCount = PostVote.countByPost(post)
-
         render view: "show", model: [
                 post             : post,
                 previousPost     : previousPost,
                 nextPost         : nextPost,
                 positiveVoteCount: positiveVoteCount,
                 negativeVoteCount: negativeVoteCount,
-                totalVoteCount   : totalVoteCount,
                 creator          : post.creator,
                 comments         : comments,
                 userPostVote     : userPostVote,
                 userHasVoted     : userHasVoted,
-                voteCount        : voteCount,
+                totalVoteCount   : totalVoteCount,
                 currentUser      : springSecurityService.currentUser
         ]
     }
