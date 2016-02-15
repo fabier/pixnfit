@@ -33,7 +33,7 @@
 
 <g:render template="/header/nolinksHeader"/>
 
-<div class="wrapper margin-top-bottom-20">
+<div class="wrapper">
     <g:render template="/templates/flashMessage"/>
     <g:layoutBody/>
 </div>
