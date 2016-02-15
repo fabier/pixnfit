@@ -13,34 +13,37 @@ class LandingPageController {
         if (landingPageEmail.validate()) {
             landingPageEmail.save()
 
+            // Envoi de mail à l'utilisateur pour lui assurer qu'on a bien enregistré son adresse
             mailService.sendMail {
-                to landingPageEmail.email
+                to params.email
                 from "noreply@pixnfit.com"
                 subject "PixnFit - You are on the waiting list !"
                 html "Hi !<br/>" +
                         "<br/>" +
-                        "You’ve been added to the <b>PixnFit waiting list !!!</b><br/>" +
+                        "You’ve been added to the <b>PixnFit waiting list</b>.<br/>" +
                         "<br/>" +
-                        "Thank you for your subscription. Pixnfit is on an early stage, we are working on the app to provide you amazing functionalities.<br/>" +
+                        "<b>Thank you for your subscription.</b><br/>" +
+                        "Pixnfit is on an early stage, we are working on the app to provide you amazing functionalities.<br/>" +
                         "You will be notified by email soon when the app is ready, to get an early access.<br/>" +
                         "<br/>" +
-                        "Please do not respond to this automatic email<br/>" +
+                        "Pixnfit Team.<br/>" +
                         "<br/>" +
-                        "Pixnfit Team."
+                        "<i>Please do not respond to this automatic email.</i>"
             }
 
+            // Envoi de mail à l'administration pour avoir des nouvelles fraiches de la saisie de nouveaux emails !
             mailService.sendMail {
                 to "contact@pixnfit.com"
                 from "noreply@pixnfit.com"
-                subject "PixnFit - You are on the waiting list !"
+                subject "PixnFit - A new user submitted its email !"
                 html "A new user has submitted its email on PixnFit !" +
                         "<br/>" +
-                        "Email : <b>$landingPageEmail.email</b><br/>" +
+                        "Email : <b>$params.email</b><br/>" +
                         "Total emails registered : <b>${LandingPageEmail.count()}</b><br/>" +
                         "<br/>" +
-                        "Please do not respond to this automatic email<br/>" +
+                        "Pixnfit Team.<br/>" +
                         "<br/>" +
-                        "Pixnfit Team."
+                        "<i>Please do not respond to this automatic email.</i>"
             }
 
             flash.message = "Your email has been successfully submitted.<br/>We'll catch up to you soon !"
