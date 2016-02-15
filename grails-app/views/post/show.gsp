@@ -12,10 +12,19 @@
 <div class="container">
 
     <div class="row">
-        <g:link controller="public" action="index" class="btn btn-link">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-            Back to gallery
-        </g:link>
+        <div class="col-md-3">
+            <g:link controller="public" action="index" class="btn btn-link">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Back to gallery
+            </g:link>
+        </div>
+
+        <div class="col-md-6">
+            <h3>${post.name}</h3>
+        </div>
+
+        <div class="col-md-3">
+        </div>
     </div>
 
     <div class="row vcenter">
@@ -58,15 +67,31 @@
         </div>
 
         <div class="col-md-1 col-xs-2 text-center">
-            <i class="glyphicon glyphicon-thumbs-down glyphicon-large"></i>
+            <g:if test="${userHasVoted}">
+                <i class="glyphicon glyphicon-thumbs-up glyphicon-large ${userPostVote.vote == true ? "glyphicon-blue" : "glyphicon-greyout"}"></i>
+            </g:if>
+            <g:else>
+                <g:link controller="post" action="voteUp" id="${post.id}">
+                    <i class="glyphicon glyphicon-thumbs-up glyphicon-large glyphicon-black"></i>
+                </g:link>
+            </g:else>
         </div>
 
         <div class="col-md-1 col-xs-2 text-center">
-            <i class="glyphicon glyphicon-thumbs-up glyphicon-large"></i>
+            <g:if test="${userHasVoted}">
+                <i class="glyphicon glyphicon-thumbs-down glyphicon-large ${userPostVote.vote == false ? "glyphicon-blue" : "glyphicon-greyout"}"></i>
+            </g:if>
+            <g:else>
+                <g:link controller="post" action="voteDown" id="${post.id}">
+                    <i class="glyphicon glyphicon-thumbs-down glyphicon-large glyphicon-black"></i>
+                </g:link>
+            </g:else>
         </div>
 
         <div class="col-md-1 col-xs-2 text-center"></div>
     </div>
+
+    <a name="comments"></a>
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -90,31 +115,35 @@
                     </p>
                 </div>
 
-                <div class="col-md-4 vcenter">
-                    <g:if test="${userHasVoted}">
-                        <div class="c100 p${positiveVoteCount / totalVoteCount * 100}> center">
-                            <span><g:formatNumber number="${positiveVoteCount / totalVoteCount * 100}"
-                                                  maxFractionDigits="0"
-                                                  maxIntegerDigits="3"/>%</span>
+                <div class="col-md-4 center">
+                    <div class="row">
+                        <g:if test="${userHasVoted}">
+                            <div class="c100 p${positiveVoteCount / totalVoteCount * 100}> center">
+                                <span><g:formatNumber number="${positiveVoteCount / totalVoteCount * 100}"
+                                                      maxFractionDigits="0"
+                                                      maxIntegerDigits="3"/>%</span>
 
-                            <div class="slice">
-                                <div class="bar"></div>
+                                <div class="slice">
+                                    <div class="bar"></div>
 
-                                <div class="fill"></div>
+                                    <div class="fill"></div>
+                                </div>
                             </div>
-                        </div>
-                    </g:if>
-                    <g:else>
-                        <div class="c100 p0> center">
-                            <span>?</span>
 
-                            <div class="slice">
-                                <div class="bar"></div>
+                            <p class="text-center">${voteCount} voters</p>
+                        </g:if>
+                        <g:else>
+                            <div class="c100 p0> center">
+                                <span>?</span>
 
-                                <div class="fill"></div>
+                                <div class="slice">
+                                    <div class="bar"></div>
+
+                                    <div class="fill"></div>
+                                </div>
                             </div>
-                        </div>
-                    </g:else>
+                        </g:else>
+                    </div>
                 </div>
             </div>
 
@@ -124,7 +153,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <textarea id="descrtiption" name="description" rows="5"
+                            <textarea id="description" name="description" rows="5"
                                       class="form-control">${params.description ?: ""}</textarea>
                         </div>
                     </div>

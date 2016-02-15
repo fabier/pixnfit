@@ -22,15 +22,20 @@ class PostController {
     def show(long id) {
         Post post = Post.get(id)
         List<PostComment> comments = post.postComments
+        comments?.sort(EntityUtils.dateCreatedComparatorDesc)
         int positiveVoteCount = post.getPositiveVoteCount()
         int negativeVoteCount = post.getNegativeVoteCount()
         int totalVoteCount = post.getVoteCount()
 
         User user = springSecurityService.currentUser
-        boolean userHasVoted = PostVote.findByPostAndCreator(post, user) != null
 
         Post previousPost = postService.getPreviousPost(post)
         Post nextPost = postService.getNextPost(post)
+
+        PostVote userPostVote = PostVote.findByCreatorAndPost(user, post)
+        boolean userHasVoted = userPostVote != null
+
+        int voteCount = PostVote.countByPost(post)
 
         render view: "show", model: [
                 post             : post,
@@ -41,7 +46,9 @@ class PostController {
                 totalVoteCount   : totalVoteCount,
                 creator          : post.creator,
                 comments         : comments,
+                userPostVote     : userPostVote,
                 userHasVoted     : userHasVoted,
+                voteCount        : voteCount,
                 currentUser      : springSecurityService.currentUser
         ]
     }
@@ -109,12 +116,42 @@ class PostController {
 
         if (postComment.validate()) {
             postComment.save()
-            post.addToPostComments(postComment)
-            post.save()
-            redirect controller: "post", action: "show", id: post.id
+//            post.addToPostComments(postComment)
+//            post.save()
+            redirect controller: "post", action: "show", id: post.id, fragment: "comments"
         } else {
             flash.error = "Impossible to create comment. See logs for details."
             redirect controller: "post", action: "show", id: post.id, params: params
+        }
+    }
+
+    def voteUp(long id) {
+        vote(id, true)
+    }
+
+    def voteDown(long id) {
+        vote(id, false, null)
+    }
+
+    private def vote(long id, boolean vote, VoteReason voteReason = null) {
+        Post post = Post.get(id)
+        User user = springSecurityService.currentUser
+
+        PostVote postVote = new PostVote(
+                post: post,
+                vote: vote,
+                voteReason: voteReason
+        )
+        postVote.setCreator(user)
+
+        if (postVote.validate()) {
+            postVote.save()
+//            post.save()
+            flash.message = "Your vote has been submitted."
+            redirect controller: "post", action: "show", id: post.id
+        } else {
+            flash.error = "Impossible to vote. See logs for details."
+            redirect controller: "post", action: "show", id: post.id
         }
     }
 }
