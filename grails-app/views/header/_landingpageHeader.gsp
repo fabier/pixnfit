@@ -10,7 +10,7 @@
             </button>
             <g:link uri="/" class="navbar-brand topnav">
                 <span>
-                    <g:img dir="images" file="logo.png" class="logo-top"/>
+                    <asset:image src="logo/logo.png" class="logo-top"/>
                 </span>
             </g:link>
         </div>

@@ -66,7 +66,7 @@
             </div>
 
             <div class="col-lg-4 col-sm-6">
-                <g:img file="home/intro-1.jpg" class="img-responsive"/>
+                <asset:image src="home/intro-1.jpg" class="img-responsive"/>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="col-lg-4 col-lg-offset-4 col-sm-pull-6 col-sm-6">
-                <g:img file="home/intro-2.jpg" class="img-responsive"/>
+                <asset:image src="home/intro-2.jpg" class="img-responsive"/>
             </div>
         </div>
     </div>
@@ -119,7 +119,7 @@
             </div>
 
             <div class="col-lg-4 col-sm-6">
-                <g:img file="home/intro-3.png" class="img-responsive"/>
+                <asset:image src="home/intro-3.png" class="img-responsive"/>
             </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
             </div>
 
             <div class="col-lg-4 col-lg-offset-4 col-sm-pull-6 col-sm-6">
-                <g:img file="home/intro-4.jpg" class="img-responsive"/>
+                <asset:image src="home/intro-4.jpg" class="img-responsive"/>
             </div>
         </div>
     </div>
