@@ -22,7 +22,7 @@
         <div class="col-md-3">
             <g:if test="${previousPost}">
                 <g:link controller="post" action="show" id="${previousPost.id}">
-                    <g:img dir="images" file="arrow-blue-left.png" class="right"/>
+                    <asset:image src="post/arrow-blue-left.png" class="right"/>
                 </g:link>
             </g:if>
         </div>
@@ -35,7 +35,7 @@
         <div class="col-md-3">
             <g:if test="${nextPost}">
                 <g:link controller="post" action="show" id="${nextPost.id}">
-                    <g:img dir="images" file="arrow-blue-right.png" class="left"/>
+                    <asset:image src="post/arrow-blue-right.png" class="left"/>
                 </g:link>
             </g:if>
         </div>
@@ -116,19 +116,16 @@
                         </div>
                     </g:else>
                 </div>
-                %{--<div class="right">--}%
-                %{----}%
-                %{--</div>--}%
             </div>
 
             <div class="row">
-                <form id="postComment-form" class="form-horizontal">
+                <g:form controller="post" action="addComment" id="${post.id}" class="form-horizontal">
                     <h4>Ajouter un commentaire</h4>
 
                     <div class="form-group">
-                        <div class="col-sm-10">
-                            <textarea id="comment" name="comment" rows="5"
-                                      class="form-control" style="width: 100%"></textarea>
+                        <div class="col-sm-12">
+                            <textarea id="descrtiption" name="description" rows="5"
+                                      class="form-control">${params.description ?: ""}</textarea>
                         </div>
                     </div>
 
@@ -140,16 +137,16 @@
                         </div>
                     </div>
                     <input type="hidden" id="postId" name="postId" value="${post.id}"/>
-                </form>
+                </g:form>
             </div>
 
-            <div class="row">
-                <g:if test="${!comments.isEmpty()}">
+            <g:if test="${!comments.isEmpty()}">
+                <div class="row">
                     <g:each in="${comments}" var="comment">
                         <g:render template="postComment" model="[comment: comment]"/>
                     </g:each>
-                </g:if>
-            </div>
+                </div>
+            </g:if>
         </div>
 
         <div class="col-sm-2">

@@ -13,6 +13,8 @@ class PostController {
     VisibilityService visibilityService
     PostService postService
 
+    static allowedMethods = [addComment: "POST"]
+
     def create() {
         render view: "create"
     }
@@ -92,6 +94,27 @@ class PostController {
         } else {
             flash.error = "Impossible to create post. See logs for details."
             redirect action: 'create', params: params
+        }
+    }
+
+    def addComment(long id) {
+        Post post = Post.get(id)
+        User user = springSecurityService.currentUser
+
+        PostComment postComment = new PostComment(
+                post: post
+        )
+        postComment.setCreator(user)
+        bindData(postComment, params, [include: ['description']])
+
+        if (postComment.validate()) {
+            postComment.save()
+            post.addToPostComments(postComment)
+            post.save()
+            redirect controller: "post", action: "show", id: post.id
+        } else {
+            flash.error = "Impossible to create comment. See logs for details."
+            redirect controller: "post", action: "show", id: post.id, params: params
         }
     }
 }
