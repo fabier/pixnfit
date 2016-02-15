@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container margin-top-20">
     <div class="row">
         <g:renderException exception="${exception}"/>
     </div>

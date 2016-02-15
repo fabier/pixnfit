@@ -7,9 +7,7 @@
 
 <body>
 
-<p/>
-
-<div class="container">
+<div class="container margin-top-20">
     <div class="row">
         <div class="col-md-6 center-block">
             <g:if test='${emailSent}'>
