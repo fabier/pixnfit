@@ -31,7 +31,8 @@ Yes : **HTTP BASIC**
     "name": "GIF",
     "description": null,
     "dateCreated": "2016-02-04T13:44:17Z"
-  }
+  },
+  ...
 ]
 ```
 <a name="show"></a>

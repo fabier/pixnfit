@@ -31,7 +31,8 @@ Yes : **HTTP BASIC**
     "name": "private",
     "description": null,
     "dateCreated": "2016-02-01T16:50:57Z"
-  }
+  },
+  ...
 ]
 ```
 <a name="show"></a>
