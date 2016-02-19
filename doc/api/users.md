@@ -27,7 +27,10 @@ TODO : There should be a captcha to avoid automatic user account creation
   "birthdate": null,
   "height": null,
   "weight": null,
-  "imageUrl": null,
+  "image": {
+    "id": 65,
+    "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+  },
   "country": null,
   "language": null,
   "dateCreated": "2016-02-12T10:18:06Z"
@@ -58,7 +61,10 @@ Yes : **HTTP BASIC**
   "birthdate": null,
   "height": null,
   "weight": null,
-  "imageUrl": "http://www.pixnfit.com/image/show/65",
+  "image": {
+    "id": 65,
+    "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+  },
   "country": {
     "id": 3,
     "name": "USA"
@@ -110,7 +116,10 @@ Yes : **HTTP BASIC**
   "birthdate": "1985-02-01T00:00:00Z",
   "height": 185,
   "weight": 83,
-  "imageUrl": "http://www.pixnfit.com/image/show/65",
+  "image": {
+    "id": 65,
+    "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+  }
   "country": {
     "id": 1,
     "name": "France"
@@ -140,15 +149,22 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 1,
       "username": "PixnFit Administrator",
-      "imageUrl": "http://www.pixnfit.com/image/show/65"
+      "image": {
+        "id": 65,
+        "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+      }
     },
     "recipient": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://www.pixnfit.com/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T20:03:07Z"
-  }
+  },
+  ...
 ]
 ```
 
@@ -169,15 +185,22 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 1,
       "username": "PixnFit Administrator",
-      "imageUrl": "http://www.pixnfit.com/image/show/65"
+      "image": {
+        "id": 65,
+        "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+      }
     },
     "recipient": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://www.pixnfit.com/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T20:05:19Z"
-  }
+  },
+  ...
 ]
 ```
 
@@ -198,12 +221,15 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://localhost:8080/pixnfit/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "images": [
       {
         "id": 1,
-        "imageUrl": "http://localhost:8080/pixnfit/image/show/1"
+        "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
       }
     ],
     "postType": {
@@ -242,7 +268,10 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://localhost:8080/pixnfit/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T16:01:59Z"
   },
@@ -271,7 +300,10 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://localhost:8080/pixnfit/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T16:01:59Z"
   },
@@ -304,7 +336,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -344,7 +379,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -384,7 +422,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -424,7 +465,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -464,7 +508,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -504,7 +551,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -544,7 +594,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"
@@ -584,7 +637,10 @@ Yes : **HTTP BASIC**
     "birthdate": "1985-02-01T00:00:00Z",
     "height": 185,
     "weight": 83,
-    "imageUrl": "http://www.pixnfit.com/image/show/65",
+    "image": {
+      "id": 65,
+      "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+    },
     "country": {
       "id": 1,
       "name": "France"

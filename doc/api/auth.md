@@ -26,7 +26,10 @@ HTTP 200 OK
   "birthdate": null,
   "height": null,
   "weight": null,
-  "imageUrl": null,
+  "image": {
+    "id": 95,
+    "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
+  }
   "country": {
     "id": 1,
     "name": "France"

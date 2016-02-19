@@ -23,7 +23,10 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 2,
     "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
+    "image": {
+      "id": 29,
+      "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+    }
   },
   "images": null,
   "postType": {
@@ -58,12 +61,15 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 2,
     "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
+    "image": {
+      "id": 29,
+      "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+    }
   },
   "images": [
     {
       "id": 1,
-      "imageUrl": "http://www.pixnfit.com/image/show/1"
+      "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
     }
   ],
   "postType": {
@@ -105,7 +111,10 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 2,
     "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
+    "image": {
+      "id": 29,
+      "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+    }
   },
   "images": null,
   "postType": {
@@ -155,12 +164,15 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 2,
     "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
+    "image": {
+      "id": 29,
+      "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+    }
   },
   "images": [
       {
         "id": 1,
-        "imageUrl": "http://www.pixnfit.com/image/show/1"
+        "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
       }
   ],
   "postType": {
@@ -197,7 +209,10 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 4,
       "username": "Marvin Hoppe",
-      "imageUrl": "http://www.pixnfit.com/image/show/58"
+      "image": {
+        "id": 58,
+        "imageUrl": "http://www.pixnfit.com/image/show/58?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T16:01:59Z"
   }
@@ -225,7 +240,10 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 2,
     "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
+    "image": {
+      "id": 29,
+      "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+    }
   },
   "dateCreated": "2016-02-08T16:01:48Z"
 }
@@ -252,7 +270,10 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 6,
       "username": "Willard Gottlieb",
-      "imageUrl": "http://localhost:8080/pixnfit/image/show/62"
+      "image": {
+        "id": 62,
+        "imageUrl": "http://www.pixnfit.com/image/show/62?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T16:01:59Z"
   },
@@ -291,7 +312,10 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 6,
     "username": "Willard Gottlieb",
-    "imageUrl": "http://www.pixnfit.com/image/show/62"
+    "image": {
+      "id": 62,
+      "imageUrl": "http://www.pixnfit.com/image/show/62?width=128&height=128"
+    }
   },
   "dateCreated": "2016-02-08T16:01:59Z"
 }
@@ -312,7 +336,10 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 6,
     "username": "Willard Gottlieb",
-    "imageUrl": "http://www.pixnfit.com/image/show/62"
+    "image": {
+      "id": 62,
+      "imageUrl": "http://www.pixnfit.com/image/show/62?width=128&height=128"
+    }
   },
   "dateCreated": "2016-02-08T16:01:59Z"
 }
@@ -340,12 +367,15 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://www.pixnfit.com/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "images": [
       {
         "id": 1,
-        "imageUrl": "http://www.pixnfit.com/image/show/1"
+        "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
       }
     ],
     "postType": {
@@ -388,12 +418,15 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 2,
       "username": "Theodore Cummings",
-      "imageUrl": "http://www.pixnfit.com/image/show/29"
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
     },
     "images": [
       {
         "id": 1,
-        "imageUrl": "http://www.pixnfit.com/image/show/1"
+        "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
       }
     ],
     "postType": {

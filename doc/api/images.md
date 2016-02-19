@@ -13,13 +13,13 @@ Yes : **HTTP BASIC**
   "id": 1,
   "name": "selfie fashion (256x256)",
   "description": null,
-  "imageUrl": "http://www.pixnfit.com/image/show/1",
+  "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256",
   "creator": {
     "id": 2,
     "username": "Keith Nitzsche",
     "image": {
       "id": 95,
-      "imageUrl": "http://www.pixnfit.com/image/show/95"
+      "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
     }
   },
   "filename": "loremflickr_selfie_fashion.jpg",
@@ -47,13 +47,13 @@ Yes : **HTTP BASIC**
   "id": 1,
   "name": "loremflickr_selfie_fashion.jpg",
   "description": null,
-  "imageUrl": "http://www.pixnfit.com/image/show/1",
+  "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256",
   "creator": {
     "id": 2,
     "username": "Keith Nitzsche",
     "image": {
       "id": 95,
-      "imageUrl": "http://www.pixnfit.com/image/show/95"
+      "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
     }
   },
   "filename": "loremflickr_selfie_fashion.jpg",
@@ -80,13 +80,13 @@ Yes : **HTTP BASIC**
   "id": 1,
   "name": "Some random name",
   "description": "A nice random picture",
-  "imageUrl": "http://www.pixnfit.com/image/show/1",
+  "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256",
   "creator": {
     "id": 2,
     "username": "Keith Nitzsche",
     "image": {
       "id": 95,
-      "imageUrl": "http://www.pixnfit.com/image/show/95"
+      "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
     }
   },
   "filename": "PIC210.jpg",

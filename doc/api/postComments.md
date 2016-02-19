@@ -17,7 +17,10 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 4,
     "username": "Marvin Hoppe",
-    "imageUrl": "http://www.pixnfit.com/image/show/58"
+    "image": {
+      "id": 58,
+      "imageUrl": "http://www.pixnfit.com/image/show/58?width=128&height=128"
+    }
   },
   "dateCreated": "2016-02-08T16:01:59Z"
 }
@@ -40,7 +43,10 @@ Yes : **HTTP BASIC**
     "creator": {
       "id": 1,
       "username": "Thomas Bull",
-      "imageUrl": null
+      "image": {
+        "id": 95,
+        "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
+      }
     },
     "dateCreated": "2016-02-08T20:46:46Z"
   },
@@ -69,7 +75,10 @@ HTTP 201 Created
   "creator": {
     "id": 1,
     "username": "Thomas Bull",
-    "imageUrl": null
+    "image": {
+      "id": 95,
+      "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
+    }
   },
   "dateCreated": "2016-02-08T20:46:46Z"
 }

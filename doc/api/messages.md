@@ -16,12 +16,18 @@ Yes : **HTTP BASIC**
     "creator": {
         "id": 1,
         "username": "Thomas Bull",
-        "imageUrl": null
+        "image": {
+          "id": 95,
+          "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
+        }
     },
     "recipient": {
         "id": 2,
         "username": "Theodore Cummings",
-        "imageUrl": "http://www.pixnfit.com/image/show/29"
+        "image": {
+          "id": 29,
+          "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+        }
     },
     "dateCreated": "2016-02-08T20:03:07Z"
 }
@@ -48,12 +54,18 @@ Yes : **HTTP BASIC**
   "creator": {
     "id": 1,
     "username": "Thomas Bull",
-    "imageUrl": null
+    "image": {
+      "id": 95,
+      "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
+    }
   },
   "recipient": {
     "id": 2,
     "username": "Theodore Cummings",
-    "imageUrl": "http://www.pixnfit.com/image/show/29"
+    "image": {
+      "id": 29,
+      "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+    }
   },
   "dateCreated": "2016-02-08T20:03:07Z"
 }
