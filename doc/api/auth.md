@@ -29,7 +29,7 @@ HTTP 200 OK
   "image": {
     "id": 95,
     "imageUrl": "http://www.pixnfit.com/image/show/95?width=128&height=128"
-  }
+  },
   "country": {
     "id": 1,
     "name": "France"

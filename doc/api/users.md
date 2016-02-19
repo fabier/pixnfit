@@ -119,7 +119,7 @@ Yes : **HTTP BASIC**
   "image": {
     "id": 65,
     "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
-  }
+  },
   "country": {
     "id": 1,
     "name": "France"
