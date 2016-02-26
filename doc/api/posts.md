@@ -191,6 +191,56 @@ Yes : **HTTP BASIC**
 }
 ```
 
+<a name="me"></a>
+## GET /api/v1/posts/:id/me
+Gets user-related information about a post.
+Returns if the user asking the questions has voted, if yes, what is the vote value, and if he has submitted one or more comments.
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+{
+  "vote": {
+    "id": 571,
+    "vote": true,
+    "voteReason": null,
+    "post": {
+      "id": 108,
+      "name": "black dress"
+    },
+    "creator": {
+      "id": 4,
+      "username": "Marvin Hoppe",
+      "image": {
+        "id": 58,
+        "imageUrl": "http://www.pixnfit.com/image/show/58?width=128&height=128"
+      }
+    },
+    "dateCreated": "2016-02-26T16:12:21Z"
+  },
+  "comments": [
+    {
+      "id": 1,
+      "name": null,
+      "description": "Non dolorum itaque in est fuga qui aliquam. Culpa eum molestiae eveniet aut blanditiis.",
+      "postId": 1,
+      "creator": {
+        "id": 4,
+        "username": "Marvin Hoppe",
+        "image": {
+          "id": 58,
+          "imageUrl": "http://www.pixnfit.com/image/show/58?width=128&height=128"
+        }
+      },
+      "dateCreated": "2016-02-08T16:01:59Z"
+    },
+    ...
+  ]
+}
+```
+
 <a name="comments"></a>
 ## GET /api/v1/posts/:id/comments
 Gets all comments on a post

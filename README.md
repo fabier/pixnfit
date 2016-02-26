@@ -31,6 +31,7 @@ PixnFit project made with Grails
 | GET | [/api/v1/posts/:id](doc/api/posts.md#show) | Gets a post by its Id |
 | PUT | [/api/v1/posts/:id](doc/api/posts.md#update) | Updates a post |
 | DELETE | [/api/v1/posts/:id](doc/api/posts.md#delete) | Deletes a post |
+| GET | [/api/v1/posts/:id/me](doc/api/posts.md#me) | Gets user-related information about a post |
 | POST | [/api/v1/posts/:id/images](doc/api/posts.md#addImage) | Adds an existing image to a post |
 | GET | [/api/v1/posts/:id/comments](doc/api/posts.md#comments) | Gets comments on a post |
 | POST | [/api/v1/posts/:id/comments](doc/api/posts.md#saveComment) | Creates a new comment on a post |
