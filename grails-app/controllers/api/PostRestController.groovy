@@ -55,6 +55,15 @@ class PostRestController extends DynamicDataRestfulController {
         respond post
     }
 
+    // Get user related information
+    def me() {
+        Post post = Post.get(params.postRestId)
+        User user = springSecurityService.currentUser
+        def postVote = PostVote.findByPostAndCreator(post, user)
+        List<PostComment> postComments = PostComment.findAllByPostAndCreator(post, user)
+        respond([vote: postVote, comments: postComments.toArray()])
+    }
+
     def comments() {
         Post post = Post.get(params.postRestId)
         respond post.postComments.toArray()
@@ -99,7 +108,9 @@ class PostRestController extends DynamicDataRestfulController {
         foreignKeyBindDataIfNotNull(postVote, json, [voteReason: VoteReason])
 
         if (postVote.validate()) {
-            postVote.save()
+            // Il est *nécessaire* de flusher pour pouvoir faire PostVote.findBy
+            // et retrouver l'entité lors de cette requete... (notamment avec l'url "/me")
+            postVote.save(flush: true)
             respond postVote, [status: HttpStatus.CREATED]
         } else {
             respond postVote, [status: HttpStatus.UNPROCESSABLE_ENTITY]
