@@ -3,7 +3,7 @@ package pixnfit
 /**
  * http://stackoverflow.com/questions/2110055/removefrom-not-working-and-with-no-errors
  */
-abstract class BaseDomain {
+abstract class BaseDomain implements Serializable {
 
     // Date de création en base
     Date dateCreated
