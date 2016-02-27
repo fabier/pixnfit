@@ -330,9 +330,17 @@ class BootStrap {
         }
         JSON.registerObjectMarshaller(UserFavoritePost) {
             UserFavoritePost userFavoritePost = it
+            Post post = userFavoritePost.post
+            User user = userFavoritePost.user
             return [
-                    post: userFavoritePost.post,
-                    user: userFavoritePost.user
+                    post: post ? [
+                            id  : post.id,
+                            name: post.name
+                    ] : null,
+                    user: user ? [
+                            id      : user.id,
+                            username: user.username
+                    ] : null
             ]
         }
     }
