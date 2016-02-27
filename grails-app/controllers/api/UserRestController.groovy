@@ -112,7 +112,7 @@ class UserRestController extends DynamicDataRestfulController {
     }
 
     def update() {
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
         def json = request.JSON
         bindData(user, json, [include: ['username', 'description', "birthdate", "height", "weight"]])
         foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language])

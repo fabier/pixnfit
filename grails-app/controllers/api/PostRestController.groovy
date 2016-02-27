@@ -26,7 +26,7 @@ class PostRestController extends DynamicDataRestfulController {
     @Transactional
     Object save() {
         def json = request.JSON
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
         Post post = new Post(
                 postType: postTypeService.help(),
                 state: stateService.active(),
@@ -59,7 +59,7 @@ class PostRestController extends DynamicDataRestfulController {
     def me() {
         Post post = Post.get(params.postRestId)
         User creator = post.creator
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
         boolean isCreator = user.equals(creator)
         boolean isFavorite = UserFavoritePost.findByUserAndPost(user, post) != null
         boolean isFollowingUser = UserFollow.findByFollowingUserAndFollowedUser(user, creator) != null
@@ -82,7 +82,7 @@ class PostRestController extends DynamicDataRestfulController {
     def addComment() {
         def json = request.JSON
         Post post = Post.get(params.postRestId)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         PostComment postComment = new PostComment(
                 post: post
@@ -106,7 +106,7 @@ class PostRestController extends DynamicDataRestfulController {
     def addVote() {
         def json = request.JSON
         Post post = Post.get(params.postRestId)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         // Création du vote
         PostVote postVote = new PostVote(
@@ -162,7 +162,7 @@ class PostRestController extends DynamicDataRestfulController {
 
     def addToFavorites() {
         Post post = Post.get(params.postRestId)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
         UserFavoritePost userFavoritePost = new UserFavoritePost(
                 post: post,
                 user: user
@@ -180,14 +180,14 @@ class PostRestController extends DynamicDataRestfulController {
 
     def removeFromFavorites() {
         Post post = Post.get(params.postRestId)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         UserFavoritePost userFavoritePost = UserFavoritePost.findByPostAndUser(post, user)
         if (userFavoritePost != null) {
             userFavoritePost.delete(flush: true)
-            respond([], [status: HttpStatus.OK])
+            respond userFavoritePost, [status: HttpStatus.OK]
         } else {
-            respond([], [status: HttpStatus.OK])
+            respond userFavoritePost, [status: HttpStatus.OK]
         }
     }
 }

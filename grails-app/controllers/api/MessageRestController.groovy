@@ -24,7 +24,7 @@ class MessageRestController extends DynamicDataRestfulController {
     @Transactional
     def save() {
         def json = request.JSON
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         // Création du message
         Message message = new Message()

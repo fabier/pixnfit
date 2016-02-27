@@ -25,7 +25,7 @@ class PostCommentRestController extends DynamicDataRestfulController {
     def addVote() {
         def json = request.JSON
         PostComment postComment = PostComment.get(params.postCommentRestId)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         // Création du vote
         PostCommentVote postCommentVote = new PostCommentVote(

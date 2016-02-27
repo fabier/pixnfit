@@ -20,7 +20,7 @@ class ImageRestController extends DynamicDataRestfulController {
     @Override
     @Transactional
     Object save() {
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         byte[] data = null
         String originalFilename = null

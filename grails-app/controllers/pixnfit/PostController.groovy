@@ -27,7 +27,7 @@ class PostController {
         int negativeVoteCount = post.getNegativeVoteCount()
         int totalVoteCount = post.getVoteCount()
 
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         Post previousPost = postService.getPreviousPost(post)
         Post nextPost = postService.getNextPost(post)
@@ -51,7 +51,7 @@ class PostController {
     }
 
     def save() {
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         // Initialisation des données du post
         Post post = new Post(
@@ -103,7 +103,7 @@ class PostController {
 
     def addComment(long id) {
         Post post = Post.get(id)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         PostComment postComment = new PostComment(
                 post: post
@@ -132,7 +132,7 @@ class PostController {
 
     private def vote(long id, boolean vote, VoteReason voteReason = null) {
         Post post = Post.get(id)
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
 
         PostVote postVote = new PostVote(
                 post: post,

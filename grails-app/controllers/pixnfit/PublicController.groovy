@@ -12,7 +12,7 @@ class PublicController {
     PostService postService
 
     def index() {
-        User user = springSecurityService.currentUser
+        User user = (User) springSecurityService.currentUser
         if (user == null) {
             // Utilisateur non connecté, on affiche la landingPage
             render view: "landingpage"
