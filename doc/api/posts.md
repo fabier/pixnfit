@@ -202,24 +202,6 @@ Yes : **HTTP BASIC**
 ### Output
 ```json
 {
-  "vote": {
-    "id": 571,
-    "vote": true,
-    "voteReason": null,
-    "post": {
-      "id": 108,
-      "name": "black dress"
-    },
-    "creator": {
-      "id": 4,
-      "username": "Marvin Hoppe",
-      "image": {
-        "id": 58,
-        "imageUrl": "http://www.pixnfit.com/image/show/58?width=128&height=128"
-      }
-    },
-    "dateCreated": "2016-02-26T16:12:21Z"
-  },
   "comments": [
     {
       "id": 1,
@@ -240,7 +222,28 @@ Yes : **HTTP BASIC**
       "dateCreated": "2016-02-08T16:01:59Z"
     },
     ...
-  ]
+  ],
+  "isCreator": false,
+  "isFavorite": true,
+  "isFollowingUser": false,
+  "vote": {
+    "id": 571,
+    "vote": true,
+    "voteReason": null,
+    "post": {
+      "id": 4,
+      "name": "Culpa eum molestiae"
+    },
+    "creator": {
+      "id": 4,
+      "username": "Marvin Hoppe",
+      "image": {
+        "id": 58,
+        "imageUrl": "http://www.pixnfit.com/image/show/58?width=128&height=128"
+      }
+    },
+    "dateCreated": "2016-02-26T16:12:21Z"
+  },
 }
 ```
 
