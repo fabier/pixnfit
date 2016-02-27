@@ -243,7 +243,51 @@ Yes : **HTTP BASIC**
       }
     },
     "dateCreated": "2016-02-26T16:12:21Z"
+  }
+}
+```
+
+
+<a name="addToFavorite"></a>
+## POST /api/v1/posts/:id/favorite
+Adds this post to favorite list
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+{
+  "post": {
+    "id": 4,
+    "name": "Culpa eum molestiae"
   },
+  "user": {
+    "id": 4,
+    "username": "Marvin Hoppe",
+  }
+}
+```
+
+
+<a name="removeFromFavorite"></a>
+## DELETE /api/v1/posts/:id/favorite
+Removes this post from favorite list
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+```json
+{
+  "post": {
+    "id": 4,
+    "name": "Culpa eum molestiae"
+  },
+  "user": {
+    "id": 4,
+    "username": "Marvin Hoppe",
+  }
 }
 ```
 
