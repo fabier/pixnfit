@@ -13,4 +13,9 @@ class UserBlacklist extends BaseDomain {
             val != obj.blacklistedUser
         }
     }
+
+    static mapping = {
+        id composite: ['blacklistingUser', 'blacklistedUser']
+        version false
+    }
 }

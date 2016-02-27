@@ -59,11 +59,6 @@ class User {
      */
     Language language
 
-    /**
-     * Favorite Posts
-     */
-    List<Post> favoritePosts
-
     /** ########################
      *  ## Account management ##
      *  ######################## */

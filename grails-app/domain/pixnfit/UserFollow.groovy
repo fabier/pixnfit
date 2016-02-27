@@ -13,4 +13,9 @@ class UserFollow extends BaseDomain {
             val != obj.followingUser
         }
     }
+
+    static mapping = {
+        id composite: ['followedUser', 'followingUser']
+        version false
+    }
 }
