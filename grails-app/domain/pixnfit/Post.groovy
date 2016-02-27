@@ -47,7 +47,12 @@ class Post extends BaseEntity {
     static hasMany = [
             images          : Image,
             postComments    : PostComment,
-            postVotes       : PostVote
+            postVotes       : PostVote,
+            favoritedByUsers: UserFavoritePost
+    ]
+
+    static mappedBy = [
+            favoritedByUsers: 'post' // UserFavoritePost WHERE this post is favorite
     ]
 
     static constraints = {

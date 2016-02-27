@@ -59,6 +59,11 @@ class User {
      */
     Language language
 
+    /**
+     * Favorite Posts
+     */
+    List<Post> favoritePosts
+
     /** ########################
      *  ## Account management ##
      *  ######################## */
@@ -84,7 +89,7 @@ class User {
             followedUsers    : UserFollow,
             blacklistingUsers: UserBlacklist,
             blacklistedUsers : UserBlacklist,
-            favoritePosts    : Post
+            favoritePosts    : UserFavoritePost
     ]
 
     static mappedBy = [
@@ -93,7 +98,8 @@ class User {
             followingUsers   : 'followedUser', // UserFollows WHERE this user is the followed User
             followedUsers    : 'followingUser', // UserFollow WHERE this user is the following User
             blacklistingUsers: 'blacklistedUser', // UserBlacklist WHERE this user is the blacklistedUser User
-            blacklistedUsers : 'blacklistingUser' // UserBlacklist WHERE this user is the blacklistingUser User
+            blacklistedUsers : 'blacklistingUser', // UserBlacklist WHERE this user is the blacklistingUser User
+            favoritePosts    : 'user' // UserFavoritePost WHERE this user has favorited one or more posts
     ]
 
     static constraints = {
