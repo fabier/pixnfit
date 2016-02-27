@@ -60,17 +60,17 @@ class PostRestController extends DynamicDataRestfulController {
         Post post = Post.get(params.postRestId)
         User creator = post.creator
         User user = springSecurityService.currentUser
-        def myPostVote = PostVote.findByPostAndCreator(post, user)
+        boolean isCreator = user.equals(creator)
         boolean isFavorite = UserFavoritePost.findByUserAndPost(user, post) != null
         boolean isFollowingUser = UserFollow.findByFollowingUserAndFollowedUser(user, creator) != null
-        boolean isCreator = user.equals(creator)
-        List<PostComment> myPostComments = PostComment.findAllByPostAndCreator(post, user)
+        PostVote userPostVote = PostVote.findByPostAndCreator(post, user)
+        List<PostComment> userPostComments = PostComment.findAllByPostAndCreator(post, user)
         respond([
-                comments       : myPostComments.toArray(),
+                comments       : userPostComments.toArray(),
                 isCreator      : isCreator,
                 isFavorite     : isFavorite,
                 isFollowingUser: isFollowingUser,
-                vote           : myPostVote,
+                vote           : userPostVote
         ])
     }
 
