@@ -58,10 +58,20 @@ class PostRestController extends DynamicDataRestfulController {
     // Get user related information
     def me() {
         Post post = Post.get(params.postRestId)
+        User creator = post.creator
         User user = springSecurityService.currentUser
-        def postVote = PostVote.findByPostAndCreator(post, user)
-        List<PostComment> postComments = PostComment.findAllByPostAndCreator(post, user)
-        respond([vote: postVote, comments: postComments.toArray()])
+        def myPostVote = PostVote.findByPostAndCreator(post, user)
+        boolean isFavorite = UserFavoritePost.findByUserAndPost(user, post) != null
+        boolean isFollowingUser = UserFollow.findByFollowingUserAndFollowedUser(user, creator) != null
+        boolean isCreator = user.equals(creator)
+        List<PostComment> myPostComments = PostComment.findAllByPostAndCreator(post, user)
+        respond([
+                comments       : myPostComments.toArray(),
+                isCreator      : isCreator,
+                isFavorite     : isFavorite,
+                isFollowingUser: isFollowingUser,
+                vote           : myPostVote,
+        ])
     }
 
     def comments() {
