@@ -79,9 +79,9 @@ class Post extends BaseEntity {
     }
 
     /**
-     * Gets users that favorited this post
+     * Gets users who have this post in their favorites
      */
     List<User> getFollowers() {
-        User.findAll("from User where ? in elements(favoritedPosts)", [this])
+        User.findAll("from User where ? in elements(favoritePosts)", [this])
     }
 }

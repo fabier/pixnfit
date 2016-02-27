@@ -84,7 +84,7 @@ class User {
             followedUsers    : UserFollow,
             blacklistingUsers: UserBlacklist,
             blacklistedUsers : UserBlacklist,
-            favoritedPosts   : Post
+            favoritePosts    : Post
     ]
 
     static mappedBy = [
