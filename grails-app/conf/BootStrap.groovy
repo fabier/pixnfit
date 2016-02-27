@@ -217,13 +217,17 @@ class BootStrap {
         }
         JSON.registerObjectMarshaller(PostComment) {
             PostComment postComment = it
+            Post post = postComment.post
             User creator = postComment.creator
             Image creatorImage = creator?.image
             return [
                     id         : postComment.id,
                     name       : postComment.name,
                     description: postComment.description,
-                    postId     : postComment.postId,
+                    post       : post ? [
+                            id  : post.id,
+                            name: post.name
+                    ] : null,
                     creator    : [
                             id      : creator.id,
                             username: creator.username,
@@ -237,13 +241,18 @@ class BootStrap {
         }
         JSON.registerObjectMarshaller(PostCommentVote) {
             PostCommentVote postCommentVote = it
+            PostComment postComment = postCommentVote.postComment
             User creator = postCommentVote.creator
             Image creatorImage = creator?.image
             return [
-                    id           : postCommentVote.id,
-                    vote         : postCommentVote.vote,
-                    postCommentId: postCommentVote.postCommentId,
-                    creator      : [
+                    id         : postCommentVote.id,
+                    vote       : postCommentVote.vote,
+                    postComment: postComment ? [
+                            id         : postComment.id,
+                            name       : postComment.name,
+                            description: postComment.description
+                    ] : null,
+                    creator    : [
                             id      : creator.id,
                             username: creator.username,
                             image   : creatorImage ? [
@@ -251,7 +260,7 @@ class BootStrap {
                                     imageUrl: grailsLinkGenerator.link(controller: "image", action: "show", id: creatorImage.id, params: [width: 128, height: 128], absolute: true)
                             ] : null
                     ],
-                    dateCreated  : postCommentVote.dateCreated
+                    dateCreated: postCommentVote.dateCreated
             ]
         }
         JSON.registerObjectMarshaller(PostVote) {
