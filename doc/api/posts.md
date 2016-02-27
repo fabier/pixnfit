@@ -225,7 +225,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": null,
       "description": "Non dolorum itaque in est fuga qui aliquam. Culpa eum molestiae eveniet aut blanditiis.",
-      "postId": 1,
+      "post": {
+        "id": 4,
+        "name": "Culpa eum molestiae"
+      },
       "creator": {
         "id": 4,
         "username": "Marvin Hoppe",
@@ -255,7 +258,10 @@ Yes : **HTTP BASIC**
     "id": 1,
     "name": null,
     "description": "Non dolorum itaque in est fuga qui aliquam. Culpa eum molestiae eveniet aut blanditiis.",
-    "postId": 1,
+    "post": {
+      "id": 4,
+      "name": "Culpa eum molestiae"
+    },
     "creator": {
       "id": 4,
       "username": "Marvin Hoppe",
@@ -287,7 +293,10 @@ Yes : **HTTP BASIC**
   "id": 1858,
   "name": null,
   "description": "Voici mon commentaire pour ce post !",
-  "postId": 1,
+  "post": {
+    "id": 4,
+    "name": "Culpa eum molestiae"
+  },
   "creator": {
     "id": 2,
     "username": "Theodore Cummings",
