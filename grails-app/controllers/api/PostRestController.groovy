@@ -96,7 +96,6 @@ class PostRestController extends DynamicDataRestfulController {
         } else {
             respond postComment, [status: HttpStatus.UNPROCESSABLE_ENTITY]
         }
-        respond postComment
     }
 
     def votes() {
@@ -159,5 +158,36 @@ class PostRestController extends DynamicDataRestfulController {
         int offset = (params.offset ?: 0) as int
         respond Post.findAllByPostType(postTypeService.dressing(),
                 [max: max, offset: offset]).toArray()
+    }
+
+    def addToFavorites() {
+        Post post = Post.get(params.postRestId)
+        User user = springSecurityService.currentUser
+        UserFavoritePost userFavoritePost = new UserFavoritePost(
+                post: post,
+                user: user
+        )
+
+        if (userFavoritePost.validate()) {
+            // Il est *nécessaire* de flusher pour pouvoir faire userFavoritePost.findBy
+            // et retrouver l'entité lors de cette requete... (notamment avec l'url "/me")
+            userFavoritePost.save(flush: true)
+            respond userFavoritePost, [status: HttpStatus.CREATED]
+        } else {
+            respond userFavoritePost, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+        }
+    }
+
+    def removeFromFavorites() {
+        Post post = Post.get(params.postRestId)
+        User user = springSecurityService.currentUser
+
+        UserFavoritePost userFavoritePost = UserFavoritePost.findByPostAndUser(post, user)
+        if (userFavoritePost != null) {
+            userFavoritePost.delete(flush: true)
+            respond([], [status: HttpStatus.OK])
+        } else {
+            respond([], [status: HttpStatus.OK])
+        }
     }
 }

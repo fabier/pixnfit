@@ -328,6 +328,13 @@ class BootStrap {
                     dateCreated: it.dateCreated
             ]
         }
+        JSON.registerObjectMarshaller(UserFavoritePost) {
+            UserFavoritePost userFavoritePost = it
+            return [
+                    post: userFavoritePost.post,
+                    user: userFavoritePost.user
+            ]
+        }
     }
 
     def destroy = {

@@ -40,6 +40,12 @@ class UrlMappings {
         // les commentaires sur ce post, poster un nouveau commentaire
         // les votes sur ce post
         "/api/v1/posts"(resources: "postRest", includes: ["show", "save", "update", "delete"]) {
+            // Gets user related informations
+            "/me"(controller: "postRest", action: "me", method: "GET")
+            // Adds to favorite
+            "/favorite"(controller: "postRest", action: "addToFavorites", method: "POST")
+            // Removes from favorite
+            "/favorite"(controller: "postRest", action: "removeFromFavorites", method: "DELETE")
             // Get post images
             "/images"(controller: "postRest", action: "addImage", method: "POST")
             // Get comments
@@ -50,8 +56,6 @@ class UrlMappings {
             "/votes"(controller: "postRest", action: "votes", method: "GET")
             // Submits a vote
             "/votes"(controller: "postRest", action: "addVote", method: "POST")
-            // Gets user related informations
-            "/me"(controller: "postRest", action: "me", method: "GET")
         }
 
         // Liste de posts qui ont besoin d'aide et de votes
