@@ -46,7 +46,7 @@ class PostController {
                 userPostVote     : userPostVote,
                 userHasVoted     : userHasVoted,
                 totalVoteCount   : totalVoteCount,
-                currentUser      : springSecurityService.currentUser
+                currentUser      : user
         ]
     }
 
