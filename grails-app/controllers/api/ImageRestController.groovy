@@ -32,26 +32,30 @@ class ImageRestController extends DynamicDataRestfulController {
             }
         }
 
-        ImageData imageData = new ImageData(
-                name: originalFilename,
-                filename: originalFilename,
-                data: data
-        )
-        imageData.setCreator(user)
-        imageData.updateAutoCalculatedFields()
+        if (data != null && originalFilename != null) {
+            ImageData imageData = new ImageData(
+                    name: originalFilename,
+                    filename: originalFilename,
+                    data: data
+            )
+            imageData.setCreator(user)
+            imageData.updateAutoCalculatedFields()
 
-        Image image = new Image(
-                imageData: imageData,
-                name: originalFilename
-        )
-        // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
-        image.setCreator(user)
+            Image image = new Image(
+                    imageData: imageData,
+                    name: originalFilename
+            )
+            // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
+            image.setCreator(user)
 
-        if (image.validate()) {
-            image.save()
-            respond image, [status: HttpStatus.CREATED]
+            if (image.validate()) {
+                image.save()
+                respond image, [status: HttpStatus.CREATED]
+            } else {
+                respond image, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+            }
         } else {
-            respond image, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+            respond "Uploaded file must be identified as \'data\'", [status: HttpStatus.BAD_REQUEST]
         }
     }
 
