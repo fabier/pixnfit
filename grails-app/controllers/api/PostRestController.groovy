@@ -37,7 +37,7 @@ class PostRestController extends DynamicDataRestfulController {
         foreignKeyBindDataIfNotNull(post, json, [postType: PostType, visibility: Visibility])
 
         if (post.validate()) {
-            post.save()
+            post.save(flush: true)
             respond post, [status: HttpStatus.CREATED]
         } else {
             respond post, [status: HttpStatus.UNPROCESSABLE_ENTITY]
@@ -129,15 +129,14 @@ class PostRestController extends DynamicDataRestfulController {
     def addImage() {
         def json = request.JSON
         Post post = Post.get(params.postRestId)
-
         Image image = Image.get(json.imageId)
         if (image != null) {
             post.addToImages(image)
             if (post.validate()) {
                 post.save()
-                respond post
+                respond post, [status: HttpStatus.CREATED]
             } else {
-                respond post
+                respond post, [status: HttpStatus.UNPROCESSABLE_ENTITY]
             }
         } else {
             respond((Object) [error: "imageId : ${json.imageId} is not a valid value"], [status: HttpStatus.BAD_REQUEST])
@@ -149,7 +148,7 @@ class PostRestController extends DynamicDataRestfulController {
         int max = Math.min((params.max ?: 10) as int, 100)
         int offset = (params.offset ?: 0) as int
         respond Post.findAllByPostType(postTypeService.help(),
-                [max: max, offset: offset]).toArray()
+                [max: max, offset: offset, sort: "dateCreated", order: "desc"]).toArray()
     }
 
     def featured() {
@@ -157,7 +156,7 @@ class PostRestController extends DynamicDataRestfulController {
         int max = Math.min((params.max ?: 10) as int, 100)
         int offset = (params.offset ?: 0) as int
         respond Post.findAllByPostType(postTypeService.dressing(),
-                [max: max, offset: offset]).toArray()
+                [max: max, offset: offset, sort: "dateCreated", order: "desc"]).toArray()
     }
 
     def addToFavorites() {
