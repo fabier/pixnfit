@@ -11,7 +11,9 @@ class LandingPageController {
         String email = params.email
         LandingPageEmail landingPageEmail = new LandingPageEmail(email: email)
         if (landingPageEmail.validate()) {
+            int emailCount = LandingPageEmail.count()
             landingPageEmail.save()
+            emailCount++
 
             // Envoi de mail à l'utilisateur pour lui assurer qu'on a bien enregistré son adresse
             mailService.sendMail {
@@ -39,7 +41,7 @@ class LandingPageController {
                 html "A new user has submitted its email on PixnFit !" +
                         "<br/>" +
                         "Email : <b>$params.email</b><br/>" +
-                        "Total emails registered : <b>${LandingPageEmail.count()}</b><br/>" +
+                        "Total emails registered : <b>${emailCount}</b><br/>" +
                         "<br/>" +
                         "Pixnfit Team.<br/>" +
                         "<br/>" +
