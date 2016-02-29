@@ -97,12 +97,12 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="row vcenter">
                 <div class="col-md-8 vcenter">
-                    <g:if test="${post.creator?.image}">
+                    <g:if test="${creator?.image}">
                         <img class="post-creator-avatar"
-                             src="${createLink(controller: "image", action: "show", id: post.creator.imageId, params: [width: 128, height: 128])}"/>
+                             src="${createLink(controller: "image", action: "show", id: creator.imageId, params: [width: 128, height: 128])}"/>
                     </g:if>
                     <g:else>
-                        <img class="post-creator-avatar" src="/images/user-avatar.png"/>
+                        <asset:image src="user/user-image.png" class="post-creator-avatar"/>
                     </g:else>
                     <p class="post-creator-name">
                         ${post.creator.username}
