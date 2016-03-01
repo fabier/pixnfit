@@ -169,11 +169,11 @@ class User {
         )
     }
 
-    def removeFromFollowers(User user) {
+    def removeFromFollowers(User user, boolean flush = false) {
         def follower = UserFollow.findByFollowedUserAndFollowingUser(this, user)
         if (follower != null) {
             this.removeFromFollowingUsers(follower)
-            follower.delete()
+            follower.delete(flush: flush)
         }
     }
 
@@ -183,11 +183,11 @@ class User {
         )
     }
 
-    def removeFromBlacklistedUsers(User user) {
+    def removeFromBlacklistedUsers(User user, boolean flush = false) {
         def blacklistedUser = UserBlacklist.findByBlacklistingUserAndBlacklistedUser(this, user)
         if (blacklistedUser != null) {
             this.removeFromBlacklistedUsers(blacklistedUser)
-            blacklistedUser.delete()
+            blacklistedUser.delete(flush: flush)
         }
     }
 

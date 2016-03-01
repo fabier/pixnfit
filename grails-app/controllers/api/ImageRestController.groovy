@@ -49,7 +49,7 @@ class ImageRestController extends DynamicDataRestfulController {
             image.setCreator(user)
 
             if (image.validate()) {
-                image.save()
+                image.save(flush: true)
                 respond image, [status: HttpStatus.CREATED]
             } else {
                 respond image, [status: HttpStatus.UNPROCESSABLE_ENTITY]

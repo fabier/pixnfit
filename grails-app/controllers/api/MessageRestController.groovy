@@ -33,7 +33,7 @@ class MessageRestController extends DynamicDataRestfulController {
         foreignKeyBindDataIfNotNull(message, json, [recipient: User])
 
         if (message.validate()) {
-            message.save()
+            message.save(flush: true)
             respond message, [status: HttpStatus.CREATED]
         } else {
             respond message, [status: HttpStatus.UNPROCESSABLE_ENTITY]

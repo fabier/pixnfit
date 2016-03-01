@@ -91,7 +91,7 @@ class PostRestController extends DynamicDataRestfulController {
         bindData(postComment, json, [include: ['description']])
 
         if (postComment.validate()) {
-            postComment.save()
+            postComment.save(flush: true)
             respond postComment, [status: HttpStatus.CREATED]
         } else {
             respond postComment, [status: HttpStatus.UNPROCESSABLE_ENTITY]
@@ -133,7 +133,7 @@ class PostRestController extends DynamicDataRestfulController {
         if (image != null) {
             post.addToImages(image)
             if (post.validate()) {
-                post.save()
+                post.save(flush: true)
                 respond post, [status: HttpStatus.CREATED]
             } else {
                 respond post, [status: HttpStatus.UNPROCESSABLE_ENTITY]

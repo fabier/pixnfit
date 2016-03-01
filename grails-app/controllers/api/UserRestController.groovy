@@ -103,7 +103,7 @@ class UserRestController extends DynamicDataRestfulController {
             }
 
             if (user.validate()) {
-                user.save()
+                user.save(flush: true)
                 respond user, [status: HttpStatus.CREATED]
             } else {
                 respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
@@ -162,14 +162,14 @@ class UserRestController extends DynamicDataRestfulController {
     def follow() {
         User user = User.get(params.userRestId)
         user.addToFollowers(springSecurityService.currentUser as User)
-        user.save()
+        user.save(flush: true)
         respond user.getFollowersAsUserSet().toArray()
     }
 
     def unfollow() {
         User user = User.get(params.userRestId)
         user.removeFromFollowers(springSecurityService.currentUser as User)
-        user.save()
+        user.save(flush: true)
         respond user.getFollowersAsUserSet().toArray()
     }
 
@@ -192,15 +192,15 @@ class UserRestController extends DynamicDataRestfulController {
         User user = (User) springSecurityService.currentUser
         User userToBlacklist = User.get(params.userRestId)
         user.addToBlacklistedUsers(userToBlacklist)
-        user.save()
+        user.save(flush: true)
         respond user.getBlacklistedUsersAsUserSet().toArray()
     }
 
     def unblacklist() {
         User user = (User) springSecurityService.currentUser
         User userToUnblacklist = User.get(params.userRestId)
-        user.removeFromBlacklistedUsers(userToUnblacklist)
-        user.save()
+        user.removeFromBlacklistedUsers(userToUnblacklist, true)
+        user.save(flush: true)
         respond user.getBlacklistedUsersAsUserSet().toArray()
     }
 

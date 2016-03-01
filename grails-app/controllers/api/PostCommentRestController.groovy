@@ -35,7 +35,7 @@ class PostCommentRestController extends DynamicDataRestfulController {
         bindData(postCommentVote, json, [include: ['vote']])
 
         if (postCommentVote.validate()) {
-            postCommentVote.save()
+            postCommentVote.save(flush: true)
             respond postCommentVote, [status: HttpStatus.CREATED]
         } else {
             respond postCommentVote, [status: HttpStatus.UNPROCESSABLE_ENTITY]
