@@ -73,7 +73,8 @@ class UrlMappings {
 
         // On peut récupérer des informations sur un profil utilisateur
         "/api/v1/users"(resources: "userRest", includes: ["show", "save", "update"]) {
-            "/profile"(controller: "userRest", action: "createProfile", method: "POST")
+            "/initImage"(controller: "userRest", action: "initUserImage", method: "POST")
+            "/initProfile"(controller: "userRest", action: "initUserProfile", method: "POST")
             "/incomingMessages"(controller: "userRest", action: "incomingMessages", method: "GET")
             "/outgoingMessages"(controller: "userRest", action: "outgoingMessages", method: "GET")
             "/posts"(controller: "userRest", action: "posts", method: "GET")
@@ -87,6 +88,7 @@ class UrlMappings {
             "/blacklistedBy"(controller: "userRest", action: "blacklistedBy", method: "GET")
             "/blacklist"(controller: "userRest", action: "blacklist", method: "POST")
             "/blacklist"(controller: "userRest", action: "unblacklist", method: "DELETE")
+            "/image"(controller: "userRest", action: "updateUserImage", method: "POST")
         }
 
         /**
