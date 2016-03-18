@@ -3,6 +3,7 @@
 <a name="ubuntu"/>
 # Ubuntu 14.04
 Install Ubuntu 14.04 (VM or full installation)
+http://releases.ubuntu.com/14.04/
 
 <a name="java"/>
 # Java : JDK 7
