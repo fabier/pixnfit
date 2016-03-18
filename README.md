@@ -108,6 +108,14 @@ PixnFit project made with Grails
 **PLEASE READ CAREFULLY, THERE ARE THINGS TO DO BEFORE LAUNCHING APPLICATION**
 
 # Things to do BEFORE launching app
+## Prerequisites
+You must have the following installed on your computer
+ * [Ubuntu 14.04](doc/developer/install.md#ubuntu)
+ * [Java 7](doc/developer/install.md#java)
+ * [PostgreSQL 9.4](doc/developer/install.md#postgresql)
+ * [Grails 2.4.5](doc/developer/install.md#grails)
+ * [IntellijIDEA 14.1.6](doc/developer/install.md#intellijidea)
+
 ## Configuration
 You need to create a file in <code>/grails-app/conf</code> named <code>passwords.properties</code>
 
