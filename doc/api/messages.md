@@ -8,6 +8,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
     "id": 1,
@@ -46,6 +47,7 @@ Creates a new message
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 201 Created**
 ```json
 {
   "id": 1,

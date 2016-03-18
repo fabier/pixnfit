@@ -12,6 +12,7 @@ Yes :
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -29,6 +30,8 @@ Yes : **HTTP BASIC**
   ...
 ]
 ```
+
+
 <a name="show"></a>
 ## GET /api/v1/genders/:id
 Gets a gender by its Id
@@ -37,6 +40,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,

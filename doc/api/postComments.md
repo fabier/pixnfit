@@ -8,6 +8,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
@@ -37,6 +38,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -73,7 +75,7 @@ Adds a vote for a comment
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
-HTTP 201 Created
+**HTTP 201 Created**
 ```json
 {
   "id": 1047,

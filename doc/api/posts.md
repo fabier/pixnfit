@@ -15,6 +15,7 @@ Creates a new post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 201 Created**
 ```json
 {
   "id": 1,
@@ -53,6 +54,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
@@ -103,6 +105,7 @@ Updates an existing post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
@@ -141,7 +144,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
-HTTP 204 No Content
+**HTTP 204 No Content**
 
 
 <a name="addImage"></a>
@@ -156,6 +159,7 @@ Adds an existing image to a post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
@@ -200,6 +204,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "comments": [
@@ -256,6 +261,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "post": {
@@ -278,6 +284,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "post": {
@@ -299,6 +306,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -335,6 +343,7 @@ Adds a comment on a post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1858,
@@ -364,6 +373,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -407,6 +417,7 @@ Creates a new vote on a post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 304,
@@ -465,6 +476,7 @@ Yes :
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -516,6 +528,7 @@ Yes :
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {

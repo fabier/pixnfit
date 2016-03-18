@@ -9,7 +9,7 @@ None
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
-HTTP 200 OK
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
