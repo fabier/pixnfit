@@ -1,5 +1,6 @@
 package api
 
+import admin.PrivateBetaRegistrationEmail
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
@@ -7,6 +8,7 @@ import grails.plugin.springsecurity.ui.RegistrationCode
 import groovy.text.SimpleTemplateEngine
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 import pixnfit.*
 
 /**
@@ -121,13 +123,66 @@ class UserRestController extends DynamicDataRestfulController {
     }
 
     @Secured("permitAll")
-    def createProfile(UserProfileCommand command) {
+    def initUserImage() {
+        User user = User.get(params.userRestId)
+        if (user != null) {
+            if (user.accountLocked) {
+                // TODO : factoriser avec updateUserImage() et ImageRestController.save()
+                byte[] data = null
+                String originalFilename = null
+                if (params.data != null) {
+                    if (params.data instanceof CommonsMultipartFile) {
+                        CommonsMultipartFile file = params.data
+                        data = file.getBytes()
+                        originalFilename = file.originalFilename
+                    }
+                }
+
+                if (data != null && originalFilename != null) {
+                    ImageData imageData = new ImageData(
+                            name: originalFilename,
+                            filename: originalFilename,
+                            data: data
+                    )
+                    imageData.setCreator(user)
+                    imageData.updateAutoCalculatedFields()
+
+                    Image image = new Image(
+                            imageData: imageData,
+                            name: originalFilename
+                    )
+                    // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
+                    image.setCreator(user)
+
+                    // On met à jour l'image de l'utilisateur
+                    user.image = image
+
+                    if (image.validate() && user.validate()) {
+                        image.save()
+                        user.save()
+                        respond user
+                    } else {
+                        respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+                    }
+                } else {
+                    respond((Object) [error: "Uploaded file must be identified as \'data\'"], [status: HttpStatus.BAD_REQUEST])
+                }
+            } else {
+                respond((Object) [error: "User account is not locked anymore. Please use 'POST /user/:id/image' to update user image"], [status: HttpStatus.BAD_REQUEST])
+            }
+        } else {
+            respond((Object) [error: "No user with id : ${params.userRestId}"], [status: HttpStatus.BAD_REQUEST])
+        }
+    }
+
+    @Secured("permitAll")
+    def initUserProfile() {
         User user = User.get(params.userRestId)
         if (user != null) {
             if (user.accountLocked) {
                 // On a le droit d'appeler cette méthode que si le compte utilisateur n'a pas encore été validé
                 def json = request.JSON
-                foreignKeyBindDataIfNotNull(user, json, [image: Image, bodyType: BodyType, gender: Gender, country: Country, language: Language])
+                foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language])
                 bindData(command, json, [include: ['description', "birthdate", "height", "weight"]])
                 if (user.validate()) {
                     user.save()
@@ -249,6 +304,50 @@ class UserRestController extends DynamicDataRestfulController {
         respond user.getBlacklistedUsersAsUserSet().toArray()
     }
 
+    def updateUserImage() {
+        User user = (User) springSecurityService.currentUser
+        byte[] data = null
+        String originalFilename = null
+        if (params.data != null) {
+            if (params.data instanceof CommonsMultipartFile) {
+                CommonsMultipartFile file = params.data
+                data = file.getBytes()
+                originalFilename = file.originalFilename
+            }
+        }
+
+        if (data != null && originalFilename != null) {
+            ImageData imageData = new ImageData(
+                    name: originalFilename,
+                    filename: originalFilename,
+                    data: data
+            )
+            imageData.setCreator(user)
+            imageData.updateAutoCalculatedFields()
+
+            Image image = new Image(
+                    imageData: imageData,
+                    name: originalFilename
+            )
+            // On ne doit pas le mettre dans le constructeur, sinon user.image se met à jour avec cette valeur !!!
+            image.setCreator(user)
+
+            // On met à jour l'image de l'utilisateur
+            user.image = image
+
+            if (image.validate() && user.validate()) {
+                image.save()
+                user.save()
+                respond user
+            } else {
+                respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+            }
+        } else {
+            respond((Object) [error: "Uploaded file must be identified as \'data\'"], [status: HttpStatus.BAD_REQUEST])
+        }
+    }
+
+
     protected String lookupUserClassName() {
         SpringSecurityUtils.securityConfig.userLookup.userDomainClassName
     }
@@ -275,18 +374,11 @@ class CreateUserCommand {
 
     static constraints = {
         username blank: false
-        email blank: false, email: true
+        email blank: false, email: true, validator: { val, obj ->
+            if (PrivateBetaRegistrationEmail.findByEmail(val) == null) {
+                return 'user.email.privateBetaRegistrationEmail'
+            }
+        }
         password blank: false, validator: RegisterController.passwordValidator
     }
-}
-
-class UserProfileCommand {
-    String description
-    long bodyTypeId
-    long genderId
-    Date birthdate
-    Integer height
-    Float weight
-    long countryId
-    long languageId
 }
