@@ -81,7 +81,7 @@ class ImageData extends BaseEntity {
             ImageReader imageReader = imageReaders.next()
             String formatName = imageReader.getFormatName()
             javaFormatNames.add(formatName)
-            imageTypeByJavaName = ImageType.findByJavaFormatName(formatName)
+            imageTypeByJavaName = ImageType.findByJavaFormatNameIlike(formatName)
         }
         if (!javaFormatNames.isEmpty()) {
             if (imageTypeByJavaName == null) {
