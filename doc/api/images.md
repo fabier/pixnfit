@@ -33,7 +33,7 @@ Creates an Image
 ### Params
 Data file must be pushed, in HTML this can be a <code>form</code> like this :
 ```HTML
-<form action="/api/v1/images/:id/data">
+<form action="/api/v1/images">
   <input name="data" type="file"></input>
   <button type="submit">Submit</button>
 </form>
