@@ -27,10 +27,7 @@ TODO : There should be a captcha to avoid automatic user account creation
   "birthdate": null,
   "height": null,
   "weight": null,
-  "image": {
-    "id": 65,
-    "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
-  },
+  "image": null,
   "country": null,
   "language": null,
   "dateCreated": "2016-02-12T10:18:06Z"
