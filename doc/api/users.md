@@ -37,6 +37,54 @@ TODO : There should be a captcha to avoid automatic user account creation
 }
 ```
 
+<a name="profile"></a>
+## POST /api/v1/user/:id/profile
+Creates a user profile
+### Params
+```json
+{
+    "description": "lorem ipsum...",
+    "bodyTypeId": 2,
+    "genderId": 1,
+    "birthdate": "1985-02-01T00:00:00Z",
+    "height": 185,
+    "weight": 83,
+    "countryId": 3,
+    "languageId": 2
+}
+```
+### Authentication
+No, but user must have an locked account, meaning user never clicked on email "account creation confirmation" link
+### Output
+```json
+{
+  "id": 8,
+  "username": "John Doe",
+  "description": "lorem ipsum...",
+  "bodyType": {
+    "id": 2,
+    "name": "average"
+  },
+  "gender": {
+    "id": 1,
+    "name": "male"
+  },
+  "birthdate": "1985-02-01T00:00:00Z",
+  "height": 185,
+  "weight": 83,
+  "image": null,
+  "country": {
+    "id": 3,
+    "name": "USA"
+  },
+  "language": {
+    "id": 2,
+    "name": "English"
+  },
+  "dateCreated": "2016-02-12T10:18:06Z"
+}
+```
+
 <a name="show"></a>
 ## GET /api/v1/user/:id
 Gets a user by its Id

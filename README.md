@@ -46,7 +46,8 @@ PixnFit project made with Grails
 | GET | [/api/v1/postComments/:id/votes](doc/api/postComments.md#votes) | Gets votes on a comment |
 | POST | [/api/v1/postComments/:id/votes](doc/api/postComments.md#addVote) | Creates a vote on a comment |
 | | **User**  | |
-| POST | [/api/v1/user](doc/api/users.md#save) | Creates a new user |
+| POST | [/api/v1/user](doc/api/users.md#save) | Creates a new user (step 1) |
+| POST | [/api/v1/user/:id/profile](doc/api/users.md#profile) | Creates a user profile (step 2) |
 | GET | [/api/v1/user/:id](doc/api/users.md#show) | Gets a user by its Id |
 | PUT | [/api/v1/user/:id](doc/api/users.md#update) | Updates a user |
 | GET | [/api/v1/user/:id/incomingMessages](doc/api/users.md#incomingMessages) | Gets incoming messages for a user |

@@ -31,6 +31,10 @@ class UserRestController extends DynamicDataRestfulController {
         render status: HttpStatus.FORBIDDEN
     }
 
+    /**
+     * Cette méthode permet de réaliser la première partie de l'inscription de l'utilisateur :
+     * Un utilisateur doit être ensuite finalisé (avec la méthode createProfile) pour que l'envoi de mail s'effectue
+     */
     @Secured("permitAll")
     def save(CreateUserCommand command) {
         bindData(command, request.JSON, [include: ['username', 'email', 'password']])
@@ -51,63 +55,104 @@ class UserRestController extends DynamicDataRestfulController {
                     return
                 }
             } else {
-                // Création du compte utilisateur
+                // Création du compte utilisateur (pas encore sauvegardé en base)
                 user = lookupUserClass().newInstance(email: command.email, username: command.username,
                         accountLocked: true, enabled: true)
             }
 
+            // Création du registrationCode
             String salt = saltSource instanceof NullSaltSource ? null : command."$usernameFieldName"
             RegistrationCode registrationCode = springSecurityUiService.register(user, command.password, salt)
+
             if (registrationCode == null || registrationCode.hasErrors()) {
                 respond((Object) [error: message(code: 'spring.security.ui.register.miscError')])
             } else {
-                // Préparation et envoi du mail
-                try {
-                    // Envoi du mail à destination de l'utilisateur
-                    String url = generateLink('verifyRegistration', [t: registrationCode.token])
-                    def conf = SpringSecurityUtils.securityConfig
-                    def emailFrom = conf.ui.register.emailFrom // noreply
-                    def emailTo = command.email
-                    def emailSubject = conf.ui.register.emailSubject // Création de compte
-
-                    def body = conf.ui.register.emailBody
-                    if (body.contains('$')) {
-                        body = evaluate(body, [user: user, url: url])
-                    }
-                    mailService.sendMail {
-                        to emailTo
-                        from emailFrom
-                        subject emailSubject
-                        html body.toString()
-                    }
-
-                    // Email à destination interne : on informe de la création d'un compte utilisateur
-                    emailTo = conf.ui.register.emailTo
-                    def emailBodyToInternalEmailAccount = conf.ui.register.emailBodyToInternalEmailAccount
-                    if (emailBodyToInternalEmailAccount.contains('$')) {
-                        emailBodyToInternalEmailAccount = evaluate(emailBodyToInternalEmailAccount, [user: user])
-                    }
-                    mailService.sendMail {
-                        to emailTo
-                        from emailFrom
-                        subject emailSubject
-                        html emailBodyToInternalEmailAccount.toString()
-                    }
-                } catch (Exception e) {
-                    // Le mail n'est pas parti, on affiche une erreur
-//                flash.error = message(code: 'registerCommand.email.errorDuringSend')
-//                flash.chainedParams = params
-//                redirect action: 'index'
-                    respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
+                // Création du code d'enregistrement OK
+                if (user.validate()) {
+                    user.save(flush: true)
+                    respond user, [status: HttpStatus.CREATED]
+                } else {
+                    respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
                 }
             }
+        }
+    }
 
-            if (user.validate()) {
-                user.save(flush: true)
-                respond user, [status: HttpStatus.CREATED]
-            } else {
-                respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+    private boolean sendConfirmationEmail(User user) throws Exception {
+        String usernameFieldName = SpringSecurityUtils.securityConfig.userLookup.usernamePropertyName
+        RegistrationCode registrationCode = RegistrationCode.findByUsername(user."$usernameFieldName")
+        if (registrationCode != null) {
+            // Préparation et envoi du mail
+            // Envoi du mail à destination de l'utilisateur
+            String url = generateLink('verifyRegistration', [t: registrationCode.token])
+            def conf = SpringSecurityUtils.securityConfig
+            def emailFrom = conf.ui.register.emailFrom // noreply
+            def emailTo = user.email
+            def emailSubject = conf.ui.register.emailSubject // Création de compte
+
+            def body = conf.ui.register.emailBody
+            if (body.contains('$')) {
+                body = evaluate(body, [user: user, url: url])
             }
+            mailService.sendMail {
+                to emailTo
+                from emailFrom
+                subject emailSubject
+                html body.toString()
+            }
+
+            // Email à destination interne : on informe de la création d'un compte utilisateur
+            emailTo = conf.ui.register.emailTo
+            def emailBodyToInternalEmailAccount = conf.ui.register.emailBodyToInternalEmailAccount
+            if (emailBodyToInternalEmailAccount.contains('$')) {
+                emailBodyToInternalEmailAccount = evaluate(emailBodyToInternalEmailAccount, [user: user])
+            }
+            mailService.sendMail {
+                to emailTo
+                from emailFrom
+                subject emailSubject
+                html emailBodyToInternalEmailAccount.toString()
+            }
+
+            return true // Email has been successfully sent
+        } else {
+            return false // Email has not been sent
+        }
+    }
+
+    @Secured("permitAll")
+    def createProfile(UserProfileCommand command) {
+        User user = User.get(params.userRestId)
+        if (user != null) {
+            if (user.accountLocked) {
+                // On a le droit d'appeler cette méthode que si le compte utilisateur n'a pas encore été validé
+                def json = request.JSON
+                foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language])
+                bindData(command, json, [include: ['description', "birthdate", "height", "weight"]])
+                if (user.validate()) {
+                    user.save()
+                    // Send email to finalize user account creation
+                    try {
+                        if (sendConfirmationEmail(user)) {
+                            // On a bien mis à jour le profil utilisateur et on a envoyé l'email
+                            respond user
+                        } else {
+                            log.warn "Impossible to confirmation email to user : ${user.email}"
+                            respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
+                        }
+                    } catch (Exception e) {
+                        // Le mail n'est pas parti, on affiche une erreur
+                        log.warn "Impossible to confirmation email to user : ${user.email}", e
+                        respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
+                    }
+                } else {
+                    respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+                }
+            } else {
+                respond((Object) [error: "User account is not locked anymore. Please use 'PUT /user/:id' to update profile"], [status: HttpStatus.BAD_REQUEST])
+            }
+        } else {
+            respond((Object) [error: "No user with id : ${params.userRestId}"], [status: HttpStatus.BAD_REQUEST])
         }
     }
 
@@ -233,4 +278,15 @@ class CreateUserCommand {
         email blank: false, email: true
         password blank: false, validator: RegisterController.passwordValidator
     }
+}
+
+class UserProfileCommand {
+    String description
+    long bodyTypeId
+    long genderId
+    Date birthdate
+    Integer height
+    Float weight
+    long countryId
+    long languageId
 }
