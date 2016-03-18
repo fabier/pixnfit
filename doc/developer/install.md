@@ -1,11 +1,11 @@
 # Developer work station configuration
 
 <a name="ubuntu"/>
-## Ubuntu 14.04
+# Ubuntu 14.04
 Install Ubuntu 14.04 (VM or full installation)
 
 <a name="java"/>
-## Java : JDK 7
+# Java : JDK 7
 In a shell (CTRL+ALT+T) :
 ```sh
 sudo rm /opt/jdk-7u55-linux-x64.tar.gz
@@ -43,7 +43,7 @@ java -version
 ```
 
 <a name="postgresql"/>
-## PostgreSQL 9.4
+# PostgreSQL 9.4
 Add ppa UbuntuUpdates :
 ```sh
 sudo wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -93,7 +93,7 @@ sudo mv grails-2.4.5 /usr/lib/grails
 ```
 
 <a name="intellijidea"/>
-## IntellijIDEA 14.1.6
+# IntellijIDEA 14.1.6
 
 Download IntellijIDEA
 ```sh
@@ -110,7 +110,7 @@ idea-IU-141.3056.4/bin/idea.sh
 
 
 <a name="git"/>
-## Git 1.9.1
+# Git 1.9.1
 
 Install Git :
 ```sh
@@ -125,7 +125,7 @@ git --version
 
 
 <a name="source"/>
-## Source code
+# Source code
 
 Create local repository
 ```sh
