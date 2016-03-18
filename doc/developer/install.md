@@ -130,10 +130,10 @@ git --version
 Create local repository
 ```sh
 mkdir -p ~/git/pixnfit
-cd ~/git/pixnfit
 ```
 
 Clone git repository :
 ```sh
+cd ~/git/pixnfit
 git clone https://github.com/fabier/pixnfit.git
 ```
