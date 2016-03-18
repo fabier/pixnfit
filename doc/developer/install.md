@@ -107,3 +107,33 @@ Start
 ```sh
 idea-IU-141.3056.4/bin/idea.sh
 ```
+
+
+<a name="git"/>
+## Git 1.9.1
+
+Install Git :
+```sh
+sudo apt-get update
+sudo apt-get install git
+```
+
+Check Git :
+```sh
+git --version
+```
+
+
+<a name="source"/>
+## Source code
+
+Create local repository
+```sh
+mkdir -p ~/git/pixnfit
+cd ~/git/pixnfit
+```
+
+Clone git repository :
+```sh
+git clone https://github.com/fabier/pixnfit.git
+```

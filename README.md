@@ -115,6 +115,8 @@ You must have the following installed on your computer
  * [PostgreSQL 9.4](doc/developer/install.md#postgresql)
  * [Grails 2.4.5](doc/developer/install.md#grails)
  * [IntellijIDEA 14.1.6](doc/developer/install.md#intellijidea)
+ * [Git 1.9.1](doc/developer/install.md#git)
+ * [Source code](doc/developer/install.md#source)
 
 ## Configuration
 You need to create a file in <code>/grails-app/conf</code> named <code>passwords.properties</code>
