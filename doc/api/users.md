@@ -50,7 +50,8 @@ Creates a user profile
     "height": 185,
     "weight": 83,
     "countryId": 3,
-    "languageId": 2
+    "languageId": 2,
+    "imageId": 415
 }
 ```
 ### Authentication
@@ -72,7 +73,10 @@ No, but user must have an locked account, meaning user never clicked on email "a
   "birthdate": "1985-02-01T00:00:00Z",
   "height": 185,
   "weight": 83,
-  "image": null,
+  "image": {
+    "id": 415,
+    "imageUrl": "http://www.pixnfit.com/image/show/415?width=128&height=128"
+  },
   "country": {
     "id": 3,
     "name": "USA"

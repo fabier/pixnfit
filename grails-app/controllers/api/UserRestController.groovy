@@ -127,7 +127,7 @@ class UserRestController extends DynamicDataRestfulController {
             if (user.accountLocked) {
                 // On a le droit d'appeler cette méthode que si le compte utilisateur n'a pas encore été validé
                 def json = request.JSON
-                foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language])
+                foreignKeyBindDataIfNotNull(user, json, [image: Image, bodyType: BodyType, gender: Gender, country: Country, language: Language])
                 bindData(command, json, [include: ['description', "birthdate", "height", "weight"]])
                 if (user.validate()) {
                     user.save()
