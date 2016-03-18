@@ -2,9 +2,8 @@
 
 <a name="save"></a>
 ## POST /api/v1/user
-Creates a new user.
-An email is automatically sent to the user to validate its account.
-The user must click on the link to validate the account creation (spam prevention). 
+*User account creation step 1 - required*
+Creates a new user
 ### Params
 ```json
 {
@@ -15,8 +14,9 @@ The user must click on the link to validate the account creation (spam preventio
 ```
 ### Authentication
 **No authentication to create an account**<br/>
-TODO : There should be a captcha to avoid automatic user account creation 
+User must have an locked account, meaning user never clicked on email "account creation confirmation" link.
 ### Output
+**HTTP 201 Created**
 ```json
 {
   "id": 8,
@@ -34,9 +34,51 @@ TODO : There should be a captcha to avoid automatic user account creation
 }
 ```
 
-<a name="profile"></a>
-## POST /api/v1/user/:id/profile
-Creates a user profile
+
+<a name="initImage"></a>
+## POST /api/v1/user/:id/initImage
+*User account creation step 2 - optional*
+Initializes a User profile image by uploading it.
+### Params
+Data file must be pushed, in HTML this can be a <code>form</code> like this :
+```HTML
+<form action="/api/v1/user/:id/initImage">
+  <input name="data" type="file"></input>
+  <button type="submit">Submit</button>
+</form>
+```
+### Authentication
+**No authentication to set user image**<br/>
+User must have an locked account, meaning user never clicked on email "account creation confirmation" link.
+### Output
+**HTTP 200 OK**
+```json
+{
+  "id": 8,
+  "username": "John Doe",
+  "description": null,
+  "bodyType": null,
+  "gender": null,
+  "birthdate": null,
+  "height": null,
+  "weight": null,
+  "image": {
+    "id": 415,
+    "imageUrl": "http://www.pixnfit.com/image/show/415?width=128&height=128"
+  },
+  "country": null,
+  "language": null,
+  "dateCreated": "2016-02-12T10:18:06Z"
+}
+```
+
+
+<a name="initProfile"></a>
+## POST /api/v1/user/:id/initProfile
+*User account creation step 3 - required*
+Initializes a user profile
+An email is automatically sent to the user to validate its account.
+The user must click on the link to validate the account creation (spam prevention).
 ### Params
 ```json
 {
@@ -47,13 +89,14 @@ Creates a user profile
     "height": 185,
     "weight": 83,
     "countryId": 3,
-    "languageId": 2,
-    "imageId": 415
+    "languageId": 2
 }
 ```
 ### Authentication
-No, but user must have an locked account, meaning user never clicked on email "account creation confirmation" link
+**No authentication set initial user profile**<br/>
+User must have an locked account, meaning user never clicked on email "account creation confirmation" link.
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 8,
@@ -94,6 +137,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
@@ -149,6 +193,7 @@ Changing someone's email is not possible at all at the moment.
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 {
   "id": 1,
@@ -189,6 +234,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -225,6 +271,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -261,6 +308,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -307,6 +355,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -336,6 +385,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -368,6 +418,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -411,6 +462,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -454,6 +506,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -497,6 +550,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -540,6 +594,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -583,6 +638,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -626,6 +682,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -669,6 +726,7 @@ None (Id is included in URL)
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
+**HTTP 200 OK**
 ```json
 [
   {
@@ -704,3 +762,38 @@ Yes : **HTTP BASIC**
 ]
 ```
 
+
+<a name="initImage"></a>
+## POST /api/v1/user/:id/image
+Updaes a user profile image by uploading it.
+### Params
+Data file must be pushed, in HTML this can be a <code>form</code> like this :
+```HTML
+<form action="/api/v1/user/:id/image">
+  <input name="data" type="file"></input>
+  <button type="submit">Submit</button>
+</form>
+```
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+**HTTP 200 OK**
+```json
+{
+  "id": 8,
+  "username": "John Doe",
+  "description": null,
+  "bodyType": null,
+  "gender": null,
+  "birthdate": null,
+  "height": null,
+  "weight": null,
+  "image": {
+    "id": 415,
+    "imageUrl": "http://www.pixnfit.com/image/show/415?width=128&height=128"
+  },
+  "country": null,
+  "language": null,
+  "dateCreated": "2016-02-12T10:18:06Z"
+}
+```
