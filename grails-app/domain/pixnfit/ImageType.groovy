@@ -44,6 +44,7 @@ class ImageType extends BaseEntity {
     List<ImageData> getImageDatas() {
         ImageData.findAllByImageType(this)
     }
+
     // Delete is forbidden
     def beforeDelete() {
         return false
