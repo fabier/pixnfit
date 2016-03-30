@@ -3,7 +3,7 @@ package pixnfit
 class LoggingFilters {
 
     def filters = {
-        allButImage(controller: 'image', actionName = "show", invert: true) {
+        allButImage(controller: 'image', action: 'show', invert: true) {
             before = {
                 if (request.JSON) {
                     log.info "${request.getForwardURI()} -> $params, JSON:${request.JSON}"
