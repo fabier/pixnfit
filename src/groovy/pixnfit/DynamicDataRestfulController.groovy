@@ -35,7 +35,7 @@ class DynamicDataRestfulController<T> extends RestfulController<T> {
         render status: HttpStatus.FORBIDDEN
     }
 
-    def foreignKeyBindDataIfNotNull(def target, def source, Map properties) {
+    protected void foreignKeyBindDataIfNotNull(def target, def source, Map properties) {
         for (def property in properties) {
             String propertyName = property.key
             Class propertyClass = property.value
