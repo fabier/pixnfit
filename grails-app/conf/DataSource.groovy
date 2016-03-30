@@ -1,5 +1,3 @@
-import pixnfit.TableNameSequencePostgreSQLDialect
-
 dataSource {
     pooled = true
     dbCreate = "update"
@@ -7,7 +5,7 @@ dataSource {
 //    dbCreate = "create-drop"
     driverClassName = "org.postgresql.Driver"
     url = "jdbc:postgresql://localhost:5432/pixnfit"
-    dialect = TableNameSequencePostgreSQLDialect
+    dialect = "pixnfit.TableNameSequencePostgreSQLDialect"
 // dialect = org.hibernate.dialect.PostgreSQL9Dialect
 // Defined in passwords.properties
 // username = ""
