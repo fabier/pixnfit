@@ -343,7 +343,7 @@ Adds a comment on a post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
-**HTTP 200 OK**
+**HTTP 201 Created**
 ```json
 {
   "id": 1858,
@@ -417,7 +417,7 @@ Creates a new vote on a post
 ### Authentication
 Yes : **HTTP BASIC**
 ### Output
-**HTTP 200 OK**
+**HTTP 201 Created**
 ```json
 {
   "id": 304,
