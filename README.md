@@ -36,9 +36,9 @@ PixnFit project made with Grails
 | DELETE | [/api/v1/posts/:id/favorite](doc/api/posts.md#removeFromFavorite) | Removes a post from favorite list |
 | POST | [/api/v1/posts/:id/images](doc/api/posts.md#addImage) | Adds an existing image to a post |
 | GET | [/api/v1/posts/:id/comments](doc/api/posts.md#comments) | Gets comments on a post |
-| POST | [/api/v1/posts/:id/comments](doc/api/posts.md#saveComment) | Creates a new comment on a post |
+| POST | [/api/v1/posts/:id/comments](doc/api/posts.md#addComment) | Creates a new comment on a post |
 | GET | [/api/v1/posts/:id/votes](doc/api/posts.md#votes) | Gets votes on a post |
-| POST | [/api/v1/posts/:id/votes](doc/api/posts.md#saveVote) | Creates a vote on a post |
+| POST | [/api/v1/posts/:id/votes](doc/api/posts.md#addVote) | Creates a vote on a post |
 | GET | [/api/v1/posts/help](doc/api/posts.md#help) | Gets posts needing help and votes |
 | GET | [/api/v1/posts/featured](doc/api/posts.md#featured) | Gets featured posts |
 | | **PostComment**  | |

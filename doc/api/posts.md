@@ -398,7 +398,7 @@ Yes : **HTTP BASIC**
 ]
 ```
 
-<a name="votes"></a>
+<a name="addVote"></a>
 ## POST /api/v1/posts/:id/votes
 Creates a new vote on a post
 ### Params
