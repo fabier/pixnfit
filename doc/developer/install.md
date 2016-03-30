@@ -74,23 +74,23 @@ sudo update-rc.d postgresql defaults 90 10
 ```
 
 <a name="grails"/>
-# Grails 2.4.5
+# Grails 2.5.4
 Download grails
 
 ```sh
 cd ~
-wget --no-check-certificate https://github.com/grails/grails-core/releases/download/v2.4.5/grails-2.4.5.zip
+wget --no-check-certificate https://github.com/grails/grails-core/releases/download/v2.5.4/grails-2.5.4.zip
 ```
 
 Unzip
 ```sh
-unzip grails-2.4.5.zip
+unzip grails-2.5.4.zip
 ```
 
 Move to the right location
 ```sh
 sudo mkdir /usr/lib/grails
-sudo mv grails-2.4.5 /usr/lib/grails
+sudo mv grails-2.5.4 /usr/lib/grails
 ```
 
 <a name="intellijidea"/>
