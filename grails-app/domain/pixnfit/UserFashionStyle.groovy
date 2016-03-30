@@ -5,7 +5,7 @@ class UserFashionStyle extends BaseDomain {
     static belongsTo = [user: User, fashionStyle: FashionStyle]
 
     static constraints = {
-        user unique: 'fashionStyle'
+        user unique: ['fashionStyle']
     }
 
     static mapping = {

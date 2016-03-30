@@ -8,7 +8,7 @@ class UserBlacklist extends BaseDomain {
     static belongsTo = [blacklistingUser: User, blacklistedUser: User]
 
     static constraints = {
-        blacklistingUser unique: 'blacklistedUser', validator: { val, obj ->
+        blacklistingUser unique: ['blacklistedUser'], validator: { val, obj ->
             // On ne peut pas se blacklister soi même !
             val != obj.blacklistedUser
         }

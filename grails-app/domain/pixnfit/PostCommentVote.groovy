@@ -24,6 +24,6 @@ class PostCommentVote extends BaseEntity {
         vote nullable: false
 
         // Only one vote per user per postComment
-        postComment unique: 'creator'
+        postComment unique: ['creator']
     }
 }

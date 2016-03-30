@@ -5,7 +5,7 @@ class UserFavoritePost extends BaseDomain {
     static belongsTo = [user: User, post: Post]
 
     static constraints = {
-        user unique: 'post'
+        user unique: ['post']
     }
 
     static mapping = {

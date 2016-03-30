@@ -37,7 +37,7 @@ class PostVote extends BaseEntity {
         voteReason nullable: true
 
         // Only one vote per user per post
-        post unique: 'creator'
+        post unique: ['creator']
     }
 
     // Delete is forbidden
