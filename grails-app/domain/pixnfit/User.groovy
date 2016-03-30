@@ -77,24 +77,41 @@ class User {
     static transients = ['springSecurityService']
 
     static hasMany = [
-            fashionStyles    : FashionStyle,
+            // Fashion styles of this user
+            fashionStyles    : UserFashionStyle,
+            // Incoming private messages
             incomingMessages : Message,
+            // Messages sent
             outgoingMessages : Message,
+            // Users following this user
             followingUsers   : UserFollow,
+            // Users that this user follows
             followedUsers    : UserFollow,
+            // Users that blacklisted this user
             blacklistingUsers: UserBlacklist,
+            // Users that this user blacklisted
             blacklistedUsers : UserBlacklist,
+            // List of posts favorited by this user
             favoritePosts    : UserFavoritePost
     ]
 
     static mappedBy = [
-            incomingMessages : 'recipient', // Messages WHERE this user is the recipient
-            outgoingMessages : 'creator', // Messages WHERE this user is the creator
-            followingUsers   : 'followedUser', // UserFollows WHERE this user is the followed User
-            followedUsers    : 'followingUser', // UserFollow WHERE this user is the following User
-            blacklistingUsers: 'blacklistedUser', // UserBlacklist WHERE this user is the blacklistedUser User
-            blacklistedUsers : 'blacklistingUser', // UserBlacklist WHERE this user is the blacklistingUser User
-            favoritePosts    : 'user' // UserFavoritePost WHERE this user has favorited one or more posts
+            // Messages WHERE this user is the recipient
+            fashionStyles    : 'user',
+            // Messages WHERE this user is the recipient
+            incomingMessages : 'recipient',
+            // Messages WHERE this user is the creator
+            outgoingMessages : 'creator',
+            // UserFollows WHERE this user is the followed User
+            followingUsers   : 'followedUser',
+            // UserFollow WHERE this user is the following User
+            followedUsers    : 'followingUser',
+            // UserBlacklist WHERE this user is the blacklistedUser User
+            blacklistingUsers: 'blacklistedUser',
+            // UserBlacklist WHERE this user is the blacklistingUser User
+            blacklistedUsers : 'blacklistingUser',
+            // UserFavoritePost WHERE this user has favorited one or more posts
+            favoritePosts    : 'user'
     ]
 
     static constraints = {
@@ -117,6 +134,11 @@ class User {
         table '`user`'
         password column: '`password`'
         description type: 'text'
+//        fashionStyles joinTable: [
+//                name  : 'user_fashion_style',
+//                column: 'fashion_style_id',
+//                key   : 'user_id'
+//        ]
     }
 
     Set<Role> getAuthorities() {

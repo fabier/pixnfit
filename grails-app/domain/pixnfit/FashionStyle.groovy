@@ -2,13 +2,10 @@ package pixnfit
 
 class FashionStyle extends BaseEntity {
 
-    /**
-     * Users with (at least) this fashion style
-     */
-    Set<User> users
-
-    static belongsTo = [User]
-    static hasMany = [users: User]
+    static hasMany = [
+            // Users with (at least) this fashion style
+            users: UserFashionStyle
+    ]
 
     static constraints = {
         name blank: false, unique: true
