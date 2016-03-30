@@ -7,6 +7,21 @@ http://releases.ubuntu.com/14.04/
 
 <a name="java"/>
 # Java : JDK 7
+
+## 32 bits
+```sh
+sudo rm /opt/jdk-7u55-linux-i586.tar.gz
+sudo wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u55-b13/jdk-7u55-linux-i586.tar.gz" -O /opt/jdk-7u55-linux-i586.tar.gz
+sudo rm -Rf /opt/jdk
+sudo mkdir /opt/jdk
+sudo tar -zxf /opt/jdk-7u55-linux-i586.tar.gz -C /opt/jdk
+sudo update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.7.0_55/bin/java 100
+sudo update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.7.0_55/bin/javac 100
+sudo rm /etc/alternatives/java
+sudo ln -s /opt/jdk/jdk1.7.0_55/bin/java /etc/alternatives/java
+```
+
+## 64 bits
 In a shell (CTRL+ALT+T) :
 ```sh
 sudo rm /opt/jdk-7u55-linux-x64.tar.gz
