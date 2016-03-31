@@ -46,26 +46,27 @@ PixnFit project made with Grails
 | GET | [/api/v1/postComments/:id/votes](doc/api/postComments.md#votes) | Gets votes on a comment |
 | POST | [/api/v1/postComments/:id/votes](doc/api/postComments.md#addVote) | Creates a vote on a comment |
 | | **User**  | **Creation process** |
-| POST | [/api/v1/user](doc/api/users.md#save) | Creates a new user (step 1) |
-| POST | [/api/v1/user/:id/initImage](doc/api/users.md#initImage) | Upload User Image (step 2) |
-| POST | [/api/v1/user/:id/initProfile](doc/api/users.md#initProfile) | Creates a user profile (step 3) |
+| POST | [/api/v1/users](doc/api/users.md#save) | Creates a new user (step 1) |
+| POST | [/api/v1/users/:id/initImage](doc/api/users.md#initImage) | Upload User Image (step 2) |
+| POST | [/api/v1/users/:id/initProfile](doc/api/users.md#initProfile) | Creates a user profile (step 3) |
 | | **User** | **Other methods** |
-| GET | [/api/v1/user/:id](doc/api/users.md#show) | Gets a user by its Id |
-| PUT | [/api/v1/user/:id](doc/api/users.md#update) | Updates a user |
-| GET | [/api/v1/user/:id/incomingMessages](doc/api/users.md#incomingMessages) | Gets incoming messages for a user |
-| GET | [/api/v1/user/:id/outgoingMessages](doc/api/users.md#outgoingMessages) | Gets outgoing messages for a user |
-| GET | [/api/v1/user/:id/posts](doc/api/users.md#posts) | Gets all posts created by this user |
-| GET | [/api/v1/user/:id/postComments](doc/api/users.md#comments) | Gets all comments created by this user |
-| GET | [/api/v1/user/:id/postVotes](doc/api/users.md#votes) | Gets all votes created by this user |
-| GET | [/api/v1/user/:id/followers](doc/api/users.md#followers) | Gets all user's followers |
-| POST | [/api/v1/user/:id/follow](doc/api/users.md#follow) | Follow this user |
-| DELETE | [/api/v1/user/:id/follow](doc/api/users.md#unfollow) | Unfollow this user |
-| GET | [/api/v1/user/:id/followedUsers](doc/api/users.md#followedUsers) | Gets users followed by this user |
-| GET | [/api/v1/user/:id/blacklistedUsers](doc/api/users.md#blacklistedUsers) | Gets users blaclisted by this user |
-| GET | [/api/v1/user/:id/blacklistedBy](doc/api/users.md#blacklistedBy) | Gets users that blacklisted this user |
-| POST | [/api/v1/user/:id/blacklist](doc/api/users.md#blacklist) | Blacklist this user |
-| DELETE | [/api/v1/user/:id/blacklist](doc/api/users.md#unblacklist) | Un-blacklist this user |
-| POST | [/api/v1/user/:id/image](doc/api/users.md#image) | Updates User image |
+| GET | [/api/v1/users/me](doc/api/users.md#me) | Gets authenticated user informations |
+| GET | [/api/v1/users/:id](doc/api/users.md#show) | Gets a user by its Id |
+| PUT | [/api/v1/users/:id](doc/api/users.md#update) | Updates a user |
+| GET | [/api/v1/users/:id/incomingMessages](doc/api/users.md#incomingMessages) | Gets incoming messages for a user |
+| GET | [/api/v1/users/:id/outgoingMessages](doc/api/users.md#outgoingMessages) | Gets outgoing messages for a user |
+| GET | [/api/v1/users/:id/posts](doc/api/users.md#posts) | Gets all posts created by this user |
+| GET | [/api/v1/users/:id/postComments](doc/api/users.md#comments) | Gets all comments created by this user |
+| GET | [/api/v1/users/:id/postVotes](doc/api/users.md#votes) | Gets all votes created by this user |
+| GET | [/api/v1/users/:id/followers](doc/api/users.md#followers) | Gets all user's followers |
+| POST | [/api/v1/users/:id/follow](doc/api/users.md#follow) | Follow this user |
+| DELETE | [/api/v1/users/:id/follow](doc/api/users.md#unfollow) | Unfollow this user |
+| GET | [/api/v1/users/:id/followedUsers](doc/api/users.md#followedUsers) | Gets users followed by this user |
+| GET | [/api/v1/users/:id/blacklistedUsers](doc/api/users.md#blacklistedUsers) | Gets users blaclisted by this user |
+| GET | [/api/v1/users/:id/blacklistedBy](doc/api/users.md#blacklistedBy) | Gets users that blacklisted this user |
+| POST | [/api/v1/users/:id/blacklist](doc/api/users.md#blacklist) | Blacklist this user |
+| DELETE | [/api/v1/users/:id/blacklist](doc/api/users.md#unblacklist) | Un-blacklist this user |
+| POST | [/api/v1/users/:id/image](doc/api/users.md#image) | Updates User image |
 
 
 ## Static Datas
