@@ -298,34 +298,44 @@ class BootStrap {
             Gender gender = user.gender
             Country country = user.country
             Language language = user.language
+            Integer points = user.points
+
+            Set<UserFollow> followers = user.getFollowers()
+            Set<UserFollow> followeds = user.getFolloweds()
+            Set<Post> posts = user.posts()
+
             return [
-                    id         : user.id,
-                    username   : user.username,
-                    description: user.description,
-                    bodyType   : bodyType ? [
+                    id            : user.id,
+                    username      : user.username,
+                    description   : user.description,
+                    bodyType      : bodyType ? [
                             id  : bodyType.id,
                             name: bodyType.name,
                     ] : null,
-                    gender     : gender ? [
+                    gender        : gender ? [
                             id  : gender.id,
                             name: gender.name,
                     ] : null,
-                    birthdate  : user.birthdate,
-                    height     : user.height,
-                    weight     : user.weight,
-                    image      : image ? [
+                    birthdate     : user.birthdate,
+                    height        : user.height,
+                    weight        : user.weight,
+                    image         : image ? [
                             id      : image.id,
                             imageUrl: grailsLinkGenerator.link(controller: "image", action: "show", id: image.id, params: [width: 128, height: 128], absolute: true)
                     ] : null,
-                    country    : country ? [
+                    country       : country ? [
                             id  : country.id,
                             name: country.name
                     ] : null,
-                    language   : language ? [
+                    language      : language ? [
                             id  : language.id,
                             name: language.name
                     ] : null,
-                    dateCreated: it.dateCreated
+                    points        : points,
+                    postCount     : posts ? posts.size() : 0,
+                    followersCount: followers ? followers.size() : 0,
+                    followedCount : followeds ? followeds.size() : 0,
+                    dateCreated   : it.dateCreated
             ]
         }
         JSON.registerObjectMarshaller(UserFavoritePost) {

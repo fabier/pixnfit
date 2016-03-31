@@ -1,5 +1,7 @@
 package pixnfit
 
+import java.sql.Date as SQLDate
+
 class User {
 
     transient springSecurityService
@@ -32,7 +34,7 @@ class User {
     /**
      * Birthdate
      */
-    Date birthdate
+    SQLDate birthdate
 
     /**
      * height (in cm)
@@ -42,7 +44,7 @@ class User {
     /**
      * Weight (in kg)
      */
-    Float weight
+    Integer weight
 
     /**
      * User's avatar
@@ -58,6 +60,11 @@ class User {
      * User's language
      */
     Language language
+
+    /**
+     * Points earned by this user
+     */
+    Integer points
 
     /** ########################
      *  ## Account management ##
@@ -128,17 +135,14 @@ class User {
         image nullable: true
         country nullable: true
         language nullable: true
+        points nullable: false
     }
 
     static mapping = {
         table '`user`'
         password column: '`password`'
         description type: 'text'
-//        fashionStyles joinTable: [
-//                name  : 'user_fashion_style',
-//                column: 'fashion_style_id',
-//                key   : 'user_id'
-//        ]
+        points defaultValue: 0
     }
 
     Set<Role> getAuthorities() {
@@ -211,6 +215,22 @@ class User {
             this.removeFromBlacklistedUsers(blacklistedUser)
             blacklistedUser.delete(flush: flush)
         }
+    }
+
+    /**
+     * Synonym for followedUsers
+     * @return
+     */
+    Set<UserFollow> getFolloweds() {
+        return this.followedUsers
+    }
+
+    /**
+     * Synonym for followingUsers
+     * @return
+     */
+    Set<UserFollow> getFollowers() {
+        return this.followingUsers
     }
 
     /**
