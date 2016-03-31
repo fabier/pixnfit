@@ -19,6 +19,8 @@ import pixnfit.*
 @Secured("hasRole('ROLE_USER')")
 class UserRestController extends DynamicDataRestfulController {
 
+    static allowedMethods = [me: "GET"]
+
     SpringSecurityService springSecurityService
     def springSecurityUiService
     def saltSource
@@ -31,6 +33,12 @@ class UserRestController extends DynamicDataRestfulController {
     def index(Integer max) {
         // Interdit de lister les utilisateurs depuis le webservice
         render status: HttpStatus.FORBIDDEN
+    }
+
+    // Get user related information
+    def me() {
+        User user = (User) springSecurityService.currentUser
+        respond user
     }
 
     /**
