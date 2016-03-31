@@ -302,7 +302,7 @@ class BootStrap {
 
             Set<UserFollow> followers = user.getFollowers()
             Set<UserFollow> followeds = user.getFolloweds()
-            Set<Post> posts = user.posts()
+            List<Post> posts = user.getPosts()
 
             return [
                     id            : user.id,
@@ -331,7 +331,7 @@ class BootStrap {
                             id  : language.id,
                             name: language.name
                     ] : null,
-                    points        : points,
+                    points        : points ?: 0,
                     postCount     : posts ? posts.size() : 0,
                     followersCount: followers ? followers.size() : 0,
                     followedCount : followeds ? followeds.size() : 0,
