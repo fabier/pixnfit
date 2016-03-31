@@ -36,12 +36,6 @@ class UserRestController extends DynamicDataRestfulController {
         render status: HttpStatus.FORBIDDEN
     }
 
-    // Get user related information
-    def me() {
-        User user = (User) springSecurityService.currentUser
-        respond user
-    }
-
     /**
      * Cette méthode permet de réaliser la première partie de l'inscription de l'utilisateur :
      * Un utilisateur doit être ensuite finalisé (avec la méthode createProfile) pour que l'envoi de mail s'effectue
@@ -354,35 +348,6 @@ class UserRestController extends DynamicDataRestfulController {
         } else {
             respond((Object) [error: "Uploaded file must be identified as \'data\'"], [status: HttpStatus.BAD_REQUEST])
         }
-    }
-
-    def fashionStyles() {
-        User user = User.get(params.userRestId)
-        respond user.fashionStyles.toArray()
-    }
-
-    def addFashionStyle() {
-        def json = request.JSON
-        User user = User.get(params.userRestId)
-        JSONArray fashionStyleIds = json.fashionStyleIds
-        if (fashionStyleIds != null) {
-            fashionStyleIds.each {
-                user.addToFashionStyle(FashionStyle.get(it.id))
-            }
-        }
-        respond user.fashionStyles.toArray()
-    }
-
-    def removeFashionStyle() {
-        def json = request.JSON
-        User user = User.get(params.userRestId)
-        JSONArray fashionStyleIds = json.fashionStyleIds
-        if (fashionStyleIds != null) {
-            fashionStyleIds.each {
-                user.removeFromFashionStyle(FashionStyle.get(it.id))
-            }
-        }
-        respond user.fashionStyles.toArray()
     }
 
     protected String lookupUserClassName() {

@@ -45,12 +45,16 @@ PixnFit project made with Grails
 | GET | [/api/v1/postComments/:id](doc/api/postComments.md#show) | Gets a comment by its Id |
 | GET | [/api/v1/postComments/:id/votes](doc/api/postComments.md#votes) | Gets votes on a comment |
 | POST | [/api/v1/postComments/:id/votes](doc/api/postComments.md#addVote) | Creates a vote on a comment |
+| | **User**  | **About me** |
+| GET | [/api/v1/me](doc/api/me.md#show) | Gets authenticated user informations |
+| GET | [/api/v1/me/fashionStyles](doc/api/me.md#fashionStyles) | Gets fashion styles for User |
+| POST | [/api/v1/me/fashionStyles](doc/api/me.md#addToFashionStyles) | Adds fashion styles for User |
+| DELETE | [/api/v1/me/fashionStyles](doc/api/me.md#removeFromFashionStyles) | Removes fashion styles for User |
 | | **User**  | **Creation process** |
 | POST | [/api/v1/users](doc/api/users.md#save) | Creates a new user (step 1) |
 | POST | [/api/v1/users/:id/initImage](doc/api/users.md#initImage) | Upload User Image (step 2) |
 | POST | [/api/v1/users/:id/initProfile](doc/api/users.md#initProfile) | Creates a user profile (step 3) |
 | | **User** | **Other methods** |
-| GET | [/api/v1/users/me](doc/api/users.md#me) | Gets authenticated user informations |
 | GET | [/api/v1/users/:id](doc/api/users.md#show) | Gets a user by its Id |
 | PUT | [/api/v1/users/:id](doc/api/users.md#update) | Updates a user |
 | GET | [/api/v1/users/:id/incomingMessages](doc/api/users.md#incomingMessages) | Gets incoming messages for a user |
@@ -67,7 +71,6 @@ PixnFit project made with Grails
 | POST | [/api/v1/users/:id/blacklist](doc/api/users.md#blacklist) | Blacklist this user |
 | DELETE | [/api/v1/users/:id/blacklist](doc/api/users.md#unblacklist) | Un-blacklist this user |
 | POST | [/api/v1/users/:id/image](doc/api/users.md#image) | Updates User image |
-
 
 ## Static Datas
 

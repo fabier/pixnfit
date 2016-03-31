@@ -1,7 +1,7 @@
 # Users API
 
 <a name="save"></a>
-## POST /api/v1/user
+## POST /api/v1/users
 *User account creation step 1 - required*
 Creates a new user
 ### Params
@@ -30,6 +30,7 @@ User must have an locked account, meaning user never clicked on email "account c
   "image": null,
   "country": null,
   "language": null,
+  "fashionStyles": null,
   "points": 0,
   "postCount": 1,
   "followersCount": 0,
@@ -40,13 +41,13 @@ User must have an locked account, meaning user never clicked on email "account c
 
 
 <a name="initImage"></a>
-## POST /api/v1/user/:id/initImage
+## POST /api/v1/users/:id/initImage
 *User account creation step 2 - optional*
 Initializes a User profile image by uploading it.
 ### Params
 Data file must be pushed, in HTML this can be a <code>form</code> like this :
 ```HTML
-<form action="/api/v1/user/:id/initImage">
+<form action="/api/v1/users/:id/initImage">
   <input name="data" type="file"></input>
   <button type="submit">Submit</button>
 </form>
@@ -72,6 +73,7 @@ User must have an locked account, meaning user never clicked on email "account c
   },
   "country": null,
   "language": null,
+  "fashionStyles": null,
   "points": 0,
   "postCount": 0,
   "followersCount": 0,
@@ -82,7 +84,7 @@ User must have an locked account, meaning user never clicked on email "account c
 
 
 <a name="initProfile"></a>
-## POST /api/v1/user/:id/initProfile
+## POST /api/v1/users/:id/initProfile
 *User account creation step 3 - required*
 Initializes a user profile
 An email is automatically sent to the user to validate its account.
@@ -133,6 +135,7 @@ User must have an locked account, meaning user never clicked on email "account c
     "id": 2,
     "name": "English"
   },
+  "fashionStyles": [{id: 1, name: "Rock"}, ...],
   "points": 0,
   "postCount": 0,
   "followersCount": 0,
@@ -142,54 +145,8 @@ User must have an locked account, meaning user never clicked on email "account c
 ```
 
 
-<a name="me"></a>
-## GET /api/v1/user/me
-Gets informations about authenticated user
-### Params
-None
-### Authentication
-Yes : **HTTP BASIC**
-### Output
-**HTTP 200 OK**
-```json
-{
-  "id": 1,
-  "username": "John Doe",
-  "description": null,
-  "bodyType": {
-    "id": 2,
-    "name": "average"
-  },
-  "gender": {
-    "id": 1,
-    "name": "male"
-  },
-  "birthdate": null,
-  "height": null,
-  "weight": null,
-  "image": {
-    "id": 65,
-    "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
-  },
-  "country": {
-    "id": 3,
-    "name": "USA"
-  },
-  "language": {
-    "id": 2,
-    "name": "English"
-  },
-  "points": 0,
-  "postCount": 0,
-  "followersCount": 0,
-  "followedCount": 0,
-  "dateCreated": "2016-02-08T16:00:53Z"
-}
-```
-
-
 <a name="show"></a>
-## GET /api/v1/user/:id
+## GET /api/v1/users/:id
 Gets a user by its Id
 ### Params
 None (Id is included in URL)
@@ -225,6 +182,7 @@ Yes : **HTTP BASIC**
     "id": 2,
     "name": "English"
   },
+  "fashionStyles": [{id: 1, name: "Rock"}, ...],
   "points": 0,
   "postCount": 0,
   "followersCount": 0,
@@ -234,7 +192,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="update"></a>
-## PUT /api/v1/user/:id
+## PUT /api/v1/users/:id
 Updates a user.
 Currently, you can't change password or email because of security issues.
 If users wants to change its password, he can do it so using the website.
@@ -285,6 +243,7 @@ Yes : **HTTP BASIC**
     "id": 1,
     "name": "French"
   },
+  "fashionStyles": [{id: 1, name: "Rock"}, ...],
   "points": 0,
   "postCount": 0,
   "followersCount": 0,
@@ -294,7 +253,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="incomingMessages"></a>
-## GET /api/v1/user/:id/incomingMessages
+## GET /api/v1/users/:id/incomingMessages
 Gets incoming messages for a user
 ### Params
 None (Id is included in URL)
@@ -331,7 +290,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="outgoingMessages"></a>
-## GET /api/v1/user/:id/outgoingMessages
+## GET /api/v1/users/:id/outgoingMessages
 Gets outgoing messages for a user
 ### Params
 None (Id is included in URL)
@@ -368,7 +327,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="posts"></a>
-## GET /api/v1/user/:id/posts
+## GET /api/v1/users/:id/posts
 Gets all posts created by this user
 ### Params
 None (Id is included in URL)
@@ -415,7 +374,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="postComments"></a>
-## GET /api/v1/user/:id/postComments
+## GET /api/v1/users/:id/postComments
 Gets all comments created by this user
 ### Params
 None (Id is included in URL)
@@ -445,7 +404,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="postVotes"></a>
-## GET /api/v1/user/:id/postVotes
+## GET /api/v1/users/:id/postVotes
 Gets all votes created by this user
 ### Params
 None (Id is included in URL)
@@ -478,7 +437,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="followers"></a>
-## GET /api/v1/user/:id/followers
+## GET /api/v1/users/:id/followers
 Gets all user's followers
 ### Params
 None (Id is included in URL)
@@ -515,6 +474,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -526,7 +486,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="follow"></a>
-## POST /api/v1/user/:id/follow
+## POST /api/v1/users/:id/follow
 Follow this user
 ### Params
 None (Id is included in URL)
@@ -563,6 +523,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -574,7 +535,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="unfollow"></a>
-## DELETE /api/v1/user/:id/follow
+## DELETE /api/v1/users/:id/follow
 Unfollow this user
 ### Params
 None (Id is included in URL)
@@ -611,6 +572,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -622,7 +584,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="followedUsers"></a>
-## GET /api/v1/user/:id/followedUsers
+## GET /api/v1/users/:id/followedUsers
 Gets users followed by this user
 ### Params
 None (Id is included in URL)
@@ -659,6 +621,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -670,7 +633,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="blacklistedUsers"></a>
-## GET /api/v1/user/:id/blacklistedUsers
+## GET /api/v1/users/:id/blacklistedUsers
 Gets users blaclisted by this user
 ### Params
 None (Id is included in URL)
@@ -707,6 +670,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -718,7 +682,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="blacklistedBy"></a>
-## GET /api/v1/user/:id/blacklistedBy
+## GET /api/v1/users/:id/blacklistedBy
 Gets users that blacklisted this user
 ### Params
 None (Id is included in URL)
@@ -755,6 +719,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -766,7 +731,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="blacklist"></a>
-## POST /api/v1/user/:id/blacklist
+## POST /api/v1/users/:id/blacklist
 Blacklist this user
 ### Params
 None (Id is included in URL)
@@ -803,6 +768,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -814,7 +780,7 @@ Yes : **HTTP BASIC**
 ```
 
 <a name="unblacklist"></a>
-## DELETE /api/v1/user/:id/blacklist
+## DELETE /api/v1/users/:id/blacklist
 Un-blacklist this user
 ### Params
 None (Id is included in URL)
@@ -851,6 +817,7 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "fashionStyles": [{id: 1, name: "Rock"}, ...],
     "points": 0,
     "postCount": 0,
     "followersCount": 0,
@@ -863,12 +830,12 @@ Yes : **HTTP BASIC**
 
 
 <a name="initImage"></a>
-## POST /api/v1/user/:id/image
+## POST /api/v1/users/:id/image
 Updaes a user profile image by uploading it.
 ### Params
 Data file must be pushed, in HTML this can be a <code>form</code> like this :
 ```HTML
-<form action="/api/v1/user/:id/image">
+<form action="/api/v1/users/:id/image">
   <input name="data" type="file"></input>
   <button type="submit">Submit</button>
 </form>
@@ -893,10 +860,30 @@ Yes : **HTTP BASIC**
   },
   "country": null,
   "language": null,
+  "fashionStyles": null,
   "points": 0,
   "postCount": 0,
   "followersCount": 0,
   "followedCount": 0,
   "dateCreated": "2016-02-12T10:18:06Z"
 }
+```
+
+<a name="fashionStyles"></a>
+## GET /api/v1/users/:id/fashionStyles
+Gets fashion styles for User
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+**HTTP 200 OK**
+```json
+[
+  {
+    id: 1,
+    name: "Rock"
+  },
+  ...
+]
 ```

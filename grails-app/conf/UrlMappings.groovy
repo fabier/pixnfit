@@ -72,7 +72,10 @@ class UrlMappings {
         }
 
         // On peut récupérer des informations sur le profil de l'utilisateur connecté
-        "/api/v1/users/me"(controller: "userRest", action: "me")
+        "/api/v1/me"(controller: "meRest", action: "show", method: "GET")
+        "/api/v1/me/fashionStyles"(controller: "userRest", action: "fashionStyles", method: "GET")
+        "/api/v1/me/fashionStyles"(controller: "userRest", action: "addFashionStyle", method: "POST")
+        "/api/v1/me/fashionStyles"(controller: "userRest", action: "removeFashionStyle", method: "DELETE")
 
         // On peut récupérer des informations sur un profil utilisateur
         "/api/v1/users"(resources: "userRest", includes: ["show", "save", "update"]) {
@@ -92,9 +95,6 @@ class UrlMappings {
             "/blacklist"(controller: "userRest", action: "blacklist", method: "POST")
             "/blacklist"(controller: "userRest", action: "unblacklist", method: "DELETE")
             "/image"(controller: "userRest", action: "updateUserImage", method: "POST")
-            "/fashionStyles"(controller: "userRest", action: "fashionStyles", method: "GET")
-            "/fashionStyles"(controller: "userRest", action: "addFashionStyle", method: "POST")
-            "/fashionStyles"(controller: "userRest", action: "removeFashionStyle", method: "DELETE")
         }
 
         /**
