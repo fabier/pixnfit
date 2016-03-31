@@ -71,6 +71,9 @@ class UrlMappings {
             "/votes"(controller: "postCommentRest", action: "addVote", method: "POST")
         }
 
+        // On peut récupérer des informations sur le profil de l'utilisateur connecté
+        "/api/v1/users/me"(controller: "userRest", action: "me")
+
         // On peut récupérer des informations sur un profil utilisateur
         "/api/v1/users"(resources: "userRest", includes: ["show", "save", "update"]) {
             "/initImage"(controller: "userRest", action: "initUserImage", method: "POST")
