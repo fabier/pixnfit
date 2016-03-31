@@ -53,12 +53,14 @@ Adds fashion styles for User
 ### Params
 List of fashionStyle ids
 ```json
-[
-  {
-    id: 1
-  },
-  ...
-]
+{
+  fashionStyles : [
+    {
+      id: 1
+    },
+    ...
+  ]
+}
 ```
 ### Authentication
 Yes : **HTTP BASIC**
@@ -80,12 +82,14 @@ Removes fashion styles for User
 ### Params
 List of fashionStyle ids
 ```json
-[
-  {
-    id: 1
-  },
-  ...
-]
+{
+  fashionStyles : [
+    {
+      id: 1
+    },
+    ...
+  ]
+}
 ```
 ### Authentication
 Yes : **HTTP BASIC**
