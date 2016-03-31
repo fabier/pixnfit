@@ -30,6 +30,10 @@ User must have an locked account, meaning user never clicked on email "account c
   "image": null,
   "country": null,
   "language": null,
+  "points": 0,
+  "postCount": 1,
+  "followersCount": 0,
+  "followedCount": 0,
   "dateCreated": "2016-02-12T10:18:06Z"
 }
 ```
@@ -68,6 +72,10 @@ User must have an locked account, meaning user never clicked on email "account c
   },
   "country": null,
   "language": null,
+  "points": 0,
+  "postCount": 0,
+  "followersCount": 0,
+  "followedCount": 0,
   "dateCreated": "2016-02-12T10:18:06Z"
 }
 ```
@@ -125,9 +133,60 @@ User must have an locked account, meaning user never clicked on email "account c
     "id": 2,
     "name": "English"
   },
+  "points": 0,
+  "postCount": 0,
+  "followersCount": 0,
+  "followedCount": 0,
   "dateCreated": "2016-02-12T10:18:06Z"
 }
 ```
+
+
+<a name="me"></a>
+## GET /api/v1/user/me
+Gets informations about authenticated user
+### Params
+None
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+**HTTP 200 OK**
+```json
+{
+  "id": 1,
+  "username": "John Doe",
+  "description": null,
+  "bodyType": {
+    "id": 2,
+    "name": "average"
+  },
+  "gender": {
+    "id": 1,
+    "name": "male"
+  },
+  "birthdate": null,
+  "height": null,
+  "weight": null,
+  "image": {
+    "id": 65,
+    "imageUrl": "http://www.pixnfit.com/image/show/65?width=128&height=128"
+  },
+  "country": {
+    "id": 3,
+    "name": "USA"
+  },
+  "language": {
+    "id": 2,
+    "name": "English"
+  },
+  "points": 0,
+  "postCount": 0,
+  "followersCount": 0,
+  "followedCount": 0,
+  "dateCreated": "2016-02-08T16:00:53Z"
+}
+```
+
 
 <a name="show"></a>
 ## GET /api/v1/user/:id
@@ -166,6 +225,10 @@ Yes : **HTTP BASIC**
     "id": 2,
     "name": "English"
   },
+  "points": 0,
+  "postCount": 0,
+  "followersCount": 0,
+  "followedCount": 0,
   "dateCreated": "2016-02-08T16:00:53Z"
 }
 ```
@@ -222,6 +285,10 @@ Yes : **HTTP BASIC**
     "id": 1,
     "name": "French"
   },
+  "points": 0,
+  "postCount": 0,
+  "followersCount": 0,
+  "followedCount": 0,
   "dateCreated": "2016-02-08T16:00:53Z"
 }
 ```
@@ -448,6 +515,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -492,6 +563,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -536,6 +611,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -580,6 +659,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -624,6 +707,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -668,6 +755,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -712,6 +803,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -756,6 +851,10 @@ Yes : **HTTP BASIC**
       "id": 1,
       "name": "French"
     },
+    "points": 0,
+    "postCount": 0,
+    "followersCount": 0,
+    "followedCount": 0,
     "dateCreated": "2016-02-08T16:00:53Z"
   },
   ...
@@ -794,6 +893,10 @@ Yes : **HTTP BASIC**
   },
   "country": null,
   "language": null,
+  "points": 0,
+  "postCount": 0,
+  "followersCount": 0,
+  "followedCount": 0,
   "dateCreated": "2016-02-12T10:18:06Z"
 }
 ```
