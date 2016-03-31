@@ -7,9 +7,12 @@ import pixnfit.FashionStyle
 import pixnfit.User
 
 @Secured("hasRole('ROLE_USER')")
-class MeController {
+class MeRestController {
 
     static responseFormats = ['json']
+
+    static allowedMethods = [me: 'GET', addFashionStyle: 'POST', removeFashionStyle: 'DELETE']
+
     SpringSecurityService springSecurityService
 
     // Get user related information
@@ -18,15 +21,10 @@ class MeController {
         respond user
     }
 
-    def fashionStyles() {
-        User user = (User) springSecurityService.currentUser
-        respond user.fashionStyles.toArray()
-    }
-
     def addFashionStyle() {
         def json = request.JSON
         User user = (User) springSecurityService.currentUser
-        JSONArray fashionStyleIds = json.fashionStyleIds
+        JSONArray fashionStyleIds = json.fashionStyles
         if (fashionStyleIds != null) {
             fashionStyleIds.each {
                 user.addToFashionStyle(FashionStyle.get(it.id))
@@ -38,7 +36,7 @@ class MeController {
     def removeFashionStyle() {
         def json = request.JSON
         User user = (User) springSecurityService.currentUser
-        JSONArray fashionStyleIds = json.fashionStyleIds
+        JSONArray fashionStyleIds = json.fashionStyles
         if (fashionStyleIds != null) {
             fashionStyleIds.each {
                 user.removeFromFashionStyle(FashionStyle.get(it.id))

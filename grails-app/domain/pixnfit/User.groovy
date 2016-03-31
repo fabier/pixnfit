@@ -102,6 +102,12 @@ class User {
             favoritePosts    : UserFavoritePost
     ]
 
+    static fetchMode = [
+            fashionStyles : 'eager',
+            followingUsers: 'eager',
+            followedUsers : 'eager'
+    ]
+
     static mappedBy = [
             // Messages WHERE this user is the recipient
             fashionStyles    : 'user',
@@ -282,6 +288,10 @@ class User {
      */
     Set<User> getBlacklistingUsersAsUserSet() {
         this.blacklistingUsers*.blacklistingUser
+    }
+
+    Set<FashionStyle> getFashionStylesAsFashionStyle() {
+        this.fashionStyles*.fashionStyle
     }
 
     def beforeInsert() {

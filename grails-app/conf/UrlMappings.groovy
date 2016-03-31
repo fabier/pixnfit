@@ -72,10 +72,9 @@ class UrlMappings {
         }
 
         // On peut récupérer des informations sur le profil de l'utilisateur connecté
-        "/api/v1/me"(controller: "meRest", action: "show", method: "GET")
-        "/api/v1/me/fashionStyles"(controller: "userRest", action: "fashionStyles", method: "GET")
-        "/api/v1/me/fashionStyles"(controller: "userRest", action: "addFashionStyle", method: "POST")
-        "/api/v1/me/fashionStyles"(controller: "userRest", action: "removeFashionStyle", method: "DELETE")
+        "/api/v1/me"(controller: "meRest", action: "me", method: "GET")
+        "/api/v1/me/fashionStyles"(controller: "meRest", action: "addFashionStyle", method: "POST")
+        "/api/v1/me/fashionStyles"(controller: "meRest", action: "removeFashionStyle", method: "DELETE")
 
         // On peut récupérer des informations sur un profil utilisateur
         "/api/v1/users"(resources: "userRest", includes: ["show", "save", "update"]) {

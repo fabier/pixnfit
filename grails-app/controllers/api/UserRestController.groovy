@@ -20,8 +20,6 @@ import pixnfit.*
 @Secured("hasRole('ROLE_USER')")
 class UserRestController extends DynamicDataRestfulController {
 
-    static allowedMethods = [me: "GET"]
-
     SpringSecurityService springSecurityService
     def springSecurityUiService
     def saltSource
