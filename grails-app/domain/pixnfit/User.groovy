@@ -135,14 +135,13 @@ class User {
         image nullable: true
         country nullable: true
         language nullable: true
-        points nullable: false
+        points nullable: true
     }
 
     static mapping = {
         table '`user`'
         password column: '`password`'
         description type: 'text'
-        points defaultValue: 0
     }
 
     Set<Role> getAuthorities() {
