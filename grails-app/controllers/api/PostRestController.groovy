@@ -76,7 +76,11 @@ class PostRestController extends DynamicDataRestfulController {
 
     def comments() {
         Post post = Post.get(params.postRestId)
-        respond post.postComments.toArray()
+        List<PostComment> comments = PostComment.createCriteria().list {
+            eq "post", post
+            order "dateCreated", "desc"
+        }
+        respond comments.toArray()
     }
 
     def addComment() {
