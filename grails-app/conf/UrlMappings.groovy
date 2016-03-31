@@ -92,6 +92,9 @@ class UrlMappings {
             "/blacklist"(controller: "userRest", action: "blacklist", method: "POST")
             "/blacklist"(controller: "userRest", action: "unblacklist", method: "DELETE")
             "/image"(controller: "userRest", action: "updateUserImage", method: "POST")
+            "/fashionStyles"(controller: "userRest", action: "fashionStyles", method: "GET")
+            "/fashionStyles"(controller: "userRest", action: "addFashionStyle", method: "POST")
+            "/fashionStyles"(controller: "userRest", action: "removeFashionStyle", method: "DELETE")
         }
 
         /**

@@ -216,6 +216,20 @@ class User {
         }
     }
 
+    def removeFromFashionStyle(FashionStyle fashionStyle, boolean flush = false) {
+        def userFashionStyle = UserFashionStyle.findByUserAndFashionStyle(this, fashionStyle)
+        if (userFashionStyle != null) {
+            this.removeFromFashionStyle(userFashionStyle)
+            userFashionStyle.delete(flush: flush)
+        }
+    }
+
+    def addToFashionStyle(FashionStyle fashionStyle) {
+        this.addToFashionStyles(
+                new UserFashionStyle(user: this, fashionStyle: fashionStyle)
+        )
+    }
+
     /**
      * Synonym for followedUsers
      * @return

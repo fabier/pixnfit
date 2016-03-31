@@ -6,6 +6,7 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.ui.RegistrationCode
 import groovy.text.SimpleTemplateEngine
+import org.json.JSONArray
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import org.springframework.web.multipart.commons.CommonsMultipartFile
@@ -355,6 +356,34 @@ class UserRestController extends DynamicDataRestfulController {
         }
     }
 
+    def fashionStyles() {
+        User user = User.get(params.userRestId)
+        respond user.fashionStyles.toArray()
+    }
+
+    def addFashionStyle() {
+        def json = request.JSON
+        User user = User.get(params.userRestId)
+        JSONArray fashionStyleIds = json.fashionStyleIds
+        if (fashionStyleIds != null) {
+            fashionStyleIds.each {
+                user.addToFashionStyle(FashionStyle.get(it.id))
+            }
+        }
+        respond user.fashionStyles.toArray()
+    }
+
+    def removeFashionStyle() {
+        def json = request.JSON
+        User user = User.get(params.userRestId)
+        JSONArray fashionStyleIds = json.fashionStyleIds
+        if (fashionStyleIds != null) {
+            fashionStyleIds.each {
+                user.removeFromFashionStyle(FashionStyle.get(it.id))
+            }
+        }
+        respond user.fashionStyles.toArray()
+    }
 
     protected String lookupUserClassName() {
         SpringSecurityUtils.securityConfig.userLookup.userDomainClassName
