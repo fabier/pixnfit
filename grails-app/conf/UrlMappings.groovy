@@ -82,6 +82,7 @@ class UrlMappings {
             "/initProfile"(controller: "userRest", action: "initUserProfile", method: "POST")
             "/incomingMessages"(controller: "userRest", action: "incomingMessages", method: "GET")
             "/outgoingMessages"(controller: "userRest", action: "outgoingMessages", method: "GET")
+            "/me"(controller: "userRest", action: "me", method: "GET")
             "/posts"(controller: "userRest", action: "posts", method: "GET")
             "/posts/dressing"(controller: "userRest", action: "dressingPosts", method: "GET")
             "/posts/help"(controller: "userRest", action: "helpPosts", method: "GET")
