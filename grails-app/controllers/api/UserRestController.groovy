@@ -280,14 +280,16 @@ class UserRestController extends DynamicDataRestfulController {
 
     def follow() {
         User user = User.get(params.userRestId)
-        user.addToFollowers(springSecurityService.currentUser as User)
+        User me = springSecurityService.currentUser
+        user.addToFollowers(me)
         user.save(flush: true)
         respond user.getFollowersAsUserSet().toArray()
     }
 
     def unfollow() {
         User user = User.get(params.userRestId)
-        user.removeFromFollowers(springSecurityService.currentUser as User)
+        User me = springSecurityService.currentUser
+        user.removeFromFollowers(me)
         user.save(flush: true)
         respond user.getFollowersAsUserSet().toArray()
     }
@@ -321,6 +323,16 @@ class UserRestController extends DynamicDataRestfulController {
         user.removeFromBlacklistedUsers(userToUnblacklist, true)
         user.save(flush: true)
         respond user.getBlacklistedUsersAsUserSet().toArray()
+    }
+
+    // Get user related information
+    def me() {
+        User user = User.get(params.userRestId)
+        User me = (User) springSecurityService.currentUser
+        respond([
+                meFollows   : me.followingUsers.contains(user),
+                meIsFollowed: user.followingUsers.contains(me)
+        ])
     }
 
     def updateUserImage() {
