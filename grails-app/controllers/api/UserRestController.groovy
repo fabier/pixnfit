@@ -329,9 +329,11 @@ class UserRestController extends DynamicDataRestfulController {
     def me() {
         User user = User.get(params.userRestId)
         User me = (User) springSecurityService.currentUser
+        boolean meFollows = UserFollow.findByFollowedUserAndFollowingUser(user, me) != null
+        boolean meIsFollowed = UserFollow.findByFollowedUserAndFollowingUser(me, user) != null
         respond([
-                meFollows   : me.followingUsers.contains(user),
-                meIsFollowed: user.followingUsers.contains(me)
+                meFollows   : meFollows,
+                meIsFollowed: meIsFollowed
         ])
     }
 
