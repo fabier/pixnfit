@@ -6,7 +6,6 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.ui.RegistrationCode
 import groovy.text.SimpleTemplateEngine
-import org.json.JSONArray
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import org.springframework.web.multipart.commons.CommonsMultipartFile
@@ -24,6 +23,7 @@ class UserRestController extends DynamicDataRestfulController {
     def springSecurityUiService
     def saltSource
     def mailService
+    PostTypeService postTypeService
 
     UserRestController() {
         super(User)
@@ -243,6 +243,24 @@ class UserRestController extends DynamicDataRestfulController {
     def posts() {
         User user = User.get(params.userRestId)
         respond user.posts.toArray()
+    }
+
+    def helpPosts() {
+        User user = User.get(params.userRestId)
+        List<Post> posts = Post.createCriteria().list {
+            eq "creator", user
+            eq "postType", postTypeService.help()
+        }
+        respond posts
+    }
+
+    def dressingPosts() {
+        User user = User.get(params.userRestId)
+        List<Post> posts = Post.createCriteria().list {
+            eq "creator", user
+            eq "postType", postTypeService.dressing()
+        }
+        respond posts
     }
 
     def postComments() {

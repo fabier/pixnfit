@@ -60,6 +60,8 @@ PixnFit project made with Grails
 | GET | [/api/v1/users/:id/incomingMessages](doc/api/users.md#incomingMessages) | Gets incoming messages for a user |
 | GET | [/api/v1/users/:id/outgoingMessages](doc/api/users.md#outgoingMessages) | Gets outgoing messages for a user |
 | GET | [/api/v1/users/:id/posts](doc/api/users.md#posts) | Gets all posts created by this user |
+| GET | [/api/v1/users/:id/posts/dressing](doc/api/users.md#dressingPosts) | Gets only dressing posts created by this user |
+| GET | [/api/v1/users/:id/posts/help](doc/api/users.md#helpPosts) | Gets only help posts created by this user |
 | GET | [/api/v1/users/:id/postComments](doc/api/users.md#comments) | Gets all comments created by this user |
 | GET | [/api/v1/users/:id/postVotes](doc/api/users.md#votes) | Gets all votes created by this user |
 | GET | [/api/v1/users/:id/followers](doc/api/users.md#followers) | Gets all user's followers |

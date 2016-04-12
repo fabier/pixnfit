@@ -373,6 +373,102 @@ Yes : **HTTP BASIC**
 }
 ```
 
+
+<a name="dressingPosts"></a>
+## GET /api/v1/users/:id/posts/dressing
+Gets only dressing posts created by this user
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+**HTTP 200 OK**
+```json
+[
+  {
+    "id": 1,
+    "name": "Aut tempore repellat vero et sed alias.",
+    "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+    "creator": {
+      "id": 2,
+      "username": "Theodore Cummings",
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
+    },
+    "images": [
+      {
+        "id": 1,
+        "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
+      }
+    ],
+    "postType": {
+      "id": 1,
+      "name": "help"
+    },
+    "visibility": {
+      "id": 1,
+      "name": "public"
+    },
+    "state": {
+      "id": 1,
+      "name": "active"
+    },
+    "dateCreated": "2016-02-08T16:01:48Z"
+  },
+  ...
+}
+```
+
+
+<a name="helpPosts"></a>
+## GET /api/v1/users/:id/posts/help
+Gets only help posts created by this user
+### Params
+None (Id is included in URL)
+### Authentication
+Yes : **HTTP BASIC**
+### Output
+**HTTP 200 OK**
+```json
+[
+  {
+    "id": 1,
+    "name": "Aut tempore repellat vero et sed alias.",
+    "description": "Quibusdam veritatis voluptas veritatis laboriosam aliquid.",
+    "creator": {
+      "id": 2,
+      "username": "Theodore Cummings",
+      "image": {
+        "id": 29,
+        "imageUrl": "http://www.pixnfit.com/image/show/29?width=128&height=128"
+      }
+    },
+    "images": [
+      {
+        "id": 1,
+        "imageUrl": "http://www.pixnfit.com/image/show/1?width=256&height=256"
+      }
+    ],
+    "postType": {
+      "id": 1,
+      "name": "help"
+    },
+    "visibility": {
+      "id": 1,
+      "name": "public"
+    },
+    "state": {
+      "id": 1,
+      "name": "active"
+    },
+    "dateCreated": "2016-02-08T16:01:48Z"
+  },
+  ...
+}
+```
+
 <a name="postComments"></a>
 ## GET /api/v1/users/:id/postComments
 Gets all comments created by this user
