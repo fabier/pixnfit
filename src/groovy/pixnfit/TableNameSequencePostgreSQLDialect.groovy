@@ -1,7 +1,7 @@
 package pixnfit
 
 import org.hibernate.dialect.Dialect
-import org.hibernate.dialect.PostgreSQLDialect
+import org.hibernate.dialect.PostgreSQL9Dialect
 import org.hibernate.id.PersistentIdentifierGenerator
 import org.hibernate.id.SequenceGenerator
 import org.hibernate.type.Type
@@ -14,7 +14,7 @@ import org.hibernate.type.Type
  href='http://www.hibernate.org/296.html'>http://www.hibernate.org/296.html</a>
  * @author Burt
  */
-public class TableNameSequencePostgreSQLDialect extends PostgreSQLDialect {
+public class TableNameSequencePostgreSQLDialect extends PostgreSQL9Dialect {
 
     /**
      * Get the native identifier generator class.
