@@ -59,6 +59,9 @@ grails.project.dependency.resolution = {
         compile "org.apache.commons:commons-lang3:3.4"
         compile 'commons-codec:commons-codec:1.10'
 
+        // Cache entities
+        compile 'net.sf.ehcache:ehcache:2.8.5'
+
         // Image Library
         runtime 'org.imgscalr:imgscalr-lib:4.2'
 
@@ -68,8 +71,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-        // build ':tomcat:8.0.22'
-        build ":tomcat:7.0.55.2" // or ":tomcat:8.0.20"
+        build ':tomcat:8.0.14.1'
 
         // plugins for the compile step
         // compile ":scaffolding:2.1.2"
