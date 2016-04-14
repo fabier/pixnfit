@@ -14,7 +14,10 @@ class Image extends BaseEntity {
 
     static belongsTo = [Post]
 
-    static hasMany = [posts: Post]
+    static hasMany = [
+            posts          : Post,
+            imageDataCaches: ImageDataCache
+    ]
 
     static constraints = {
         imageData unique: true

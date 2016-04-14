@@ -8,6 +8,7 @@ import com.sun.image.codec.jpeg.JPEGEncodeParam
 import com.sun.image.codec.jpeg.JPEGImageEncoder
 import grails.transaction.Transactional
 import org.imgscalr.Scalr
+import util.CalendarService
 
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
@@ -17,6 +18,7 @@ class ImageService {
 
     DownloadService downloadService
     ImageTypeService imageTypeService
+    CalendarService calendarService
 
     Image createDefaultLoremIpsumImage(User creator) {
         createLoremIpsumImage(creator, 256, 256, "selfie", "fashion")
@@ -174,6 +176,16 @@ class ImageService {
         }
 
         return orientationInfo
+    }
+
+    boolean hasExpired(Date date, int calendarField, int amount) {
+        if (date == null) {
+            return true
+        } else {
+            Calendar calendar = calendarService.newCalendarUTCInstance()
+            calendar.add(calendarField, -amount)
+            return date.before(calendar.getTime())
+        }
     }
 }
 

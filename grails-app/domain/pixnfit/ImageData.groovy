@@ -51,6 +51,8 @@ class ImageData extends BaseEntity {
 
     static belongsTo = [image: Image]
 
+    static hasMany = [imageDataCaches: ImageDataCache]
+
     static constraints = {
         md5 blank: false, size: 32..32, maxSize: 32
         filename blank: false
