@@ -16,8 +16,6 @@ class ImageDataCache extends BaseDomain {
 
     static belongsTo = [image: Image, imageData: ImageData]
 
-    static hasOne = [image: Image, imageData: ImageData]
-
     static constraints = {
     }
 

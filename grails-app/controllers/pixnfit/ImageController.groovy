@@ -30,9 +30,12 @@ class ImageController {
                 eq "idc.image", image
                 eq "width", width
                 eq "height", height
-            }
+                maxResults 1
+                uniqueResult()
+            } as ImageData
 
-            if (imageData == null || imageService.hasExpired(imageData.dateCreated, Calendar.DAY_OF_YEAR, 7)) {
+            if (imageData == null) {
+                // || imageService.hasExpired(imageData.dateCreated, Calendar.DAY_OF_YEAR, 7)) {
                 // Si les données n'existent pas encore, ou qu'elles ont expiré
                 // On cherche à calculer l'image à partir des données maitres, et on retaille
                 ImageData masterData = image.imageData
@@ -46,33 +49,23 @@ class ImageController {
                             binaryDataBytes = imageService.getDataAsJPEG(rescaled)
 
                             // Put data in cache
-                            ImageData imageDataSmall = new ImageData(
-                                    name: imageData.name,
-                                    filename: imageData.filename,
-                                    data: binaryDataBytes
-                            )
-                            imageDataSmall.setCreator(imageData.creator)
-                            imageDataSmall.updateAutoCalculatedFields()
-                            imageDataSmall.save()
-
-                            new ImageDataCache(
-                                    image: image,
-                                    imageData: imageDataSmall
-                            ).save()
+                            imageData = imageService.saveImageDataCache(image, masterData, binaryDataBytes)
+                        } else {
+                            // Dans tous les autres cas, erreur 404
+                            response.sendError(404)
                         }
-                        // On ne met pas les images fullscreen en cache, ca prend trop de mémoire
-                        render file: binaryDataBytes, contentType: imageData?.imageType?.defaultMimeType?.mimetype
                     } else {
-                        // Dans tous les autres cas, erreur 404
+                        // Pas de données maitres associées à cette image
                         response.sendError(404)
                     }
                 } else {
                     // Pas de données maitres associées à cette image
                     response.sendError(404)
                 }
-            } else {
-                render file: imageData?.data, contentType: imageData?.imageType?.defaultMimeType?.mimetype
             }
+
+            // On retourne l'image (soit celle en cache soit celle calculée)
+            render file: imageData?.data, contentType: imageData?.imageType?.defaultMimeType?.mimetype
         }
     }
 }

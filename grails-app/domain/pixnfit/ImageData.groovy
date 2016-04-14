@@ -44,13 +44,6 @@ class ImageData extends BaseEntity {
      */
     ImageType imageType
 
-    /**
-     * The image using this data
-     */
-    Image image
-
-    static belongsTo = [image: Image]
-
     static hasMany = [imageDataCaches: ImageDataCache]
 
     static constraints = {

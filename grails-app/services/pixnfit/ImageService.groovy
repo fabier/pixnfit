@@ -187,6 +187,24 @@ class ImageService {
             return date.before(calendar.getTime())
         }
     }
+
+    ImageData saveImageDataCache(Image image, ImageData master, byte[] data) {
+        ImageData imageData = new ImageData(
+                name: master.name,
+                filename: master.filename,
+                data: data
+        )
+        imageData.setCreator(image.creator)
+        imageData.updateAutoCalculatedFields()
+        imageData.save()
+
+        new ImageDataCache(
+                image: image,
+                imageData: imageData
+        ).save()
+
+        return imageData
+    }
 }
 
 class OrientationInfo {
