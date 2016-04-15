@@ -24,6 +24,10 @@ class UserRestController extends DynamicDataRestfulController {
     def saltSource
     def mailService
     PostTypeService postTypeService
+    PostService postService
+    PostVoteService postVoteService
+    PostCommentService postCommentService
+    UserService userService
 
     UserRestController() {
         super(User)
@@ -242,7 +246,8 @@ class UserRestController extends DynamicDataRestfulController {
 
     def posts() {
         User user = User.get(params.userRestId)
-        respond user.posts.toArray()
+        List<Post> posts = postService.getPosts(user)
+        respond posts.toArray()
     }
 
     def helpPosts() {
@@ -265,48 +270,61 @@ class UserRestController extends DynamicDataRestfulController {
 
     def postComments() {
         User user = User.get(params.userRestId)
-        respond user.postComments.toArray()
+        List<PostComment> postComments = postCommentService.getPostComments(user)
+        respond postComments.toArray()
     }
 
     def postVotes() {
         User user = User.get(params.userRestId)
-        respond user.postVotes.toArray()
+        List<PostVote> postVotes = postVoteService.getPostVotes(user)
+        respond postVotes.toArray()
     }
 
     def followers() {
         User user = User.get(params.userRestId)
-        respond user.getFollowersAsUserSet().toArray()
+        List<User> followers = userService.getFollowers(user)
+        respond followers.toArray()
     }
 
     def follow() {
         User user = User.get(params.userRestId)
         User me = springSecurityService.currentUser
-        user.addToFollowers(me)
-        user.save(flush: true)
-        respond user.getFollowersAsUserSet().toArray()
+
+        new UserFollow(followingUser: me, followedUser: user).save(flush: true)
+
+        List<User> followers = userService.getFollowers(user)
+        respond followers.toArray()
     }
 
     def unfollow() {
         User user = User.get(params.userRestId)
         User me = springSecurityService.currentUser
-        user.removeFromFollowers(me)
-        user.save(flush: true)
-        respond user.getFollowersAsUserSet().toArray()
+
+        UserFollow userFollow = UserFollow.findByFollowingUserAndFollowedUser(me, user)
+        if (userFollow != null) {
+            userFollow.delete(flush: true)
+        }
+
+        List<User> followers = userService.getFollowers(user)
+        respond followers.toArray()
     }
 
     def followedUsers() {
         User user = User.get(params.userRestId)
-        respond user.getFollowedUsersAsUserSet().toArray()
+        List<User> followedUsers = userService.getUsersFollowedBy(user)
+        respond followedUsers.toArray()
     }
 
     def blacklistedUsers() {
         User user = User.get(params.userRestId)
-        respond user.getBlacklistedUsersAsUserSet().toArray()
+        List<User> blacklistedUsers = userService.getUsersBlacklistedBy(user)
+        respond blacklistedUsers.toArray()
     }
 
     def blacklistedBy() {
         User user = User.get(params.userRestId)
-        respond user.getBlacklistingUsersAsUserSet().toArray()
+        List<User> blacklistedBy = userService.getBlacklisters(user)
+        respond blacklistedBy.toArray()
     }
 
     def blacklist() {
@@ -314,7 +332,9 @@ class UserRestController extends DynamicDataRestfulController {
         User userToBlacklist = User.get(params.userRestId)
         user.addToBlacklistedUsers(userToBlacklist)
         user.save(flush: true)
-        respond user.getBlacklistedUsersAsUserSet().toArray()
+
+        List<User> blacklistedUsers = userService.getUsersBlacklistedBy(user)
+        respond blacklistedUsers.toArray()
     }
 
     def unblacklist() {
@@ -322,7 +342,9 @@ class UserRestController extends DynamicDataRestfulController {
         User userToUnblacklist = User.get(params.userRestId)
         user.removeFromBlacklistedUsers(userToUnblacklist, true)
         user.save(flush: true)
-        respond user.getBlacklistedUsersAsUserSet().toArray()
+
+        List<User> blacklistedUsers = userService.getUsersBlacklistedBy(user)
+        respond blacklistedUsers.toArray()
     }
 
     // Get user related information

@@ -56,4 +56,11 @@ class PostService {
             maxResults(1)
         }
     }
+
+    /**
+     * Gets User's posts
+     */
+    List<Post> getPosts(User user) {
+        Post.findAllByCreator(user)
+    }
 }

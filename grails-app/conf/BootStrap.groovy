@@ -6,10 +6,10 @@ import pixnfit.*
 class BootStrap {
 
     def grailsApplication
-
     def bootstrapInitialDataService
-
     LinkGenerator grailsLinkGenerator
+    PostService postService
+    UserService userService
 
     def init = { servletContext ->
         // Adds random() method to all domain classes
@@ -300,9 +300,9 @@ class BootStrap {
             Language language = user.language
             Integer points = user.points
 
-            Set<UserFollow> followers = user.getFollowers()
-            Set<UserFollow> followeds = user.getFolloweds()
-            List<Post> posts = user.getPosts()
+            Set<UserFollow> followers = userService.getFollowers(user)
+            Set<UserFollow> followeds = userService.getUsersFollowedBy(user)
+            List<Post> posts = postService.getPosts(user)
             Set<FashionStyle> fashionStyles = user.getFashionStylesAsFashionStyle()
 
             return [

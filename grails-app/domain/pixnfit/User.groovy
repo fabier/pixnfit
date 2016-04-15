@@ -91,9 +91,9 @@ class User {
             // Messages sent
             outgoingMessages : Message,
             // Users following this user
-            followingUsers   : UserFollow,
+//            followingUsers   : UserFollow,
             // Users that this user follows
-            followedUsers    : UserFollow,
+//            followedUsers    : UserFollow,
             // Users that blacklisted this user
             blacklistingUsers: UserBlacklist,
             // Users that this user blacklisted
@@ -103,9 +103,7 @@ class User {
     ]
 
     static fetchMode = [
-            fashionStyles : 'eager',
-            followingUsers: 'eager',
-            followedUsers : 'eager'
+            fashionStyles: 'eager'
     ]
 
     static mappedBy = [
@@ -116,9 +114,9 @@ class User {
             // Messages WHERE this user is the creator
             outgoingMessages : 'creator',
             // UserFollows WHERE this user is the followed User
-            followingUsers   : 'followedUser',
+//            followingUsers   : 'followedUser',
             // UserFollow WHERE this user is the following User
-            followedUsers    : 'followingUser',
+//            followedUsers    : 'followingUser',
             // UserBlacklist WHERE this user is the blacklistedUser User
             blacklistingUsers: 'blacklistedUser',
             // UserBlacklist WHERE this user is the blacklistingUser User
@@ -154,60 +152,6 @@ class User {
         UserRole.findAllByUser(this).collect { it.role }
     }
 
-    /**
-     * Gets users posts
-     */
-    List<Post> getPosts() {
-        Post.findAllByCreator(this)
-    }
-
-    /**
-     * Gets User's post votes
-     */
-    List<PostVote> getPostVotes() {
-        PostVote.findAllByCreator(this)
-    }
-
-    /**
-     * Gets User's post comments
-     */
-    List<PostComment> getPostComments() {
-        PostComment.findAllByCreator(this)
-    }
-
-    /**
-     * Gets User's post comment votes
-     */
-    List<PostCommentVote> getPostCommentVotes() {
-        PostCommentVote.findAllByCreator(this)
-    }
-
-    /**
-     * Adds this user to the 'follow list' of user in params
-     */
-    def addToFollowers(User user) {
-        this.addToFollowingUsers(
-                new UserFollow(followedUser: this, followingUser: user)
-        )
-    }
-
-    /**
-     * Adds user in params to this user's 'follow list'
-     */
-    def addToFollowedUsers(User user) {
-        this.addToFollowedUsers(
-                new UserFollow(followedUser: user, followingUser: this)
-        )
-    }
-
-    def removeFromFollowers(User user, boolean flush = false) {
-        def follower = UserFollow.findByFollowedUserAndFollowingUser(this, user)
-        if (follower != null) {
-            this.removeFromFollowingUsers(follower)
-            follower.delete(flush: flush)
-        }
-    }
-
     def addToBlacklistedUsers(User user) {
         this.addToBlacklistedUsers(
                 new UserBlacklist(blacklistingUser: this, blacklistedUser: user)
@@ -234,60 +178,6 @@ class User {
         this.addToFashionStyles(
                 new UserFashionStyle(user: this, fashionStyle: fashionStyle)
         )
-    }
-
-    /**
-     * Synonym for followedUsers
-     * @return
-     */
-    Set<UserFollow> getFolloweds() {
-        return this.followedUsers
-    }
-
-    /**
-     * Synonym for followingUsers
-     * @return
-     */
-    Set<UserFollow> getFollowers() {
-        return this.followingUsers
-    }
-
-    /**
-     * Gets users following this user
-     */
-    Set<User> getFollowersAsUserSet() {
-        this.followingUsers*.followingUser
-    }
-
-    /**
-     * Gets users this user follows
-     */
-    Set<User> getFollowedUsersAsUserSet() {
-        this.followedUsers*.followedUser
-    }
-
-    /**
-     * Users that blacklisted this user
-     * Synonym for blacklistingUsers
-     */
-    Set<User> getBlacklistersAsUserSet() {
-        this.blacklistingUsers*.blacklistingUser
-    }
-
-    /**
-     * Users blacklisted by this user
-     * @return
-     */
-    Set<User> getBlacklistedUsersAsUserSet() {
-        this.blacklistedUsers*.blacklistedUser
-    }
-
-    /**
-     * Users blacklisting this user
-     * @return
-     */
-    Set<User> getBlacklistingUsersAsUserSet() {
-        this.blacklistingUsers*.blacklistingUser
     }
 
     Set<FashionStyle> getFashionStylesAsFashionStyle() {
