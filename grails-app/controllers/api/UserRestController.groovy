@@ -49,37 +49,43 @@ class UserRestController extends DynamicDataRestfulController {
         if (!command.validate()) {
             respond((Object) [errors: command.errors], [status: HttpStatus.BAD_REQUEST])
         } else {
-
             def userClass = lookupUserClass()
             String usernameFieldName = SpringSecurityUtils.securityConfig.userLookup.usernamePropertyName
             def user = userClass.findWhere((usernameFieldName): command."$usernameFieldName")
             if (user) {
+                // Le compte existe déjà, on n'y touche pas (pas de .save())
+                // pour éviter les usurpations d'identité
                 if (user.accountLocked) {
-                    // On va renvoyer le mail de validation automatiquement
+                    // Compte non encore activé, on autorise à récupérer des informations
+                    respond user, [status: HttpStatus.CREATED]
                 } else {
-                    // Le compte existe déjà et il est actif
-                    respond user
-                    return
+                    // Compte déjà activé, on retourne une erreur
+                    response.sendError(HttpStatus.FORBIDDEN)
                 }
             } else {
                 // Création du compte utilisateur (pas encore sauvegardé en base)
-                user = lookupUserClass().newInstance(email: command.email, username: command.username,
-                        accountLocked: true, enabled: true)
-            }
+                // Ce compte utilisateur est automatiquement activé pour ne pas avoir à vérifier ses emails...
+                user = lookupUserClass().newInstance(
+                        email: command.email,
+                        username: command.username,
+                        accountLocked: true,
+                        enabled: true
+                )
 
-            // Création du registrationCode
-            String salt = saltSource instanceof NullSaltSource ? null : command."$usernameFieldName"
-            RegistrationCode registrationCode = springSecurityUiService.register(user, command.password, salt)
+                // Création du registrationCode
+                String salt = saltSource instanceof NullSaltSource ? null : command."$usernameFieldName"
+                RegistrationCode registrationCode = springSecurityUiService.register(user, command.password, salt)
 
-            if (registrationCode == null || registrationCode.hasErrors()) {
-                respond((Object) [error: message(code: 'spring.security.ui.register.miscError')])
-            } else {
-                // Création du code d'enregistrement OK
-                if (user.validate()) {
-                    user.save(flush: true)
-                    respond user, [status: HttpStatus.CREATED]
+                if (registrationCode == null || registrationCode.hasErrors()) {
+                    respond((Object) [error: message(code: 'spring.security.ui.register.miscError')])
                 } else {
-                    respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+                    // Création du code d'enregistrement OK
+                    if (user.validate()) {
+                        user.save(flush: true)
+                        respond user, [status: HttpStatus.CREATED]
+                    } else {
+                        respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
+                    }
                 }
             }
         }
@@ -187,15 +193,23 @@ class UserRestController extends DynamicDataRestfulController {
             if (user.accountLocked) {
                 // On a le droit d'appeler cette méthode que si le compte utilisateur n'a pas encore été validé
                 def json = request.JSON
-                foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language])
-                bindData(command, json, [include: ['description', "birthdate", "height", "weight"]])
+                foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language, visibility: Visibility])
+                bindData(user, json, [include: ['username', 'description', "birthdate", "height", "weight"]])
+
+                if (json.fashionStyles != null) {
+                    user.fashionStyles.clear()
+                    json.fashionStyles.each {
+                        user.addToFashionStyle(FashionStyle.get(it.id))
+                    }
+                }
+
                 if (user.validate()) {
                     user.save()
                     // Send email to finalize user account creation
                     try {
                         if (sendConfirmationEmail(user)) {
                             // On a bien mis à jour le profil utilisateur et on a envoyé l'email
-                            respond user
+                            respond user, [status: HttpStatus.OK]
                         } else {
                             log.warn "Impossible to confirmation email to user : ${user.email}"
                             respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
@@ -209,7 +223,7 @@ class UserRestController extends DynamicDataRestfulController {
                     respond user, [status: HttpStatus.UNPROCESSABLE_ENTITY]
                 }
             } else {
-                respond((Object) [error: "User account is not locked anymore. Please use 'PUT /user/:id' to update profile"], [status: HttpStatus.BAD_REQUEST])
+                respond((Object) [error: "User account is not locked anymore. Please use 'PUT /users/:id' to update profile"], [status: HttpStatus.BAD_REQUEST])
             }
         } else {
             respond((Object) [error: "No user with id : ${params.userRestId}"], [status: HttpStatus.BAD_REQUEST])
