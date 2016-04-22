@@ -4,7 +4,7 @@ import org.springframework.security.access.annotation.Secured
 import pixnfit.Country
 import pixnfit.StaticDataRestfulController
 
-@Secured("hasRole('ROLE_USER')")
+@Secured("permitAll")
 class CountryRestController extends StaticDataRestfulController {
     CountryRestController() {
         super(Country, true)
