@@ -298,6 +298,7 @@ class BootStrap {
             Gender gender = user.gender
             Country country = user.country
             Language language = user.language
+            Visibility visibility = user.visibility
             Integer points = user.points
 
             Set<UserFollow> followers = userService.getFollowers(user)
@@ -335,6 +336,10 @@ class BootStrap {
                     fashionStyles : fashionStyles ? fashionStyles.collect {
                         [id: it.id, name: it.name]
                     } : null,
+                    visibility    : visibility ? [
+                            id  : visibility.id,
+                            name: visibility.name,
+                    ] : null,
                     points        : points ?: 0,
                     postCount     : posts ? posts.size() : 0,
                     followersCount: followers ? followers.size() : 0,

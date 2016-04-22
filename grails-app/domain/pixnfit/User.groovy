@@ -66,6 +66,11 @@ class User {
      */
     Integer points
 
+    /**
+     * User's visibility
+     */
+    Visibility visibility
+
     /** ########################
      *  ## Account management ##
      *  ######################## */
@@ -140,6 +145,7 @@ class User {
         country nullable: true
         language nullable: true
         points nullable: true
+        visibility nullable: true
     }
 
     static mapping = {
