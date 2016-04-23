@@ -58,11 +58,10 @@ class BootstrapInitialDataService {
         // BodyType
         log.info "Initializing BodyTypes..."
         if (BodyType.count() == 0) {
-            [new BodyType(name: "skinny"),
-             new BodyType(name: "average"),
-             new BodyType(name: "big")].each {
-                it.setCreator(admin)
-                it.save()
+            ["8 shaped", "Inverted triangle", "Triangle", "Double triangle", "Round", "Square"].each {
+                BodyType bodyType = new BodyType(name: it)
+                bodyType.setCreator(admin)
+                bodyType.save()
             }
         }
         log.info "BodyTypes OK"
@@ -70,25 +69,10 @@ class BootstrapInitialDataService {
         // FashionStyle
         log.info "Initializing FashionStyles..."
         if (FashionStyle.count() == 0) {
-            [new FashionStyle(name: "bohemian"),
-             new FashionStyle(name: "arty"),
-             new FashionStyle(name: "chic"),
-             new FashionStyle(name: "classic"),
-             new FashionStyle(name: "exotic"),
-             new FashionStyle(name: "flamboyant"),
-             new FashionStyle(name: "glamourous"),
-             new FashionStyle(name: "romantic"),
-             new FashionStyle(name: "sexy"),
-             new FashionStyle(name: "sophisticated"),
-             new FashionStyle(name: "western"),
-             new FashionStyle(name: "traditional"),
-             new FashionStyle(name: "preppy"),
-             new FashionStyle(name: "punk"),
-             new FashionStyle(name: "tomboy"),
-             new FashionStyle(name: "rocker"),
-             new FashionStyle(name: "goth")].each {
-                it.setCreator(admin)
-                it.save()
+            ["Casual", "Chic", "Classic", "Hipster", "Rocker", "Sporty", "Urban", "Vintage"].each {
+                FashionStyle fashionStyle = new FashionStyle(name: it)
+                fashionStyle.setCreator(admin)
+                fashionStyle.save()
             }
         }
         log.info "FashionStyles OK"
@@ -96,11 +80,10 @@ class BootstrapInitialDataService {
         // State
         log.info "Initializing States..."
         if (State.count() == 0) {
-            [new State(name: "active"),
-             new State(name: "inactive"),
-             new State(name: "deleted")].each {
-                it.setCreator(admin)
-                it.save()
+            ["active", "inactive", "deleted"].each {
+                State state = new State(name: it)
+                state.setCreator(admin)
+                state.save()
             }
         }
         log.info "States OK"
@@ -108,12 +91,10 @@ class BootstrapInitialDataService {
         // VoteReason
         log.info "Initializing VoteReasons..."
         if (VoteReason.count() == 0) {
-            [new VoteReason(name: "style"),
-             new VoteReason(name: "color"),
-             new VoteReason(name: "size"),
-             new VoteReason(name: "shape")].each {
-                it.setCreator(admin)
-                it.save()
+            ["style", "color", "size", "shape"].each {
+                VoteReason voteReason = new VoteReason(name: it)
+                voteReason.setCreator(admin)
+                voteReason.save()
             }
         }
         log.info "VoteReasons OK"
@@ -121,10 +102,10 @@ class BootstrapInitialDataService {
         // PostType
         log.info "Initializing PostTypes..."
         if (PostType.count() == 0) {
-            [new PostType(name: "help"),
-             new PostType(name: "dressing")].each {
-                it.setCreator(admin)
-                it.save()
+            ["help", "dressing"].each {
+                PostType postType = new PostType(name: it)
+                postType.setCreator(admin)
+                postType.save()
             }
         }
         log.info "PostTypes OK"
@@ -132,10 +113,10 @@ class BootstrapInitialDataService {
         // Gender
         log.info "Initializing Genders..."
         if (Gender.count() == 0) {
-            [new Gender(name: "male"),
-             new Gender(name: "female")].each {
-                it.setCreator(admin)
-                it.save()
+            ["male", "female"].each {
+                Gender gender = new Gender(name: it)
+                gender.setCreator(admin)
+                gender.save()
             }
         }
         log.info "Genders OK"
