@@ -62,7 +62,7 @@ class UserRestController extends DynamicDataRestfulController {
                     respond user, [status: HttpStatus.CREATED]
                 } else {
                     // Compte déjà activé, on retourne une erreur
-                    response.sendError(HttpStatus.FORBIDDEN)
+                    response.sendError(HttpStatus.FORBIDDEN.value())
                 }
             } else {
                 // Création du compte utilisateur (pas encore sauvegardé en base)
@@ -217,7 +217,14 @@ class UserRestController extends DynamicDataRestfulController {
                 user.accountLocked = false
 
                 if (user.validate()) {
-                    user.save()
+                    user.save(flush: true)
+
+                    // On ajoute automatiquement l'utilisateur au role
+                    def conf = SpringSecurityUtils.securityConfig
+                    for (roleName in conf.ui.register.defaultRoleNames) {
+                        UserRole.create user, Role.findByAuthority(roleName)
+                    }
+
                     // Send email to finalize user account creation
                     try {
                         // On n'envoie pas de mail de création de compte
