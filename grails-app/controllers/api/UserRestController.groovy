@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import pixnfit.*
+import util.JsonFormatService
 
 /**
  * On n'a que le droit que de voir la fiche pour un utilisateur donné,
@@ -28,6 +29,7 @@ class UserRestController extends DynamicDataRestfulController {
     PostVoteService postVoteService
     PostCommentService postCommentService
     UserService userService
+    JsonFormatService jsonFormatService
 
     UserRestController() {
         super(User)
@@ -193,8 +195,16 @@ class UserRestController extends DynamicDataRestfulController {
             if (user.accountLocked) {
                 // On a le droit d'appeler cette méthode que si le compte utilisateur n'a pas encore été validé
                 def json = request.JSON
-                foreignKeyBindDataIfNotNull(user, json, [bodyType: BodyType, gender: Gender, country: Country, language: Language, visibility: Visibility])
-                bindData(user, json, [include: ['username', 'description', "birthdate", "height", "weight"]])
+                foreignKeyBindDataIfNotNull(user, json, [
+                        bodyType  : BodyType,
+                        gender    : Gender,
+                        country   : Country,
+                        language  : Language,
+                        visibility: Visibility
+                ])
+                bindData(user, json, [include: ['username', 'description', "height", "weight"]])
+
+                user.birthdate = jsonFormatService.parseSQLDate(json.birthdate)
 
                 if (json.fashionStyles != null) {
                     user.fashionStyles.clear()
@@ -203,17 +213,21 @@ class UserRestController extends DynamicDataRestfulController {
                     }
                 }
 
+                // Déverouillage automatique du compte (pas d'envoi de mail)
+//                user.accountLocked = false
+
                 if (user.validate()) {
                     user.save()
                     // Send email to finalize user account creation
                     try {
-                        if (sendConfirmationEmail(user)) {
-                            // On a bien mis à jour le profil utilisateur et on a envoyé l'email
-                            respond user, [status: HttpStatus.OK]
-                        } else {
-                            log.warn "Impossible to confirmation email to user : ${user.email}"
-                            respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
-                        }
+                        // On n'envoie pas de mail de création de compte
+                        // if (sendConfirmationEmail(user)) {
+                        // On a bien mis à jour le profil utilisateur et on a envoyé l'email
+                        respond user, [status: HttpStatus.OK]
+                        // } else {
+                        // log.warn "Impossible to confirmation email to user : ${user.email}"
+                        // respond((Object) [error: message(code: 'registerCommand.email.errorDuringSend')])
+                        // }
                     } catch (Exception e) {
                         // Le mail n'est pas parti, on affiche une erreur
                         log.warn "Impossible to confirmation email to user : ${user.email}", e
