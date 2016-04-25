@@ -214,7 +214,7 @@ class UserRestController extends DynamicDataRestfulController {
                 }
 
                 // Déverouillage automatique du compte (pas d'envoi de mail)
-//                user.accountLocked = false
+                user.accountLocked = false
 
                 if (user.validate()) {
                     user.save()
