@@ -7,8 +7,6 @@ DELETE FROM fashion_style;
 
 ALTER SEQUENCE "public".seq_fashion_style RESTART;
 
--- "Casual", "Chic", "Classic", "Hipster", "Rocker", "Sporty", "Urban", "Vintage"
-
 INSERT INTO fashion_style (id, "name", description, version, creator_id, date_created, last_updated)
 VALUES (nextval('seq_fashion_style'), 'Casual', null, 0, 1, now(), now()),
 (nextval('seq_fashion_style'), 'Chic', null, 0, 1, now(), now()),
