@@ -1,5 +1,4 @@
 import grails.converters.JSON
-import grails.util.Environment
 import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 import pixnfit.*
 
@@ -55,10 +54,7 @@ class BootStrap {
             }
         }
 
-        if (Environment.current == Environment.DEVELOPMENT || Environment.current == Environment.TEST) {
-            bootstrapInitialDataService.initStaticData()
-            // bootstrapInitialDataService.initRandomData(true)
-        }
+        bootstrapInitialDataService.initStaticData()
     }
 
     /**
