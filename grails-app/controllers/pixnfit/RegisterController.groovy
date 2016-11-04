@@ -4,7 +4,6 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
 import grails.plugin.springsecurity.ui.RegistrationCode
 import org.springframework.security.access.annotation.Secured
-import admin.PrivateBetaRegistrationEmail
 
 @Secured("permitAll")
 class RegisterController extends grails.plugin.springsecurity.ui.RegisterController {
@@ -154,11 +153,13 @@ class RegisterCommand {
 
     static constraints = {
         username blank: false
-        email blank: false, email: true, validator: { val, obj ->
+        email blank: false, email: true
+        // Le bloc suivant active la liste d'emails pour la beta privée
+        /*, validator: { val, obj ->
             if (PrivateBetaRegistrationEmail.findByEmail(val) == null) {
                 return 'user.email.privateBetaRegistrationEmail'
             }
-        }
+        }*/
         password blank: false, validator: RegisterController.passwordValidator
         password2 validator: RegisterController.password2Validator
         // acceptsConditions notEqual: false

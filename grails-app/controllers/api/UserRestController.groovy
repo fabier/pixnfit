@@ -1,6 +1,5 @@
 package api
 
-import admin.PrivateBetaRegistrationEmail
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.authentication.dao.NullSaltSource
@@ -463,11 +462,13 @@ class CreateUserCommand {
 
     static constraints = {
         username blank: false
-        email blank: false, email: true, validator: { val, obj ->
+        email blank: false, email: true
+        // Le bloc suivant active la liste d'emails pour la beta privée
+        /*, validator: { val, obj ->
             if (PrivateBetaRegistrationEmail.findByEmail(val) == null) {
                 return 'user.email.privateBetaRegistrationEmail'
             }
-        }
+        }*/
         password blank: false, validator: RegisterController.passwordValidator
     }
 }
